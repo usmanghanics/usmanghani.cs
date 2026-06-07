@@ -29,8 +29,6 @@ This portfolio is a modern, full-stack application built with **Next.js** that h
 - **Software Engineering** - Full-stack development, backend systems, and DevOps work
 - **Case Studies** - In-depth project documentation and technical insights
 
-The previous static portfolio has been archived in the `old_portfolio/` directory for reference.
-
 ---
 
 ## Features
@@ -46,7 +44,7 @@ The previous static portfolio has been archived in the `old_portfolio/` director
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -170,8 +168,8 @@ This project is personal work. All rights reserved © 2026 Usman Ghani.
 
 For inquiries about my work or collaboration opportunities:
 
-- **Email:** [your-email@example.com]
-- **LinkedIn:** [https://www.linkedin.com/in/usmanghanics/)]
+- **Email:** [usmanghanii7729@gmail.com]
+- **LinkedIn:** [https://www.linkedin.com/in/usmanghanics/]
 - **GitHub:** [https://github.com/Code-with-UsmanG]
 - **X:** [https://x.com/USMAANGF]
 

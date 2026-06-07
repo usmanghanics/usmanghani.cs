@@ -2,7 +2,7 @@
 
 A premium, high-performance portfolio website showcasing published mobile apps, AI systems, automation solutions, and production-grade software engineering work.
 
-**Live Site:** [Portfolio Link]  
+**Live Site:** [https://usmanghanics.netlify.app]  
 **Stack:** Next.js 14 | TypeScript | Tailwind CSS
 
 ---

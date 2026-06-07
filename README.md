@@ -1,4 +1,4 @@
-# 🚀 Usman Ghani Portfolio
+# Usman Ghani Portfolio
 
 A premium, high-performance portfolio website showcasing published mobile apps, AI systems, automation solutions, and production-grade software engineering work.
 
@@ -7,7 +7,7 @@ A premium, high-performance portfolio website showcasing published mobile apps, 
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -20,7 +20,7 @@ A premium, high-performance portfolio website showcasing published mobile apps, 
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This portfolio is a modern, full-stack application built with **Next.js** that highlights:
 
@@ -33,16 +33,16 @@ The previous static portfolio has been archived in the `old_portfolio/` director
 
 ---
 
-## ✨ Features
+## Features
 
-- ⚡ **Next.js 14** - Latest React framework with App Router
-- 🎨 **Modern UI/UX** - Responsive design with smooth animations
-- 🔍 **SEO Optimized** - Metadata, Open Graph, and structured data
-- 📱 **Mobile First** - Fully responsive across all devices
-- 🚀 **High Performance** - Optimized images, lazy loading, and caching
-- 🌙 **Dark Mode Support** - Theme toggle for user preference
-- ♿ **Accessible** - WCAG compliant with proper semantic HTML
-- 📊 **Analytics Ready** - Integration points for tracking and monitoring
+- **Next.js 14** - Latest React framework with App Router
+- **Modern UI/UX** - Responsive design with smooth animations
+- **SEO Optimized** - Metadata, Open Graph, and structured data
+- **Mobile First** - Fully responsive across all devices
+- **High Performance** - Optimized images, lazy loading, and caching
+- **Dark Mode Support** - Theme toggle for user preference
+- **Accessible** - WCAG compliant with proper semantic HTML
+- **Analytics Ready** - Integration points for tracking and monitoring
 
 ---
 
@@ -58,7 +58,7 @@ The previous static portfolio has been archived in the `old_portfolio/` director
 
 ---
 
-## 🏃 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -79,11 +79,9 @@ npm install
 npm run dev
 ```
 
-The site will be available at `http://localhost:3000`
-
 ---
 
-## 🛠️ Development
+## Development
 
 ### Available Scripts
 
@@ -132,7 +130,7 @@ Portfolio-Site/
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 ### Recommended Platforms
 
@@ -162,9 +160,9 @@ NEXT_PUBLIC_GA_ID=your_analytics_id
 
 ---
 
-## 📄 License
+## License
 
-This project is personal work. All rights reserved © 2024 Usman Ghani.
+This project is personal work. All rights reserved © 2026 Usman Ghani.
 
 ---
 
@@ -173,16 +171,16 @@ This project is personal work. All rights reserved © 2024 Usman Ghani.
 For inquiries about my work or collaboration opportunities:
 
 - **Email:** [your-email@example.com]
-- **LinkedIn:** [Your LinkedIn]
-- **GitHub:** [@Code-with-UsmanG](https://github.com/Code-with-UsmanG)
-- **Twitter:** [@YourHandle]
+- **LinkedIn:** [https://www.linkedin.com/in/usmanghanics/)]
+- **GitHub:** [https://github.com/Code-with-UsmanG]
+- **X:** [https://x.com/USMAANGF]
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 Built with ❤️ using modern web technologies and best practices in software engineering.
 
 ---
 
-**Last Updated:** June 2024
+**Last Updated:** June 2026

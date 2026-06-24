@@ -2,6 +2,9 @@
 
 import { ArrowUpRight, Maximize2 } from "lucide-react";
 import { useState } from "react";
+import { AppStore } from "@/components/ui/AppStore";
+import { GitHub } from "@/components/ui/GitHub";
+import { GooglePlay } from "@/components/ui/GooglePlay";
 import { ImageLightbox, type LightboxImage } from "@/components/ui/ImageLightbox";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -63,6 +66,7 @@ function FeaturedBand({
             {Object.entries(project.links).map(([label, url]) =>
               url ? (
                 <a href={url} key={label} target="_blank" rel="noreferrer">
+                  {getLinkIcon(label)}
                   {formatLinkLabel(label)}
                   <ArrowUpRight size={15} />
                 </a>
@@ -159,4 +163,20 @@ function formatLinkLabel(label: string) {
   if (label === "playStore") return "Play Store";
   if (label === "appStore") return "App Store";
   return "Live";
+}
+
+function getLinkIcon(label: string) {
+  if (label === "github") {
+    return <GitHub className="brand-link-icon brand-link-icon-github" width={14} height={14} />;
+  }
+
+  if (label === "playStore") {
+    return <GooglePlay className="brand-link-icon" width={14} height={14} />;
+  }
+
+  if (label === "appStore") {
+    return <AppStore className="brand-link-icon" width={14} height={14} />;
+  }
+
+  return null;
 }

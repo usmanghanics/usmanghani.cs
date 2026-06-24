@@ -1,5 +1,7 @@
-import { Apple, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { App } from "@/data/apps";
+import { AppStore } from "@/components/ui/AppStore";
+import { GooglePlay } from "@/components/ui/GooglePlay";
 
 type AppCardProps = {
   app: App;
@@ -40,14 +42,16 @@ export function AppCard({ app }: AppCardProps) {
         <div className="store-row">
           {app.links.play ? (
             <a href={app.links.play} target="_blank" rel="noreferrer">
-              <Play size={13} fill="currentColor" />
+              <GooglePlay className="google-play-icon" width={13} height={13} />
               Play Store
+              <ArrowUpRight size={14} />
             </a>
           ) : null}
           {app.links.appStore ? (
             <a href={app.links.appStore} target="_blank" rel="noreferrer">
-              <Apple size={13} />
+              <AppStore className="brand-store-icon" width={13} height={13} />
               App Store
+              <ArrowUpRight size={14} />
             </a>
           ) : null}
         </div>

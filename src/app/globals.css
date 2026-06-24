@@ -359,12 +359,12 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
   gap: 64px;
   align-items: center;
-  min-height: 100svh;
-  padding: 96px 0 40px;
+  min-height: auto;
+  padding: 112px 0 74px;
 }
 
 .hero-eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 18px;
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 650;
@@ -394,7 +394,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .hero-proof {
@@ -416,7 +416,7 @@ button {
 
 .hero-visual {
   position: relative;
-  min-height: 560px;
+  min-height: 500px;
   isolation: isolate;
 }
 
@@ -427,19 +427,18 @@ button {
   content: "";
   background: radial-gradient(circle, var(--accent-soft), transparent 68%);
   filter: blur(20px);
-  animation: heroGlowPulse 9s ease-in-out infinite;
 }
 
 .device-frame {
   position: relative;
   width: 214px;
-  padding: 7px;
+  padding: 3px;
   overflow: visible;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04)),
     rgba(18, 18, 20, 0.36);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 34px;
+  border-radius: 28px;
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
@@ -447,7 +446,7 @@ button {
 }
 
 .device-large {
-  width: min(286px, 45vw);
+  width: min(258px, 42vw);
 }
 
 .device-medium {
@@ -485,15 +484,6 @@ button {
   border-radius: 0;
   filter: drop-shadow(0 26px 45px rgba(0, 0, 0, 0.42));
   transform: translate3d(0, 0, 0);
-}
-
-.hero-device-main .device-screen-image::before {
-  position: absolute;
-  inset: 2.8%;
-  z-index: 0;
-  content: "";
-  background: #050507;
-  border-radius: 28px;
 }
 
 .tone-blue {
@@ -616,7 +606,7 @@ button {
   --hero-scale: 1;
   transform: translate(var(--hero-x), var(--hero-y)) rotate(var(--hero-rotation)) scale(var(--hero-scale));
   transform-origin: center bottom;
-  animation: heroDeviceFloat 7s ease-in-out infinite;
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease, filter 260ms ease;
   will-change: transform;
 }
 
@@ -626,7 +616,6 @@ button {
   --hero-y: -50%;
   --hero-rotation: 0deg;
   --hero-scale: 1;
-  animation-delay: -1s;
 }
 
 .hero-device-left {
@@ -636,7 +625,6 @@ button {
   --hero-rotation: -11deg;
   --hero-scale: 0.9;
   opacity: 0.92;
-  animation-delay: -2.2s;
 }
 
 .hero-device-right {
@@ -646,7 +634,6 @@ button {
   --hero-rotation: 11deg;
   --hero-scale: 0.9;
   opacity: 0.92;
-  animation-delay: -3.4s;
 }
 
 .hero-visual:hover .hero-device-left {
@@ -657,30 +644,6 @@ button {
 .hero-visual:hover .hero-device-right {
   --hero-x: calc(-50% + 138px);
   --hero-rotation: 13deg;
-}
-
-@keyframes heroDeviceFloat {
-  0%,
-  100% {
-    transform: translate(var(--hero-x), var(--hero-y)) rotate(var(--hero-rotation)) scale(var(--hero-scale));
-  }
-
-  50% {
-    transform: translate(calc(var(--hero-x) + 4px), calc(var(--hero-y) - 8px)) rotate(calc(var(--hero-rotation) + 0.45deg)) scale(var(--hero-scale));
-  }
-}
-
-@keyframes heroGlowPulse {
-  0%,
-  100% {
-    opacity: 0.72;
-    transform: scale(0.96);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
 }
 
 .proof-strip {
@@ -1183,6 +1146,16 @@ button.grid-card {
   border: 1px solid var(--accent-border);
   border-radius: 999px;
   transition: background 140ms ease, color 140ms ease;
+}
+
+.google-play-icon,
+.brand-store-icon,
+.brand-link-icon {
+  flex: none;
+}
+
+.brand-link-icon-github {
+  color: var(--text-primary);
 }
 
 .store-row a:hover {
@@ -2059,7 +2032,7 @@ a.project-row:hover {
 
 @media (max-width: 1280px) and (min-width: 1061px) {
   .device-large {
-    width: min(266px, 42vw);
+    width: min(246px, 40vw);
   }
 
   .hero-device-left {
@@ -2092,15 +2065,16 @@ a.project-row:hover {
     grid-template-columns: 1fr;
     gap: 28px;
     min-height: auto;
-    padding-top: 118px;
+    padding-top: 122px;
+    padding-bottom: 38px;
   }
 
   .hero-visual {
-    min-height: 460px;
+    min-height: 420px;
   }
 
   .device-large {
-    width: min(260px, 42vw);
+    width: min(242px, 40vw);
   }
 
   .hero-device-left {
@@ -2244,7 +2218,8 @@ a.project-row:hover {
   }
 
   .hero {
-    padding-top: 98px;
+    padding-top: 108px;
+    padding-bottom: 30px;
   }
 
   .hero-actions {

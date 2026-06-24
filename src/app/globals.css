@@ -216,7 +216,6 @@ button {
 .button-primary {
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 12px 34px var(--accent-soft);
 }
 
 .button-primary:hover {

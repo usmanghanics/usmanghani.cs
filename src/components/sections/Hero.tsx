@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { DeviceFrame } from "@/components/ui/DeviceFrame";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { apps } from "@/data/apps";
-import { profile, proofPoints } from "@/data/profile";
+import { profile } from "@/data/profile";
 
 export function Hero() {
   const heroApps = ["makki-autocare", "bizcare", "snapcut"].map((id) => {
@@ -23,13 +23,6 @@ export function Hero() {
           <Button href={profile.resumeUrl} variant="ghost" external>
             Download Resume
           </Button>
-        </div>
-        <div className="hero-proof">
-          {proofPoints.slice(0, 3).map((point) => (
-            <span className="glass mono" key={point}>
-              {point}
-            </span>
-          ))}
         </div>
       </RevealOnScroll>
 

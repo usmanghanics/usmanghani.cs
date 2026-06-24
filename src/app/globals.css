@@ -246,6 +246,42 @@ button {
   transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
+.site-nav::after {
+  position: absolute;
+  right: 26px;
+  bottom: -8px;
+  left: 26px;
+  height: 2px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-border) 18%,
+    rgba(232, 93, 117, 0.62) 50%,
+    var(--accent-border) 82%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  opacity: 0.72;
+}
+
+[data-theme="light"] .site-nav::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-border) 18%,
+    rgba(217, 79, 103, 0.5) 50%,
+    var(--accent-border) 82%,
+    transparent 100%
+  );
+  opacity: 0.82;
+}
+
+.site-nav.is-scrolled::after {
+  opacity: 0.52;
+}
+
 .site-nav-inner {
   display: flex;
   align-items: center;
@@ -335,7 +371,7 @@ button {
   gap: 64px;
   align-items: center;
   min-height: 100svh;
-  padding: 118px 0 82px;
+  padding: 96px 0 82px;
 }
 
 .hero-eyebrow {
@@ -2056,7 +2092,7 @@ a.project-row:hover {
     grid-template-columns: 1fr;
     gap: 28px;
     min-height: auto;
-    padding-top: 134px;
+    padding-top: 118px;
   }
 
   .hero-visual {
@@ -2192,6 +2228,12 @@ a.project-row:hover {
     width: calc(100% - 20px);
   }
 
+  .site-nav::after {
+    right: 20px;
+    left: 20px;
+    bottom: -7px;
+  }
+
   .site-nav-inner {
     min-height: 54px;
     padding-left: 16px;
@@ -2202,7 +2244,7 @@ a.project-row:hover {
   }
 
   .hero {
-    padding-top: 112px;
+    padding-top: 98px;
   }
 
   .hero-actions {

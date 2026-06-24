@@ -1784,11 +1784,11 @@ a.project-row:hover {
 
 .image-lightbox-dialog {
   position: relative;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   width: min(1100px, 100%);
-  max-height: min(86svh, 900px);
+  height: min(86svh, 900px);
   padding: 14px;
   background: var(--surface-1);
   border: 1px solid var(--border-strong);
@@ -1827,7 +1827,8 @@ a.project-row:hover {
 .image-lightbox-stage {
   position: relative;
   display: grid;
-  min-height: 0;
+  flex: 1 1 auto;
+  min-height: 280px;
   place-items: center;
   overflow: hidden;
   background: var(--surface-2);
@@ -1838,8 +1839,18 @@ a.project-row:hover {
 .image-lightbox-stage img {
   width: 100%;
   height: 100%;
-  max-height: calc(86svh - 168px);
   object-fit: contain;
+}
+
+.viewer-toast {
+  flex: 0 0 auto;
+  padding: 10px 12px;
+  color: var(--text-primary);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 14px;
+  font-size: 0.84rem;
+  line-height: 1.4;
 }
 
 .lightbox-nav {
@@ -1869,6 +1880,7 @@ a.project-row:hover {
 
 .image-lightbox-thumbs {
   display: flex;
+  flex: 0 0 auto;
   gap: 8px;
   justify-content: center;
   overflow-x: auto;
@@ -1897,6 +1909,42 @@ a.project-row:hover {
   height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+
+.image-lightbox.limited-space {
+  padding: 8px;
+}
+
+.image-lightbox.limited-space .image-lightbox-dialog {
+  gap: 8px;
+  height: calc(100svh - 16px);
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.image-lightbox.limited-space .image-lightbox-topbar {
+  padding: 0 0 2px;
+}
+
+.image-lightbox.limited-space .image-lightbox-topbar p {
+  max-width: calc(100vw - 96px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-lightbox.limited-space .image-lightbox-topbar span,
+.image-lightbox.limited-space .image-lightbox-thumbs {
+  display: none;
+}
+
+.image-lightbox.limited-space .image-lightbox-stage {
+  min-height: 0;
+}
+
+.image-lightbox.limited-space .lightbox-nav {
+  width: 36px;
+  height: 36px;
 }
 
 @media (max-width: 1060px) {
@@ -2081,13 +2129,9 @@ a.project-row:hover {
   }
 
   .image-lightbox-dialog {
-    max-height: 90svh;
+    height: calc(100svh - 24px);
     padding: 10px;
     border-radius: 20px;
-  }
-
-  .image-lightbox-stage img {
-    max-height: calc(90svh - 150px);
   }
 
   .contact-card {

@@ -256,7 +256,7 @@ button {
   pointer-events: none;
   background: var(--accent);
   border-radius: 999px;
-  opacity: 0.82;
+  opacity: 0.64;
   transform: scaleX(1);
   transform-origin: center;
   transition: opacity 180ms ease, transform 180ms ease;
@@ -360,11 +360,11 @@ button {
   gap: 64px;
   align-items: center;
   min-height: 100svh;
-  padding: 96px 0 52px;
+  padding: 96px 0 40px;
 }
 
 .hero-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 650;
@@ -394,7 +394,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 .hero-proof {

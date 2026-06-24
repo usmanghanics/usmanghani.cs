@@ -5,10 +5,7 @@ import { apps } from "@/data/apps";
 import { profile, proofPoints } from "@/data/profile";
 
 export function Hero() {
-  const heroApps = ["makki-autocare", "bizcare", "snapcut"].map((id) => {
-    const app = apps.find((item) => item.id === id);
-    return app ?? apps[0];
-  });
+  const heroApp = apps.find((item) => item.id === "makki-autocare") ?? apps[0];
 
   return (
     <section className="hero page-shell" id="top">
@@ -34,9 +31,16 @@ export function Hero() {
       </RevealOnScroll>
 
       <RevealOnScroll className="hero-visual" delay={0.12}>
-        <DeviceFrame app={heroApps[1]} size="large" className="hero-device hero-device-left" />
-        <DeviceFrame app={heroApps[0]} size="large" className="hero-device hero-device-main" />
-        <DeviceFrame app={heroApps[2]} size="large" className="hero-device hero-device-right" />
+        <div className="hero-visual-copy">
+          <p className="hero-visual-label mono">Featured app</p>
+          <h2>{heroApp.name}</h2>
+          <p className="hero-visual-description">{heroApp.tagline}</p>
+          <div className="hero-visual-meta mono">
+            <span>{heroApp.type === "commercial" ? "Commercial build" : "Personal product"}</span>
+            <span>{heroApp.stack.slice(0, 2).join(" + ")}</span>
+          </div>
+        </div>
+        <DeviceFrame app={heroApp} size="large" className="hero-device hero-device-featured" />
       </RevealOnScroll>
     </section>
   );

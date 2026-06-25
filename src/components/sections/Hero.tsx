@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { DeviceFrame } from "@/components/ui/DeviceFrame";
+import { HeroPhoneStage } from "@/components/sections/HeroPhoneStage";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { apps } from "@/data/apps";
@@ -27,10 +27,8 @@ export function Hero() {
         </div>
       </RevealOnScroll>
 
-      <RevealOnScroll className="hero-visual" delay={0.12}>
-        <DeviceFrame app={heroApps[1]} size="large" className="hero-device hero-device-left" />
-        <DeviceFrame app={heroApps[0]} size="large" className="hero-device hero-device-main" />
-        <DeviceFrame app={heroApps[2]} size="large" className="hero-device hero-device-right" />
+      <RevealOnScroll delay={0.12}>
+        <HeroPhoneStage apps={[heroApps[1], heroApps[0], heroApps[2]]} />
       </RevealOnScroll>
     </section>
   );

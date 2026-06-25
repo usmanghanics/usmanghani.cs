@@ -432,6 +432,7 @@ button {
   position: relative;
   min-height: 500px;
   isolation: isolate;
+  transform-style: preserve-3d;
 }
 
 .hero-visual::before {
@@ -441,6 +442,41 @@ button {
   content: "";
   background: radial-gradient(circle, var(--accent-soft), transparent 68%);
   filter: blur(20px);
+}
+
+.hero-carousel {
+  transform-origin: center center;
+}
+
+.hero-phone-layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.hero-phone-left {
+  z-index: 1;
+}
+
+.hero-phone-main {
+  z-index: 3;
+}
+
+.hero-phone-right {
+  z-index: 2;
+}
+
+.hero-depth-plane {
+  position: absolute;
+  inset: 16% 10% 5%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(232, 93, 117, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 54%);
+  border-radius: 999px;
+  filter: blur(18px);
+  transform-style: preserve-3d;
 }
 
 .device-frame {
@@ -645,6 +681,7 @@ button {
   --hero-scale: 1;
   transform: translate(var(--hero-x), var(--hero-y)) rotate(var(--hero-rotation)) scale(var(--hero-scale));
   transform-origin: center bottom;
+  transition: filter 260ms ease;
 }
 
 .hero-device-main {

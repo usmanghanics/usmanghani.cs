@@ -227,6 +227,14 @@ button {
   background: var(--accent-cta-hover);
 }
 
+/* Darker pink (#B83B5E) for hero + app card primary CTAs */
+.hero .button-primary,
+.app-card .button-primary {
+  background: #B83B5E;
+  border-color: #9e3352;
+  color: #fbf6f6;
+}
+
 .button-ghost,
 .button-store {
   background: var(--surface-glass);
@@ -262,11 +270,15 @@ button {
   align-items: center;
 }
 
+/* Darker pink (#B83B5E) for View Images button site-wide */
 .project-view-images {
   min-height: 32px;
   padding: 0 12px;
   font-size: 0.78rem;
   font-weight: 650;
+  background: #B83B5E;
+  border-color: #9e3352;
+  color: #fbf6f6;
 }
 
 .ghost-hover:hover {

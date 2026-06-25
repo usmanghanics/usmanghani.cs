@@ -58,7 +58,7 @@ Usman is an Android, iOS, and web developer specializing in intelligent applicat
 | UDO | To-do app | 18/03/2025 | Kotlin, Jetpack Compose | Lead Developer | `#` | Tasks, completed state, deletion, dark/light theme. |
 | Tic Tac Toe | Web game converted to Android | DD/MM/YYYY | HTML, CSS, JS | Lead Web and Android Developer | `#` | Needs real date. Consider lower priority unless reframed as early experiment. |
 | Ember | AI/computer vision Android app | 06/02/2025 | Kotlin, Jetpack Compose, Google ML Kit | Sole Developer | `#` | On-device visual recognition, object/gesture/pattern detection. |
-| TimSort Algorithm Simulator | Algorithm visualization | 25/02/2025 | HTML, CSS, JavaScript | Web Developer | https://github.com/Code-with-UsmanG/UTUBE-Downloader | Link appears incorrect and should be fixed. |
+| TimSort Simulator | Algorithm visualization | 25/02/2025 | HTML, CSS, JavaScript | Web Developer | https://github.com/Code-with-UsmanG/UTUBE-Downloader | Link appears incorrect and should be fixed. |
 | TubeDown | Web utility | 25/02/2025 | HTML, CSS, JavaScript, Python | Web Developer | https://github.com/Code-with-UsmanG/TubeDown | YouTube audio/video downloader. |
 | Treasure Hunting Game | DSA game | 15/01/2025 | C++ | Game Developer | https://github.com/Code-with-UsmanG/DSA-Project-Treasure-Hunting-Game | DFS, BFS, pathfinding. |
 | Chess Game | CLI game | 10/01/2023 | C++ | Game Developer | https://github.com/Code-with-UsmanG/Chess-Game | 7000+ lines, first-semester programming fundamentals project. |

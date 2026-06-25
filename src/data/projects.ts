@@ -81,7 +81,7 @@ export const projects: Project[] = [
   },
   {
     id: "timsort",
-    name: "TimSort Algorithm Simulator",
+    name: "TimSort Simulator",
     description:
       "Interactive educational simulator explaining TimSort through animated algorithm steps.",
     role: "Web developer",

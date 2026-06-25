@@ -72,7 +72,7 @@ export function ProjectCard({ project, onViewImages }: ProjectCardProps) {
 function ViewImagesButton({ onClick }: { onClick: () => void }) {
   return (
     <MagneticButton
-      className="button button-ghost project-view-images"
+      className="button button-primary ghost-hover project-view-images"
       icon={<Maximize2 size={16} />}
       strength={0.2}
       onClick={onClick}

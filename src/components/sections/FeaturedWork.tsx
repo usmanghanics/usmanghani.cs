@@ -72,7 +72,7 @@ function FeaturedBand({
           {canViewImages ? (
             <div className="featured-links">
               <MagneticButton
-                className="button button-primary featured-primary-cta"
+                className="button button-primary ghost-hover featured-primary-cta"
                 icon={<Maximize2 size={16} />}
                 strength={0.22}
                 onClick={() => {

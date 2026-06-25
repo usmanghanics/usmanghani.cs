@@ -229,9 +229,10 @@ button {
   background: var(--accent-cta-hover);
 }
 
-/* Darker pink (#B83B5E) for hero + app card primary CTAs */
+/* Darker pink (#B83B5E) for hero + app card + splash button primary CTAs */
 .hero .button-primary,
-.app-card .button-primary {
+.app-card .button-primary,
+.splash-view-portfolio-btn-wrapper .button-primary {
   background: #B83B5E;
   border-color: #9e3352;
   color: #fbf6f6;
@@ -2563,7 +2564,7 @@ a.project-row:hover {
 
 .splash-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-size: clamp(1.8rem, 4.5vw, 2.75rem);
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: 0.04em;
@@ -2571,32 +2572,46 @@ a.project-row:hover {
   line-height: 1.2;
 }
 
-.splash-enter-btn {
-  position: relative;
-  margin-bottom: 32px;
-  padding: 14px 44px;
-  background: var(--text-primary);
-  color: var(--bg);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.2s;
+.splash-view-portfolio-btn-wrapper {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 10;
+  pointer-events: auto;
 }
 
-.splash-enter-btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5),
-              0 0 25px rgba(255, 255, 255, 0.1);
+.splash-bottom-right-hint {
+  position: absolute;
+  bottom: 24px;
+  right: 28px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-align: right;
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.splash-enter-btn:active {
-  transform: translateY(0) scale(0.98);
+.splash-bottom-right-hint span {
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes splash-nudge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.nudge-initial {
+  animation: splash-nudge 0.8s ease-in-out 3;
+}
+
+.nudge-idle {
+  animation: splash-nudge 1.2s ease-in-out infinite;
 }
 
 /* Reduced-motion adjustments */
@@ -2608,7 +2623,18 @@ a.project-row:hover {
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
-  .splash-enter-btn {
-    margin-bottom: 24px;
+  .splash-view-portfolio-btn-wrapper {
+    top: 16px;
+    right: 16px;
+  }
+  .splash-view-portfolio-btn-wrapper .button {
+    min-height: 36px;
+    padding: 0 16px;
+    font-size: 0.8rem;
+  }
+  .splash-bottom-right-hint {
+    bottom: 16px;
+    right: 16px;
+    font-size: 0.62rem;
   }
 }

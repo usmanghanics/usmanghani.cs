@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { InfiniteCanvas } from "./infinite-canvas";
 import manifest from "./infinite-canvas/manifest.json";
+import { MagneticButton } from "./MagneticButton";
 
 type Phase = "loading" | "active" | "exiting" | "done";
 
@@ -14,6 +15,52 @@ export function SplashScreen() {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const rafRef = useRef<number | null>(null);
+
+  const [nudgeClass, setNudgeClass] = useState<"nudge-initial" | "nudge-idle" | "">("nudge-initial");
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const resetIdleTimer = useCallback(() => {
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+    }
+    setNudgeClass("");
+    
+    // Resume idle animation after 4 seconds of inactivity
+    idleTimerRef.current = setTimeout(() => {
+      setNudgeClass("nudge-idle");
+    }, 4000);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== "active") return;
+
+    const events = ["mousemove", "mousedown", "wheel", "touchmove", "keydown", "touchstart"];
+    const handleActivity = () => {
+      resetIdleTimer();
+    };
+
+    events.forEach((event) => {
+      window.addEventListener(event, handleActivity, { passive: true });
+    });
+
+    // Clear "nudge-initial" after 3 seconds (approx 3 runs of 1s animation)
+    const initialTimeout = setTimeout(() => {
+      setNudgeClass((prev) => (prev === "nudge-initial" ? "" : prev));
+    }, 3000);
+
+    // If the user remains completely idle from the start, trigger "nudge-idle" at 5 seconds
+    idleTimerRef.current = setTimeout(() => {
+      setNudgeClass("nudge-idle");
+    }, 5000);
+
+    return () => {
+      events.forEach((event) => {
+        window.removeEventListener(event, handleActivity);
+      });
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      clearTimeout(initialTimeout);
+    };
+  }, [phase, resetIdleTimer]);
 
   // Check theme, sessionStorage and prefers-reduced-motion on mount
   useEffect(() => {
@@ -163,12 +210,16 @@ export function SplashScreen() {
                       style={{ transform: `scaleX(${visualProgress / 100})` }} 
                     />
                   </div>
+
+                  <span className="splash-loader-percentage mono">
+                    {Math.round(visualProgress)}%
+                  </span>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Active Overlay (No card, button at top, name below) */}
+          {/* Active Overlay (No card, button at top right, name in center, hint at bottom right) */}
           {phase === "active" && (
             <div className="splash-interactive-overlay">
               <motion.div 
@@ -177,16 +228,34 @@ export function SplashScreen() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <button 
-                  className="splash-enter-btn"
-                  onClick={handleEnter}
-                  aria-label="Enter Portfolio"
-                >
-                  <span className="splash-btn-bg" />
-                  <span className="splash-btn-text">Enter Portfolio</span>
-                </button>
-
                 <h1 className="splash-title">USMAN GHANI</h1>
+              </motion.div>
+
+              {/* View Portfolio Button in the top right corner */}
+              <motion.div 
+                className="splash-view-portfolio-btn-wrapper"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <MagneticButton
+                  className="button button-primary ghost-hover"
+                  onClick={handleEnter}
+                >
+                  View Portfolio
+                </MagneticButton>
+              </motion.div>
+
+              {/* Instruction hint at bottom right */}
+              <motion.div 
+                className="splash-bottom-right-hint mono"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <span className={nudgeClass}>
+                  scroll down/up, or click View Portfolio button
+                </span>
               </motion.div>
             </div>
           )}

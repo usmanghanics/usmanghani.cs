@@ -250,7 +250,7 @@ export function SplashScreen() {
               <motion.div 
                 className="splash-bottom-right-hint mono"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
                 <span className={nudgeClass}>

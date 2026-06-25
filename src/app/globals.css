@@ -212,6 +212,7 @@ button {
   padding: 0 20px;
   font-size: 0.94rem;
   font-weight: 620;
+  white-space: nowrap;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
@@ -2578,6 +2579,7 @@ a.project-row:hover {
   right: 28px;
   z-index: 10;
   pointer-events: auto;
+  white-space: nowrap;
 }
 
 .splash-bottom-right-hint {
@@ -2594,15 +2596,20 @@ a.project-row:hover {
 
 .splash-bottom-right-hint span {
   display: inline-block;
-  transition: opacity 0.3s ease;
+  opacity: 0.65;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 @keyframes splash-nudge {
   0%, 100% {
     transform: translateY(0);
+    opacity: 0.65;
+    color: var(--text-muted);
   }
   50% {
     transform: translateY(-4px);
+    opacity: 1;
+    color: var(--text-primary);
   }
 }
 

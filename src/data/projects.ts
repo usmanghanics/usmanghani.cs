@@ -29,100 +29,6 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "ember",
-    name: "Ember",
-    description:
-      "AI-powered Android computer vision app using on-device ML Kit detection workflows.",
-    role: "Sole developer",
-    stack: ["Kotlin", "ML Kit", "Compose"],
-    type: "mobile",
-    image: "/assets/projects/ember.webp",
-    images: [
-      "/assets/projects/ember.webp",
-      "/assets/projects/ember-2.webp",
-      "/assets/projects/ember-3.webp",
-    ],
-    featured: true,
-  },
-  {
-    id: "snappy",
-    name: "Snappy",
-    description:
-      "Social Android app with media sharing, realtime chat, Firebase, Supabase, and Compose UI.",
-    role: "Lead Android developer",
-    stack: ["Kotlin", "Firebase", "Supabase"],
-    type: "mobile",
-    link: "https://github.com/Code-with-UsmanG/Snappy",
-    image: "/assets/projects/snappy.webp",
-    images: [
-      "/assets/projects/snappy.webp",
-      "/assets/projects/snappy-2.webp",
-      "/assets/projects/snappy-3.webp",
-    ],
-    featured: true,
-  },
-  {
-    id: "sonic",
-    name: "Sonic",
-    description:
-      "Native Android music player with playlist management, album art, and playback controls.",
-    role: "Android developer",
-    stack: ["Kotlin", "Compose", "Android SDK"],
-    type: "mobile",
-    link: "https://github.com/Code-with-UsmanG/Sonic",
-    image: "/assets/projects/sonic.webp",
-    images: [
-      "/assets/projects/sonic.webp",
-      "/assets/projects/sonic-2.webp",
-      "/assets/projects/sonic-3.webp",
-    ],
-  },
-  {
-    id: "ulearn",
-    name: "ULearn",
-    description:
-      "Learning management app with Firebase-backed course access and student progress workflows.",
-    role: "Backend and API developer",
-    stack: ["Kotlin", "Firebase", "LMS"],
-    type: "mobile",
-    image: "/assets/projects/ulearn.webp",
-    images: [
-      "/assets/projects/ulearn.webp",
-      "/assets/projects/ulearn-2.webp",
-      "/assets/projects/ulearn-3.webp",
-    ],
-  },
-  {
-    id: "lumina",
-    name: "Lumina",
-    description:
-      "Gemini-powered AI chatbot Android app for dynamic conversational experiences.",
-    role: "Lead Android developer",
-    stack: ["Kotlin", "Gemini API", "AI"],
-    type: "mobile",
-    image: "/assets/projects/lumina.webp",
-    images: [
-      "/assets/projects/lumina.webp",
-      "/assets/projects/lumina-2.webp",
-      "/assets/projects/lumina-3.webp",
-    ],
-  },
-  {
-    id: "calculator",
-    name: "Calculator",
-    description:
-      "Modern calculator and unit conversion app with calculation history and clean Material UI.",
-    role: "UI/UX and Android developer",
-    stack: ["Kotlin", "Material", "Utility"],
-    type: "mobile",
-    image: "/assets/projects/calculator.webp",
-    images: [
-      "/assets/projects/calculator.webp",
-      "/assets/projects/calculator-2.webp",
-      "/assets/projects/calculator-3.webp",
-    ],
-  },
-  {
     id: "spendly",
     name: "Spendly",
     description:
@@ -136,36 +42,7 @@ export const projects: Project[] = [
       "/assets/projects/spendly-2.webp",
       "/assets/projects/spendly-3.webp",
     ],
-  },
-  {
-    id: "udo",
-    name: "UDO",
-    description:
-      "Minimal to-do app with task creation, completion, deletion, and light/dark theme support.",
-    role: "Lead developer",
-    stack: ["Kotlin", "Compose", "Productivity"],
-    type: "mobile",
-    image: "/assets/projects/udo.webp",
-    images: [
-      "/assets/projects/udo.webp",
-      "/assets/projects/udo-2.webp",
-      "/assets/projects/udo-3.webp",
-    ],
-  },
-  {
-    id: "lost-found",
-    name: "Lost & Found Management System",
-    description:
-      "University-focused mobile system where students report lost/found items and claim matched belongings.",
-    role: "Sole developer",
-    stack: ["Kotlin", "Firebase", "Matching"],
-    type: "mobile",
-    image: "/assets/projects/traceit.webp",
-    images: [
-      "/assets/projects/traceit.webp",
-      "/assets/projects/traceit-2.webp",
-      "/assets/projects/traceit-3.webp",
-    ],
+    featured: true,
   },
   {
     id: "lead-generation-n8n",
@@ -200,6 +77,7 @@ export const projects: Project[] = [
       "/assets/projects/tubedown-2.webp",
       "/assets/projects/tubedown-3.webp",
     ],
+    featured: true,
   },
   {
     id: "timsort",
@@ -214,21 +92,6 @@ export const projects: Project[] = [
       "/assets/projects/timsort.webp",
       "/assets/projects/timsort-2.webp",
       "/assets/projects/timsort-3.webp",
-    ],
-  },
-  {
-    id: "tic-tac-toe",
-    name: "Tic Tac Toe",
-    description:
-      "Classic web game built with HTML, CSS, and JavaScript, then packaged for Android.",
-    role: "Web and Android developer",
-    stack: ["HTML", "CSS", "JavaScript"],
-    type: "academic",
-    image: "/assets/projects/tictactoe.webp",
-    images: [
-      "/assets/projects/tictactoe.webp",
-      "/assets/projects/tictactoe-2.webp",
-      "/assets/projects/tictactoe-3.webp",
     ],
   },
   {

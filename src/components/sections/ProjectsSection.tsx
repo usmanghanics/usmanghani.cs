@@ -1,4 +1,8 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { ImageLightbox, type LightboxImage } from "@/components/ui/ImageLightbox";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -14,12 +18,16 @@ const groups: Array<{ label: string; type: Project["type"] }> = [
 
 export function ProjectsSection() {
   const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerTitle, setViewerTitle] = useState("");
+  const [viewerImages, setViewerImages] = useState<LightboxImage[]>([]);
 
   return (
     <section className="section-pad page-shell projects-section">
       <RevealOnScroll className="section-heading section-heading-row">
         <div>
-          <SectionLabel>Selected projects</SectionLabel>
+          <SectionLabel>Academic & Personal Projects</SectionLabel>
           <h2>Supporting work across mobile, AI, web, and automation.</h2>
           <p>
             Android apps, web utilities, workflow automation, and academic labs
@@ -34,10 +42,31 @@ export function ProjectsSection() {
       <div className="compact-grid project-preview-grid">
         {featuredProjects.map((project, index) => (
           <RevealOnScroll delay={index * 0.05} key={project.id}>
-            <ProjectCard project={project} />
+            <ProjectCard
+              project={project}
+              onViewImages={({ title, images }) => {
+                const usable = images.slice(0, 3);
+                const lightboxImages: LightboxImage[] = usable.map((src, imageIndex) => ({
+                  src,
+                  alt: `${title} screenshot ${imageIndex + 1}`,
+                  label: `${imageIndex + 1} of ${usable.length}`,
+                }));
+                setViewerTitle(title);
+                setViewerImages(lightboxImages);
+                setActiveIndex(0);
+                setViewerOpen(true);
+              }}
+            />
           </RevealOnScroll>
         ))}
       </div>
+      <ImageLightbox
+        images={viewerImages}
+        initialIndex={activeIndex}
+        open={viewerOpen}
+        title={viewerTitle}
+        onClose={() => setViewerOpen(false)}
+      />
 
       <div className="project-list">
         {groups.map((group) => {
@@ -66,7 +95,6 @@ function ProjectRow({ project }: { project: Project }) {
           <h4>{project.name}</h4>
         </div>
         <p>{project.description}</p>
-        <span className="project-role mono">{project.role}</span>
       </div>
       <div className="project-row-meta">
         <div className="tag-row">

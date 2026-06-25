@@ -1,13 +1,16 @@
-import { ArrowUpRight } from "lucide-react";
+"use client";
+
+import { ArrowUpRight, Maximize2 } from "lucide-react";
+import { useState } from "react";
 import type { Project } from "@/data/projects";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { profile } from "@/data/profile";
 
 type ProjectCardProps = {
   project: Project;
+  onViewImages?: (payload: { title: string; images: string[] }) => void;
 };
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onViewImages }: ProjectCardProps) {
   const images = project.images ?? (project.image ? [project.image] : []);
   const tone =
     project.type === "mobile"
@@ -17,11 +20,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         : project.type === "automation"
           ? "red"
           : "coral";
-  const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
-    `Build request: ${project.name}`,
-  )}&body=${encodeURIComponent(
-    `Hi Usman,\n\nI’d like to request a build/demo for: ${project.name}\n\nThanks!`,
-  )}`;
+  const isMobileLayout = project.type === "mobile";
 
   return (
     <article className="grid-card project-grid-card solid-card">
@@ -31,7 +30,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         }`}
       >
         {images.length > 0 ? (
-          <ProjectImageStack images={images} name={project.name} />
+          isMobileLayout ? (
+            <MobileScreenshotStack images={images} name={project.name} />
+          ) : (
+            <DesktopImageStack images={images} name={project.name} />
+          )
         ) : (
           <AutomationVisual name={project.name} />
         )}
@@ -39,9 +42,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="grid-card-body">
         <div className="grid-card-title-row">
           <h3>{project.name}</h3>
+          {!isMobileLayout && images.length > 1 && onViewImages ? (
+            <ViewImagesButton
+              onClick={() => onViewImages({ title: project.name, images })}
+            />
+          ) : null}
         </div>
         <p>{project.description}</p>
-        <span className="project-role mono">{project.role}</span>
         <div className="tag-row">
           {project.stack.map((item) => (
             <span className="stack-tag mono" key={item}>
@@ -50,22 +57,53 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
         <div className="store-row">
-          <MagneticButton
-            href={project.link ?? mailto}
-            className="button button-primary ghost-hover"
-            strength={0.22}
-            external={Boolean(project.link)}
-            icon={<ArrowUpRight size={16} />}
-          >
-            {project.link ? "View project" : project.type === "mobile" ? "Request APK" : "Request access"}
-          </MagneticButton>
+          <DisabledHint message="Link coming soon">
+            <button className="button button-primary ghost-hover button-disabled" type="button" aria-disabled="true">
+              View project
+              <ArrowUpRight size={16} />
+            </button>
+          </DisabledHint>
         </div>
       </div>
     </article>
   );
 }
 
-function ProjectImageStack({ images, name }: { images: string[]; name: string }) {
+function ViewImagesButton({ onClick }: { onClick: () => void }) {
+  return (
+    <MagneticButton
+      className="button button-ghost project-view-images"
+      icon={<Maximize2 size={16} />}
+      strength={0.2}
+      onClick={onClick}
+    >
+      View images
+    </MagneticButton>
+  );
+}
+
+function DisabledHint({ children, message }: { children: React.ReactNode; message: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span
+      className={`disabled-hint ${open ? "open" : ""}`}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={() => {
+        setOpen(true);
+        window.setTimeout(() => setOpen(false), 1400);
+      }}
+    >
+      {children}
+      <span className="disabled-hint-toast glass mono" role="status">
+        {message}
+      </span>
+    </span>
+  );
+}
+
+function MobileScreenshotStack({ images, name }: { images: string[]; name: string }) {
   const mainImage = images[0];
   if (!mainImage) return null;
   const stackImages = Array.from({ length: 3 }, (_, index) => images[index % images.length] ?? mainImage);
@@ -77,6 +115,29 @@ function ProjectImageStack({ images, name }: { images: string[]; name: string })
           <img src={image} alt={`${name} screenshot ${index + 1}`} loading="lazy" />
         </div>
       ))}
+    </div>
+  );
+}
+
+function DesktopImageStack({ images, name }: { images: string[]; name: string }) {
+  const mainImage = images[0];
+  if (!mainImage) return null;
+  const thumbImages = Array.from({ length: 2 }, (_, index) => images[(index + 1) % images.length] ?? mainImage);
+
+  return (
+    <div className="project-image-stack">
+      <img className="project-image-main" src={mainImage} alt={`${name} preview`} loading="lazy" />
+      <div className="project-card-thumbs" aria-hidden="true">
+        {thumbImages.map((image, index) => (
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            key={`${image}-${index}`}
+            style={{ zIndex: thumbImages.length - index }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

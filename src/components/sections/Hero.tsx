@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { DeviceFrame } from "@/components/ui/DeviceFrame";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { apps } from "@/data/apps";
 import { profile } from "@/data/profile";
@@ -20,9 +21,9 @@ export function Hero() {
           <Button href="#work" icon="down">
             View Work
           </Button>
-          <Button href={profile.resumeUrl} variant="ghost" external>
+          <MagneticButton href={profile.resumeUrl} external>
             Download Resume
-          </Button>
+          </MagneticButton>
         </div>
       </RevealOnScroll>
 

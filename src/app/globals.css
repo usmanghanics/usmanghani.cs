@@ -2470,135 +2470,199 @@ a.project-row:hover {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  cursor: pointer;
   user-select: none;
   overflow: hidden;
   background: #070708;
-
-  /* Entrance: fade in */
-  animation: splash-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  width: 100vw;
+  height: 100vh;
 }
 
-@keyframes splash-enter {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* Exit: slide up + fade out */
-.splash-exiting {
-  animation: splash-exit 0.72s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-  pointer-events: none;
-}
-
-@keyframes splash-exit {
-  0%   { opacity: 1; transform: translateY(0);    clip-path: inset(0 0 0 0); }
-  100% { opacity: 0; transform: translateY(-6vh); clip-path: inset(0 0 100% 0); }
-}
-
-/* WebGL canvas fills the whole overlay */
-.splash-canvas {
+.splash-canvas-wrapper {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  z-index: 1;
 }
 
-/* Name + role — centered below the photo circle */
-.splash-meta {
+/* Loader Screen */
+.splash-loader-screen {
   position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, calc(50% + min(23vmin, 160px) + 28px));
+  inset: 0;
+  background: #070708;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  pointer-events: none;
-
-  opacity: 0;
-  translate: 0 12px;
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s,
-              translate 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
 }
 
-.splash-meta-in {
-  opacity: 1;
-  translate: 0 0;
+.splash-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.splash-name {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+.splash-loader-name {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 700;
   color: #fbf6f6;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
-.splash-role {
-  font-size: clamp(0.72rem, 1.4vw, 0.85rem);
-  color: rgba(251, 246, 246, 0.52);
-  letter-spacing: 0.04em;
-  margin: 6px 0 0;
+.splash-loader-role {
+  font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+  color: rgba(251, 246, 246, 0.5);
+  letter-spacing: 0.05em;
+  margin: 8px 0 0;
 }
 
-/* Tap hint — bottom center */
-.splash-hint {
+.splash-loader-bar-container {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  margin: 32px auto 12px;
+  overflow: hidden;
+}
+
+.splash-loader-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #B83B5E;
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}
+
+.splash-loader-percentage {
+  font-size: 0.68rem;
+  color: rgba(251, 246, 246, 0.35);
+  letter-spacing: 0.05em;
+}
+
+/* Interactive Overlay (WASD / Explore Card) */
+.splash-interactive-overlay {
   position: absolute;
-  bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: rgba(251, 246, 246, 0.0);
-  text-transform: lowercase;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   pointer-events: none;
-  white-space: nowrap;
-
-  transition: color 0.6s ease 0.8s;
-  animation: hint-pulse 2.8s ease-in-out 1.4s infinite;
+  padding: 24px;
 }
 
-.splash-hint-in {
-  color: rgba(251, 246, 246, 0.38);
+.splash-center-content {
+  pointer-events: auto;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
 }
 
-@keyframes hint-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+.splash-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.85), 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
-/* Skip button — top-right */
-.splash-skip {
+.splash-subtitle {
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.06em;
+  margin: 12px 0 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.splash-enter-btn {
+  position: relative;
+  margin-top: 36px;
+  padding: 14px 44px;
+  background: #ffffff;
+  color: #070708;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s;
+}
+
+.splash-enter-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8),
+              0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+.splash-enter-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.splash-hint-text {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  margin: 28px 0 0;
+  max-width: 320px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* Skip Button */
+.splash-skip-btn {
   position: absolute;
   top: 24px;
   right: 28px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 100px;
-  color: rgba(251, 246, 246, 0.42);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  padding: 6px 14px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
   cursor: pointer;
-  pointer-events: all;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  pointer-events: auto;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
   text-transform: lowercase;
 }
 
-.splash-skip:hover {
-  background: rgba(255, 255, 255, 0.11);
-  border-color: rgba(184, 59, 94, 0.4);
-  color: rgba(251, 246, 246, 0.72);
+.splash-skip-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(251, 246, 246, 0.85);
 }
 
-/* Reduced-motion: skip animation, just fade */
+/* Reduced-motion adjustments */
 @media (prefers-reduced-motion: reduce) {
-  .splash-overlay { animation: splash-enter 0.3s ease both; }
-  .splash-exiting { animation: none; opacity: 0; transition: opacity 0.3s ease; }
-  @keyframes hint-pulse { 0%, 100% { opacity: 1; } }
+  .splash-center-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #070708;
+  }
 }
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
-  .splash-hint  { bottom: 32px; font-size: 0.68rem; }
-  .splash-skip  { top: 16px; right: 16px; }
+  .splash-center-card {
+    padding: 36px 24px;
+  }
+  .splash-hint-text {
+    margin-top: 24px;
+  }
+  .splash-skip-btn {
+    top: 16px;
+    right: 16px;
+  }
 }

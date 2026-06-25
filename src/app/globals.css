@@ -245,6 +245,25 @@ button {
   color: var(--text-primary);
 }
 
+.store-cta {
+  min-height: 42px;
+  font-size: 0.9rem;
+  font-weight: 620;
+  padding: 0 16px;
+}
+
+.store-cta > span {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ghost-hover:hover {
+  background: var(--surface-glass);
+  border-color: var(--accent-border);
+  color: var(--text-primary);
+}
+
 .site-nav {
   position: fixed;
   top: 14px;
@@ -891,6 +910,12 @@ button {
   transform: translateX(-50%) scale(1.12);
 }
 
+.app-screenshot-shell:nth-child(1) img,
+.app-screenshot-shell:nth-child(2) img,
+.app-screenshot-shell:nth-child(3) img {
+  transform: scaleX(1.02) translateY(-5px);
+}
+
 .app-screenshot-shell:nth-child(3) {
   z-index: 1;
   transform: translateX(-2%) rotate(4deg) scale(1.02);
@@ -1250,8 +1275,8 @@ button.grid-card {
   color: var(--text-primary);
 }
 
-.store-row a:hover,
-.store-row button:hover {
+.store-row a.button-store:hover,
+.store-row button.button-store:hover {
   background: var(--accent-soft);
   color: var(--accent-strong);
 }

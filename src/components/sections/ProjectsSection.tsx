@@ -64,7 +64,6 @@ function ProjectRow({ project }: { project: Project }) {
       <div>
         <div className="project-row-top">
           <h4>{project.name}</h4>
-          <span className={`type-badge mono type-${project.type}`}>{project.type}</span>
         </div>
         <p>{project.description}</p>
         <span className="project-role mono">{project.role}</span>

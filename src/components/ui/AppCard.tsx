@@ -12,7 +12,6 @@ export function AppCard({ app }: AppCardProps) {
   return (
     <article className="app-card solid-card">
       <div className={`app-card-visual tone-${app.visual.tone}`}>
-        {app.featured ? <span className="featured-pill mono">Featured</span> : null}
         <div className="app-screenshot-stack">
           {app.screenshots.map((screenshot, index) => (
             <div className="app-screenshot-shell" key={screenshot}>
@@ -45,33 +44,29 @@ export function AppCard({ app }: AppCardProps) {
           {app.links.play ? (
             <MagneticButton
               href={app.links.play}
-              className="button button-store"
+              className="button button-primary store-cta ghost-hover"
               external
               strength={0.22}
-              icon={
-                <>
-                  <GooglePlay className="google-play-icon" width={13} height={13} />
-                  <ArrowUpRight size={14} />
-                </>
-              }
+              icon={<ArrowUpRight size={16} />}
             >
-              Play Store
+              <>
+                <GooglePlay className="google-play-icon" width={13} height={13} />
+                Play Store
+              </>
             </MagneticButton>
           ) : null}
           {app.links.appStore ? (
             <MagneticButton
               href={app.links.appStore}
-              className="button button-store"
+              className="button button-primary store-cta ghost-hover"
               external
               strength={0.22}
-              icon={
-                <>
-                  <AppStore className="brand-store-icon" width={13} height={13} />
-                  <ArrowUpRight size={14} />
-                </>
-              }
+              icon={<ArrowUpRight size={16} />}
             >
-              App Store
+              <>
+                <AppStore className="brand-store-icon" width={13} height={13} />
+                App Store
+              </>
             </MagneticButton>
           ) : null}
         </div>

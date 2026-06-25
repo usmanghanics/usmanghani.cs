@@ -21,7 +21,11 @@ export function Hero() {
           <Button href="#work" variant="ghost" icon="down">
             View Work
           </Button>
-          <MagneticButton href={profile.resumeUrl} className="button button-primary" external>
+          <MagneticButton
+            href={profile.resumeUrl}
+            className="button button-primary ghost-hover"
+            external
+          >
             Download Resume
           </MagneticButton>
         </div>

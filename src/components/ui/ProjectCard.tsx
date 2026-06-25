@@ -15,7 +15,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         ) : (
           <AutomationVisual name={project.name} />
         )}
-        <span className={`type-badge mono type-${project.type}`}>{project.type}</span>
       </div>
       <div className="grid-card-body">
         <div className="grid-card-title-row">

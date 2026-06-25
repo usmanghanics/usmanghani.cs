@@ -1,11 +1,9 @@
 "use client";
 
-import { ArrowUpRight, Maximize2 } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 import { useState } from "react";
-import { AppStore } from "@/components/ui/AppStore";
-import { GitHub } from "@/components/ui/GitHub";
-import { GooglePlay } from "@/components/ui/GooglePlay";
 import { ImageLightbox, type LightboxImage } from "@/components/ui/ImageLightbox";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { featuredWork, type FeaturedProject } from "@/data/featuredWork";
@@ -38,6 +36,15 @@ function FeaturedBand({
   index: number;
 }) {
   const imageFirst = project.imagePosition === "left";
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const images: LightboxImage[] =
+    project.images?.map((image, imageIndex) => ({
+      src: image,
+      alt: `${project.name} screenshot ${imageIndex + 1}`,
+      label: `${imageIndex + 1} of ${project.images?.length ?? 1}`,
+    })) ?? [];
+  const canViewImages = images.length > 0;
 
   return (
     <article className="featured-band">
@@ -62,36 +69,55 @@ function FeaturedBand({
               </span>
             ))}
           </div>
-          <div className="featured-links">
-            {Object.entries(project.links).map(([label, url]) =>
-              url ? (
-                <a href={url} key={label} target="_blank" rel="noreferrer">
-                  {getLinkIcon(label)}
-                  {formatLinkLabel(label)}
-                  <ArrowUpRight size={15} />
-                </a>
-              ) : null,
-            )}
-          </div>
+          {canViewImages ? (
+            <div className="featured-links">
+              <MagneticButton
+                className="button button-primary featured-primary-cta"
+                icon={<Maximize2 size={16} />}
+                strength={0.22}
+                onClick={() => {
+                  setActiveIndex(0);
+                  setViewerOpen(true);
+                }}
+              >
+                View images
+              </MagneticButton>
+            </div>
+          ) : null}
         </RevealOnScroll>
         <RevealOnScroll className="featured-visual-wrap" delay={0.14 + index * 0.03}>
-          <ProjectVisual project={project} />
+          <ProjectVisual
+            project={project}
+            images={images}
+            activeIndex={activeIndex}
+            viewerOpen={viewerOpen}
+            onThumbSelect={(imageIndex) => {
+              setActiveIndex(imageIndex);
+              setViewerOpen(true);
+            }}
+            onClose={() => setViewerOpen(false)}
+          />
         </RevealOnScroll>
       </div>
     </article>
   );
 }
 
-function ProjectVisual({ project }: { project: FeaturedProject }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [viewerOpen, setViewerOpen] = useState(false);
-  const images: LightboxImage[] =
-    project.images?.map((image, index) => ({
-      src: image,
-      alt: `${project.name} screenshot ${index + 1}`,
-      label: `${index + 1} of ${project.images?.length ?? 1}`,
-    })) ?? [];
-
+function ProjectVisual({
+  project,
+  images,
+  activeIndex,
+  viewerOpen,
+  onThumbSelect,
+  onClose,
+}: {
+  project: FeaturedProject;
+  images: LightboxImage[];
+  activeIndex: number;
+  viewerOpen: boolean;
+  onThumbSelect: (imageIndex: number) => void;
+  onClose: () => void;
+}) {
   if (!project.image || images.length === 0) {
     return (
       <div className={`project-visual glass visual-${project.visual}`}>
@@ -119,28 +145,12 @@ function ProjectVisual({ project }: { project: FeaturedProject }) {
     <div className={`project-visual glass visual-${project.visual}`}>
       <div className="featured-image-frame">
         <img src={project.image} alt={`${project.name} interface preview`} loading="lazy" />
-        <div className="featured-image-actions">
-          <button
-            type="button"
-            onClick={() => {
-              setActiveIndex(0);
-              setViewerOpen(true);
-            }}
-          >
-            View images
-            <Maximize2 size={15} />
-          </button>
-          <span className="mono">{images.length} views</span>
-        </div>
       </div>
       <div className="featured-thumb-row">
         {images.map((image, index) => (
           <button
             type="button"
-            onClick={() => {
-              setActiveIndex(index);
-              setViewerOpen(true);
-            }}
+            onClick={() => onThumbSelect(index)}
             key={image.src}
           >
             <img src={image.src} alt={image.alt} loading="lazy" />
@@ -152,31 +162,8 @@ function ProjectVisual({ project }: { project: FeaturedProject }) {
         initialIndex={activeIndex}
         open={viewerOpen}
         title={project.name}
-        onClose={() => setViewerOpen(false)}
+        onClose={onClose}
       />
     </div>
   );
-}
-
-function formatLinkLabel(label: string) {
-  if (label === "github") return "GitHub";
-  if (label === "playStore") return "Play Store";
-  if (label === "appStore") return "App Store";
-  return "Live";
-}
-
-function getLinkIcon(label: string) {
-  if (label === "github") {
-    return <GitHub className="brand-link-icon brand-link-icon-github" width={14} height={14} />;
-  }
-
-  if (label === "playStore") {
-    return <GooglePlay className="brand-link-icon" width={14} height={14} />;
-  }
-
-  if (label === "appStore") {
-    return <AppStore className="brand-link-icon" width={14} height={14} />;
-  }
-
-  return null;
 }

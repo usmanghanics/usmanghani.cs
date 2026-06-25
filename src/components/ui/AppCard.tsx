@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { App } from "@/data/apps";
 import { AppStore } from "@/components/ui/AppStore";
 import { GooglePlay } from "@/components/ui/GooglePlay";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 type AppCardProps = {
   app: App;
@@ -14,12 +15,13 @@ export function AppCard({ app }: AppCardProps) {
         {app.featured ? <span className="featured-pill mono">Featured</span> : null}
         <div className="app-screenshot-stack">
           {app.screenshots.map((screenshot, index) => (
-            <img
-              src={screenshot}
-              alt={`${app.name} screenshot ${index + 1}`}
-              loading="lazy"
-              key={screenshot}
-            />
+            <div className="app-screenshot-shell" key={screenshot}>
+              <img
+                src={screenshot}
+                alt={`${app.name} screenshot ${index + 1}`}
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -41,18 +43,36 @@ export function AppCard({ app }: AppCardProps) {
         </div>
         <div className="store-row">
           {app.links.play ? (
-            <a href={app.links.play} target="_blank" rel="noreferrer">
-              <GooglePlay className="google-play-icon" width={13} height={13} />
+            <MagneticButton
+              href={app.links.play}
+              className="button button-store"
+              external
+              strength={0.22}
+              icon={
+                <>
+                  <GooglePlay className="google-play-icon" width={13} height={13} />
+                  <ArrowUpRight size={14} />
+                </>
+              }
+            >
               Play Store
-              <ArrowUpRight size={14} />
-            </a>
+            </MagneticButton>
           ) : null}
           {app.links.appStore ? (
-            <a href={app.links.appStore} target="_blank" rel="noreferrer">
-              <AppStore className="brand-store-icon" width={13} height={13} />
+            <MagneticButton
+              href={app.links.appStore}
+              className="button button-store"
+              external
+              strength={0.22}
+              icon={
+                <>
+                  <AppStore className="brand-store-icon" width={13} height={13} />
+                  <ArrowUpRight size={14} />
+                </>
+              }
+            >
               App Store
-              <ArrowUpRight size={14} />
-            </a>
+            </MagneticButton>
           ) : null}
         </div>
       </div>

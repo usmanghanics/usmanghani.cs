@@ -18,10 +18,10 @@ export function Hero() {
         <h1>{profile.headline}</h1>
         <p className="hero-bio">{profile.bio}</p>
         <div className="hero-actions">
-          <Button href="#work" icon="down">
+          <Button href="#work" variant="ghost" icon="down">
             View Work
           </Button>
-          <MagneticButton href={profile.resumeUrl} external>
+          <MagneticButton href={profile.resumeUrl} className="button button-primary" external>
             Download Resume
           </MagneticButton>
         </div>

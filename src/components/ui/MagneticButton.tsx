@@ -5,22 +5,28 @@ import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 type MagneticButtonProps = {
-  href: string;
   children: React.ReactNode;
+  href?: string;
   className?: string;
   external?: boolean;
   strength?: number;
+  icon?: React.ReactNode;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 };
 
 export function MagneticButton({
-  href,
   children,
+  href,
   className = "button button-ghost",
   external,
   strength = 0.35,
+  icon = <ArrowUpRight size={16} />,
+  onClick,
+  type = "button",
 }: MagneticButtonProps) {
   const zoneRef = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLAnchorElement>(null);
+  const btnRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const zone = zoneRef.current;
@@ -78,16 +84,28 @@ export function MagneticButton({
 
   return (
     <div ref={zoneRef} className="magnetic-button-zone">
-      <a
-        ref={btnRef}
-        className={className}
-        href={href}
-        rel={external ? "noreferrer" : undefined}
-        target={external ? "_blank" : undefined}
-      >
-        <span>{children}</span>
-        <ArrowUpRight size={16} />
-      </a>
+      {href ? (
+        <a
+          ref={btnRef as React.RefObject<HTMLAnchorElement>}
+          className={className}
+          href={href}
+          rel={external ? "noreferrer" : undefined}
+          target={external ? "_blank" : undefined}
+        >
+          <span>{children}</span>
+          {icon}
+        </a>
+      ) : (
+        <button
+          ref={btnRef as React.RefObject<HTMLButtonElement>}
+          className={className}
+          type={type}
+          onClick={onClick}
+        >
+          <span>{children}</span>
+          {icon}
+        </button>
+      )}
     </div>
   );
 }

@@ -38,9 +38,7 @@ export const featuredWork: FeaturedProject[] = [
       "Designed as a creator-facing SaaS with generation, download, and selling paths.",
     ],
     stack: ["Next.js", "Supabase", "AI", "Stripe", "Vercel"],
-    links: {
-      github: "https://github.com/ayeshag7/Leafiyo.git",
-    },
+    links: {},
     imagePosition: "right",
     visual: "saas",
     image: "/assets/featured/leafiyo-1.webp",
@@ -64,9 +62,7 @@ export const featuredWork: FeaturedProject[] = [
       "Supported product areas such as document Q&A, email triage, and resident communication.",
     ],
     stack: ["React", "AI", "RAG", "Backend APIs", "WhatsApp"],
-    links: {
-      github: "https://github.com/usmansafdarktk/DOS2-AI",
-    },
+    links: {},
     imagePosition: "left",
     visual: "dashboard",
     image: "/assets/featured/dos2-ai-1.webp",
@@ -90,10 +86,7 @@ export const featuredWork: FeaturedProject[] = [
       "Helped turn operational requirements into practical mobile product flows.",
     ],
     stack: ["Flutter", "ERP", "Firebase", "REST APIs", "iOS"],
-    links: {
-      playStore: "https://play.google.com/store/apps/details?id=com.bizcare.bizcare&pcampaignid=web_share",
-      appStore: "https://apps.apple.com/us/app/bizcare/id6752336703",
-    },
+    links: {},
     imagePosition: "right",
     visual: "mobile",
     placeholder: {

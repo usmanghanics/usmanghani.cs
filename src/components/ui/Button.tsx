@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 type ButtonProps = {
   href: string;
@@ -16,14 +17,18 @@ export function Button({
   external,
 }: ButtonProps) {
   const className = `button button-${variant}`;
-  const rel = external ? "noreferrer" : undefined;
-  const target = external ? "_blank" : undefined;
+  const iconNode =
+    icon === "arrow" ? <ArrowUpRight size={16} /> : icon === "down" ? <ArrowDown size={16} /> : null;
 
   return (
-    <a className={className} href={href} rel={rel} target={target}>
-      <span>{children}</span>
-      {icon === "arrow" ? <ArrowUpRight size={16} /> : null}
-      {icon === "down" ? <ArrowDown size={16} /> : null}
-    </a>
+    <MagneticButton
+      href={href}
+      className={className}
+      external={external}
+      icon={iconNode}
+      strength={0.28}
+    >
+      {children}
+    </MagneticButton>
   );
 }

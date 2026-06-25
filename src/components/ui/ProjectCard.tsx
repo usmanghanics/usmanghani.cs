@@ -82,9 +82,6 @@ function ProjectImageStack({ images, name }: { images: string[]; name: string })
           ))}
         </div>
       ) : null}
-      {visibleImages.length > 1 ? (
-        <span className="project-image-count mono">{visibleImages.length} views</span>
-      ) : null}
     </div>
   );
 }

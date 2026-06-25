@@ -2,7 +2,7 @@ export const profile = {
   name: "Usman Ghani",
   eyebrow: "Mobile Application Engineer - Lahore, Pakistan",
   headline: "Building apps people actually use.",
-  bio: "Published mobile application engineer with 6+ Android and iOS apps across client and personal products. I build commercial apps with BizCare Software Solutions, publish my own utilities through BlueX Software Solutions, and work on AI/product systems at Veloq.",
+  bio: "I've built, deployed, and maintained 6+ Android and iOS applications, including 3 published personal products through BlueX Software Solutions and 3 commercial mobile applications developed with BizCare Software Solutions. Additionally, I've contributed to 5 projects at Veloq, spanning software products, autonomous agent systems, and n8n-based workflow automation solutions.",
   email: "usmanghanii7729@gmail.com",
   resumeUrl: "https://drive.google.com/file/d/1JPxMGBQtiBtv1lTsU1e8aZZ0xTf7lEvO/view?usp=sharing",
   socials: {
@@ -21,7 +21,7 @@ export const profile = {
 export const proofPoints = [
   "BS Computer Science - Namal University",
   "6+ published apps on Android and iOS",
-  "BlueX Software Solutions - Play Store publisher",
-  "BizCare Software Solutions - internship and client apps",
+  "BlueX Software Solutions",
+  "BizCare Software Solutions",
   "Veloq - AI software house",
 ];

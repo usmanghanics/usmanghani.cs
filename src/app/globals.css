@@ -2464,3 +2464,141 @@ a.project-row:hover {
     flex-direction: column;
   }
 }
+
+/* ─── Splash Screen ───────────────────────────────────────────────────────── */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  background: #070708;
+
+  /* Entrance: fade in */
+  animation: splash-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes splash-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Exit: slide up + fade out */
+.splash-exiting {
+  animation: splash-exit 0.72s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes splash-exit {
+  0%   { opacity: 1; transform: translateY(0);    clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; transform: translateY(-6vh); clip-path: inset(0 0 100% 0); }
+}
+
+/* WebGL canvas fills the whole overlay */
+.splash-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Name + role — centered below the photo circle */
+.splash-meta {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(50% + min(23vmin, 160px) + 28px));
+  text-align: center;
+  pointer-events: none;
+
+  opacity: 0;
+  translate: 0 12px;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s,
+              translate 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.splash-meta-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.splash-name {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: #fbf6f6;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.splash-role {
+  font-size: clamp(0.72rem, 1.4vw, 0.85rem);
+  color: rgba(251, 246, 246, 0.52);
+  letter-spacing: 0.04em;
+  margin: 6px 0 0;
+}
+
+/* Tap hint — bottom center */
+.splash-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: rgba(251, 246, 246, 0.0);
+  text-transform: lowercase;
+  pointer-events: none;
+  white-space: nowrap;
+
+  transition: color 0.6s ease 0.8s;
+  animation: hint-pulse 2.8s ease-in-out 1.4s infinite;
+}
+
+.splash-hint-in {
+  color: rgba(251, 246, 246, 0.38);
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Skip button — top-right */
+.splash-skip {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  color: rgba(251, 246, 246, 0.42);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  cursor: pointer;
+  pointer-events: all;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  text-transform: lowercase;
+}
+
+.splash-skip:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(184, 59, 94, 0.4);
+  color: rgba(251, 246, 246, 0.72);
+}
+
+/* Reduced-motion: skip animation, just fade */
+@media (prefers-reduced-motion: reduce) {
+  .splash-overlay { animation: splash-enter 0.3s ease both; }
+  .splash-exiting { animation: none; opacity: 0; transition: opacity 0.3s ease; }
+  @keyframes hint-pulse { 0%, 100% { opacity: 1; } }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .splash-hint  { bottom: 32px; font-size: 0.68rem; }
+  .splash-skip  { top: 16px; right: 16px; }
+}

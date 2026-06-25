@@ -12,9 +12,10 @@ export function SplashScreen() {
   const [textureProgress, setTextureProgress] = useState(0);
   const [visualProgress, setVisualProgress] = useState(0);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const rafRef = useRef<number | null>(null);
 
-  // Check sessionStorage and prefers-reduced-motion on mount
+  // Check theme, sessionStorage and prefers-reduced-motion on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isAlreadyShown = sessionStorage.getItem("ug_splash");
@@ -28,7 +29,27 @@ export function SplashScreen() {
         // Prevent scrolling while splash screen is active
         document.body.style.overflow = "hidden";
       }
+
+      // Initialize theme
+      const initialTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+      setTheme(initialTheme);
+
+      // Listen for theme mutations (e.g. if changed via toggle)
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.attributeName === "data-theme") {
+            const nextTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+            setTheme(nextTheme);
+          }
+        }
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      return () => observer.disconnect();
     }
+  }, []);
+
+  // Restore scrolling on unmount
+  useEffect(() => {
     return () => {
       if (typeof window !== "undefined") {
         document.body.style.overflow = "";
@@ -77,7 +98,7 @@ export function SplashScreen() {
     }
   }, []);
 
-  // Keyboard skip/enter
+  // Keyboard enter/skip
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (phase === "active" && (e.key === "Enter" || e.key === " ")) {
@@ -92,6 +113,8 @@ export function SplashScreen() {
 
   if (phase === "done" || isReducedMotion) return null;
 
+  const bgAndFogColor = theme === "light" ? "#f9f2f2" : "#070708";
+
   return (
     <AnimatePresence onExitComplete={() => setPhase("done")}>
       {phase !== "exiting" && (
@@ -105,13 +128,13 @@ export function SplashScreen() {
             transition: { duration: 0.65, ease: [0.76, 0, 0.24, 1] } 
           }}
         >
-          {/* Canvas is loaded in the background */}
+          {/* Canvas loaded in the background */}
           <div className="splash-canvas-wrapper">
             <InfiniteCanvas 
               media={manifest} 
               onTextureProgress={setTextureProgress}
-              backgroundColor="#070708"
-              fogColor="#070708"
+              backgroundColor={bgAndFogColor}
+              fogColor={bgAndFogColor}
             />
           </div>
 
@@ -133,14 +156,6 @@ export function SplashScreen() {
                   >
                     Usman Ghani
                   </motion.h1>
-                  <motion.p 
-                    className="splash-loader-role mono"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  >
-                    Product &amp; Software Engineer
-                  </motion.p>
                   
                   <div className="splash-loader-bar-container">
                     <div 
@@ -148,16 +163,12 @@ export function SplashScreen() {
                       style={{ transform: `scaleX(${visualProgress / 100})` }} 
                     />
                   </div>
-                  
-                  <span className="splash-loader-percentage mono">
-                    {Math.round(visualProgress)}%
-                  </span>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Active Overlay Card and Info */}
+          {/* Active Overlay (No card, button at top, name below) */}
           {phase === "active" && (
             <div className="splash-interactive-overlay">
               <motion.div 
@@ -166,9 +177,6 @@ export function SplashScreen() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <h1 className="splash-title">Usman Ghani</h1>
-                <p className="splash-subtitle mono">Product &amp; Software Engineer</p>
-                
                 <button 
                   className="splash-enter-btn"
                   onClick={handleEnter}
@@ -178,22 +186,8 @@ export function SplashScreen() {
                   <span className="splash-btn-text">Enter Portfolio</span>
                 </button>
 
-                <p className="splash-hint-text mono">
-                  WASD / Drag mouse to explore the gallery
-                </p>
+                <h1 className="splash-title">USMAN GHANI</h1>
               </motion.div>
-
-              {/* Skip button in the top right */}
-              <motion.button
-                className="splash-skip-btn mono"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.6 }}
-                whileHover={{ opacity: 1, scale: 1.05 }}
-                onClick={handleEnter}
-                aria-label="Skip intro"
-              >
-                skip
-              </motion.button>
             </div>
           )}
         </motion.div>

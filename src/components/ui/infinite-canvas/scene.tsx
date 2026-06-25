@@ -447,9 +447,9 @@ function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onT
     s.velocity.y = lerp(s.velocity.y, s.targetVel.y, VELOCITY_LERP);
     s.velocity.z = lerp(s.velocity.z, s.targetVel.z, VELOCITY_LERP);
 
-    s.basePos.x = clamp(s.basePos.x + s.velocity.x, -70, 70);
-    s.basePos.y = clamp(s.basePos.y + s.velocity.y, -70, 70);
-    s.basePos.z = clamp(s.basePos.z + s.velocity.z, 20, 110);
+    s.basePos.x += s.velocity.x;
+    s.basePos.y += s.velocity.y;
+    s.basePos.z += s.velocity.z;
 
     camera.position.set(s.basePos.x + s.drift.x, s.basePos.y + s.drift.y, s.basePos.z);
 

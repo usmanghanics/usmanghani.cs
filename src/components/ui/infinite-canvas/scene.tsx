@@ -122,7 +122,7 @@ function MediaPlane({
 
     const target = Math.min(gridFade, depthFade * depthFade);
 
-    state.opacity = target < INVIS_THRESHOLD && state.opacity < INVIS_THRESHOLD ? 0 : lerp(state.opacity, target, 0.18);
+    state.opacity = target < INVIS_THRESHOLD && state.opacity < INVIS_THRESHOLD ? 0 : lerp(state.opacity, target, 0.09);
 
     const isFullyOpaque = state.opacity > 0.99;
     material.opacity = isFullyOpaque ? 1 : state.opacity;
@@ -343,15 +343,15 @@ function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onT
       };
 
       if (s.isDragging) {
-        s.targetVel.x -= (e.clientX - s.lastMouse.x) * 0.025;
-        s.targetVel.y += (e.clientY - s.lastMouse.y) * 0.025;
+        s.targetVel.x -= (e.clientX - s.lastMouse.x) * 0.018;
+        s.targetVel.y += (e.clientY - s.lastMouse.y) * 0.018;
         s.lastMouse = { x: e.clientX, y: e.clientY };
       }
     };
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      s.scrollAccum += e.deltaY * 0.006;
+      s.scrollAccum += e.deltaY * 0.004;
     };
 
     const onTouchStart = (e: TouchEvent) => {
@@ -423,8 +423,8 @@ function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onT
 
     const isZooming = Math.abs(s.velocity.z) > 0.05;
     const zoomFactor = clamp(s.basePos.z / 50, 0.3, 2.0);
-    const driftAmount = 8.0 * zoomFactor;
-    const driftLerp = isZooming ? 0.2 : 0.12;
+    const driftAmount = 6.0 * zoomFactor;
+    const driftLerp = isZooming ? 0.06 : 0.04;
 
     if (s.isDragging) {
       // Freeze drift during drag - keep it at current value
@@ -524,7 +524,7 @@ export function InfiniteCanvasScene({
   fogColor = "#ffffff",
 }: InfiniteCanvasProps) {
   const isTouchDevice = useIsTouchDevice();
-  const dpr = Math.min(window.devicePixelRatio || 1, isTouchDevice ? 1.25 : 1.5);
+  const dpr = Math.min(window.devicePixelRatio || 1, isTouchDevice ? 1.5 : 2.0);
 
   if (!media.length) {
     return null;
@@ -537,7 +537,7 @@ export function InfiniteCanvasScene({
           camera={{ position: [0, 0, INITIAL_CAMERA_Z], fov: cameraFov, near: cameraNear, far: cameraFar }}
           dpr={dpr}
           flat
-          gl={{ antialias: false, powerPreference: "high-performance" }}
+          gl={{ antialias: true, powerPreference: "high-performance" }}
           className={styles.canvas}
         >
           <color attach="background" args={[backgroundColor]} />

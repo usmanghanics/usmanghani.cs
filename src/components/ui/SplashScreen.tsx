@@ -6,6 +6,23 @@ import { InfiniteCanvas } from "./infinite-canvas";
 import manifest from "./infinite-canvas/manifest.json";
 import { MagneticButton } from "./MagneticButton";
 
+const ArrowIcon = (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ transition: "transform 150ms ease" }}
+  >
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
+  </svg>
+);
+
 type Phase = "loading" | "active" | "exiting" | "done";
 
 export function SplashScreen() {
@@ -241,6 +258,7 @@ export function SplashScreen() {
                 <MagneticButton
                   className="button button-primary ghost-hover"
                   onClick={handleEnter}
+                  icon={ArrowIcon}
                 >
                   View Portfolio
                 </MagneticButton>

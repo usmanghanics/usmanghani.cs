@@ -213,6 +213,7 @@ button {
   font-size: 0.94rem;
   font-weight: 620;
   white-space: nowrap;
+  cursor: pointer;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
@@ -2582,6 +2583,10 @@ a.project-row:hover {
   white-space: nowrap;
 }
 
+.splash-view-portfolio-btn-wrapper .button {
+  padding: 0 26px;
+}
+
 .splash-bottom-right-hint {
   position: absolute;
   bottom: 24px;
@@ -2636,7 +2641,7 @@ a.project-row:hover {
   }
   .splash-view-portfolio-btn-wrapper .button {
     min-height: 36px;
-    padding: 0 16px;
+    padding: 0 20px;
     font-size: 0.8rem;
   }
   .splash-bottom-right-hint {

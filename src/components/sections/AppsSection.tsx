@@ -11,10 +11,10 @@ export function AppsSection() {
     <section className="section-pad page-shell" id="apps">
       <RevealOnScroll className="section-heading">
         <SectionLabel>Apps in production</SectionLabel>
-        <h2>Published apps with real users, stores, and business context.</h2>
+        <h2>Published mobile apps across client and personal work.</h2>
         <p>
-          Commercial Android and iOS apps built with BizCare Software
-          Solutions, alongside independent Android utilities published through
+          Commercial Android and iOS products built with BizCare Software
+          Solutions, plus independent Android utilities published through
           BlueX Software Solutions.
         </p>
       </RevealOnScroll>

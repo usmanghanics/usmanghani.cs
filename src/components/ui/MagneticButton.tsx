@@ -20,7 +20,7 @@ export function MagneticButton({
   href,
   className = "button button-ghost",
   external,
-  strength = 0.35,
+  strength = 0.16,
   icon = <ArrowUpRight size={16} />,
   onClick,
   type = "button",
@@ -34,7 +34,8 @@ export function MagneticButton({
     if (!zone || !btn) return;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+    const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches || navigator.maxTouchPoints > 0;
+    if (prefersReducedMotion || hasCoarsePointer) return;
 
     const onMove = (event: MouseEvent) => {
       const rect = zone.getBoundingClientRect();

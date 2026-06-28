@@ -4,7 +4,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "ghost" | "store";
+  variant?: "primary" | "secondary" | "tertiary" | "ghost" | "store";
   icon?: "arrow" | "down" | "none";
   external?: boolean;
 };

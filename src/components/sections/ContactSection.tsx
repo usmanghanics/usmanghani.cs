@@ -19,8 +19,8 @@ export function ContactSection() {
     <section className="section-pad contact-section" id="contact">
       <RevealOnScroll className="contact-card page-shell glass">
         <SectionLabel>Get in touch</SectionLabel>
-        <h2>Open to collaborations, freelance work, and engineering roles.</h2>
-        <p>If you are building something real, let’s talk.</p>
+        <h2>Available for product engineering, mobile apps, and AI workflows.</h2>
+        <p>For roles, freelance work, or collaboration, email is the best place to start.</p>
         <button className="email-button glass" type="button" onClick={copyEmail}>
           <Mail size={18} />
           {profile.email}

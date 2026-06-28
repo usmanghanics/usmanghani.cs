@@ -14,10 +14,10 @@ export function FeaturedWork() {
       <div className="page-shell">
         <RevealOnScroll className="section-heading">
           <SectionLabel>Featured work</SectionLabel>
-          <h2>Selected production work.</h2>
+          <h2>Production work with clear technical scope.</h2>
           <p>
-            A closer look at shipped apps, AI-enabled products, business
-            software, and integration work built for real workflows.
+            Selected systems across mobile apps, AI-assisted products,
+            business software, and integration workflows.
           </p>
         </RevealOnScroll>
       </div>
@@ -72,9 +72,9 @@ function FeaturedBand({
           {canViewImages ? (
             <div className="featured-links">
               <MagneticButton
-                className="button button-primary ghost-hover featured-primary-cta"
+                className="button button-tertiary featured-image-cta"
                 icon={<Maximize2 size={16} />}
-                strength={0.22}
+                strength={0.12}
                 onClick={() => {
                   setActiveIndex(0);
                   setViewerOpen(true);

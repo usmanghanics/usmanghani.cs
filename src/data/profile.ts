@@ -1,9 +1,9 @@
 export const profile = {
   name: "Usman Ghani",
   eyebrow: "Product & Software Engineer - Lahore, Pakistan",
-  headline: "Building Softwares People Actually Use.",
+  headline: "Building software people actually use.",
   bio: "I've designed, developed, deployed, and maintained 6+ Android and iOS applications, including 3+ published personal products through BlueX Software Solutions and 3+ commercial mobile applications developed with BizCare Software Solutions. Additionally, I've contributed to 5+ projects at Veloq, spanning software products, autonomous agent systems, and n8n-based workflow automation solutions.",
-  email: "[usmanghanii7729@gmail.com",
+  email: "usmanghanii7729@gmail.com",
   resumeUrl: "https://drive.google.com/file/d/1JPxMGBQtiBtv1lTsU1e8aZZ0xTf7lEvO/view?usp=sharing",
   socials: {
     github: "https://github.com/Code-with-UsmanG",

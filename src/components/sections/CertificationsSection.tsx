@@ -12,11 +12,10 @@ export function CertificationsSection() {
       <RevealOnScroll className="section-heading section-heading-row">
         <div>
           <SectionLabel>Certifications</SectionLabel>
-          <h2>Selected credentials across AI, mobile, web, and automation.</h2>
+          <h2>Selected certifications by technical area.</h2>
           <p>
-            High-signal certificates from IBM, Meta, Google, freeCodeCamp,
-            airSlate, and other learning platforms, with the complete gallery
-            available for deeper review.
+            A compact view of certifications across AI, mobile, web,
+            automation, data, business, and security.
           </p>
         </div>
         <Button href="/certifications" variant="ghost">

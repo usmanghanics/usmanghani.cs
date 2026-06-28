@@ -4,11 +4,17 @@ export type MediaItem = {
   url: string;
   width: number;
   height: number;
+  title?: string;
+  artist?: string;
+  projectId?: string;
+  sectionTarget?: string;
+  kind?: "app" | "featured" | "project" | "certificate";
 };
 
 export type InfiniteCanvasProps = {
   media: MediaItem[];
   onTextureProgress?: (progress: number) => void;
+  onMediaSelect?: (media: MediaItem) => void;
   showFps?: boolean;
   showControls?: boolean;
   cameraFov?: number;

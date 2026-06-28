@@ -44,9 +44,9 @@ export function AppCard({ app }: AppCardProps) {
           {app.links.play ? (
             <MagneticButton
               href={app.links.play}
-              className="button button-primary store-cta ghost-hover"
+              className="button button-store store-cta"
               external
-              strength={0.22}
+              strength={0.1}
               icon={<ArrowUpRight size={16} />}
             >
               <>
@@ -58,9 +58,9 @@ export function AppCard({ app }: AppCardProps) {
           {app.links.appStore ? (
             <MagneticButton
               href={app.links.appStore}
-              className="button button-primary store-cta ghost-hover"
+              className="button button-store store-cta"
               external
-              strength={0.22}
+              strength={0.1}
               icon={<ArrowUpRight size={16} />}
             >
               <>

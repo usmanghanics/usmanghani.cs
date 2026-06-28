@@ -14,6 +14,7 @@ type ImageLightboxProps = {
   initialIndex?: number;
   open: boolean;
   title: string;
+  fit?: "cover" | "contain" | "certificate";
   onClose: () => void;
 };
 
@@ -22,6 +23,7 @@ export function ImageLightbox({
   initialIndex = 0,
   open,
   title,
+  fit = "contain",
   onClose,
 }: ImageLightboxProps) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
@@ -74,7 +76,7 @@ export function ImageLightbox({
       aria-label={title}
     >
       <button className="image-lightbox-backdrop" type="button" onClick={onClose} aria-label="Close image viewer" />
-      <div className="image-lightbox-dialog">
+      <div className={`image-lightbox-dialog image-lightbox-${fit}`}>
         <div className="image-lightbox-topbar">
           <div>
             <p className="mono">{title}</p>

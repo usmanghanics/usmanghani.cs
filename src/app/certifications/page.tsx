@@ -21,11 +21,10 @@ export default function CertificationsPage() {
       <main className="subpage page-shell" id="top">
         <div className="subpage-hero">
           <SectionLabel>All certifications</SectionLabel>
-          <h1>Verified learning, grouped by signal.</h1>
+          <h1>Certification gallery.</h1>
           <p>
-            Certificates across AI, mobile, web, automation, data, business,
-            and security, grouped for quick review. Open any card to inspect
-            the full certificate.
+            Credentials grouped by technical area. Open a card to view the
+            full certificate without leaving the page.
           </p>
         </div>
         {categories.map((category) => {

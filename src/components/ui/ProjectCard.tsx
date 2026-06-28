@@ -58,7 +58,7 @@ export function ProjectCard({ project, onViewImages }: ProjectCardProps) {
         </div>
         <div className="store-row">
           <DisabledHint message="Link coming soon">
-            <button className="button button-primary ghost-hover button-disabled" type="button" aria-disabled="true">
+            <button className="button button-secondary button-disabled" type="button" aria-disabled="true">
               View project
               <ArrowUpRight size={16} />
             </button>
@@ -72,9 +72,9 @@ export function ProjectCard({ project, onViewImages }: ProjectCardProps) {
 function ViewImagesButton({ onClick }: { onClick: () => void }) {
   return (
     <MagneticButton
-      className="button button-primary ghost-hover project-view-images"
+      className="button button-tertiary project-view-images"
       icon={<Maximize2 size={16} />}
-      strength={0.2}
+      strength={0.1}
       onClick={onClick}
     >
       View images

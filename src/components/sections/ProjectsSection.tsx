@@ -20,10 +20,10 @@ export function ProjectsSection() {
       <RevealOnScroll className="section-heading section-heading-row">
         <div>
           <SectionLabel>Academic & Personal Projects</SectionLabel>
-          <h2>Supporting work across mobile, AI, web, and automation.</h2>
+          <h2>Additional work across mobile, web, and automation.</h2>
           <p>
-            Android apps, web utilities, workflow automation, and academic labs
-            that round out the production work shown above.
+            Focused builds that show supporting skills beyond the published
+            apps and featured production work.
           </p>
         </div>
         <Button href="/projects" variant="ghost">

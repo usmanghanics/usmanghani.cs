@@ -40,10 +40,10 @@ export default function ProjectsPage() {
       <main className="subpage page-shell" id="top">
         <div className="subpage-hero">
           <SectionLabel>All projects</SectionLabel>
-          <h1>Project work, sorted by purpose.</h1>
+          <h1>Project archive.</h1>
           <p>
-            A broader view of mobile apps, AI product work, automation systems,
-            web utilities, and academic engineering labs.
+            Mobile apps, web utilities, automation systems, and academic
+            projects grouped by type.
           </p>
         </div>
         {groups.map((group) => {

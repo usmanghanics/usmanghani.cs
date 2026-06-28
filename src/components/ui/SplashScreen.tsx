@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { InfiniteCanvas } from "./infinite-canvas";
 import manifest from "./infinite-canvas/manifest.json";
 import { MagneticButton } from "./MagneticButton";
+import type { MediaItem } from "./infinite-canvas/types";
 
 const ArrowIcon = (
   <svg
@@ -25,12 +26,36 @@ const ArrowIcon = (
 
 type Phase = "loading" | "active" | "exiting" | "done";
 
+const sectionForTitle = (title?: string) => {
+  if (!title) return "/#projects";
+  const appTitles = ["Makki AutoCare", "BizCare", "Biz Parta", "SnapCut", "Clippy", "Scanix"];
+  const featuredTitles = ["Leafiyo", "DOS2-AI"];
+  if (appTitles.includes(title)) return "/#apps";
+  if (featuredTitles.includes(title)) return "/#work";
+  return "/projects";
+};
+
+const kindForTitle = (title?: string): MediaItem["kind"] => {
+  if (!title) return "project";
+  if (["Makki AutoCare", "BizCare", "Biz Parta", "SnapCut", "Clippy", "Scanix"].includes(title)) return "app";
+  if (["Leafiyo", "DOS2-AI"].includes(title)) return "featured";
+  return "project";
+};
+
+const splashMedia = (manifest as MediaItem[]).map((item) => ({
+  ...item,
+  projectId: item.projectId ?? item.title?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+  sectionTarget: item.sectionTarget ?? sectionForTitle(item.title),
+  kind: item.kind ?? kindForTitle(item.title),
+}));
+
 export function SplashScreen() {
   const [phase, setPhase] = useState<Phase>("loading");
   const [textureProgress, setTextureProgress] = useState(0);
   const [visualProgress, setVisualProgress] = useState(0);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
   const rafRef = useRef<number | null>(null);
 
   const [nudgeClass, setNudgeClass] = useState<"nudge-initial" | "nudge-idle" | "">("nudge-initial");
@@ -162,6 +187,13 @@ export function SplashScreen() {
     }
   }, []);
 
+  const handleEnterTarget = useCallback((target = "/#top") => {
+    handleEnter();
+    window.setTimeout(() => {
+      window.location.href = target;
+    }, 180);
+  }, [handleEnter]);
+
   // Keyboard enter/skip
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -195,8 +227,9 @@ export function SplashScreen() {
           {/* Canvas loaded in the background */}
           <div className="splash-canvas-wrapper">
             <InfiniteCanvas 
-              media={manifest} 
+              media={splashMedia} 
               onTextureProgress={setTextureProgress}
+              onMediaSelect={setSelectedMedia}
               backgroundColor={bgAndFogColor}
               fogColor={bgAndFogColor}
             />
@@ -246,9 +279,18 @@ export function SplashScreen() {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h1 className="splash-title">USMAN GHANI</h1>
+                <p className="splash-subtitle">Explore selected apps and project work.</p>
+                <MagneticButton
+                  className="button button-primary splash-enter-primary"
+                  onClick={() => handleEnterTarget("/#top")}
+                  icon={ArrowIcon}
+                  strength={0.1}
+                >
+                  Enter Portfolio
+                </MagneticButton>
               </motion.div>
 
-              {/* View Portfolio Button in the top right corner */}
+              {/* Secondary skip button */}
               <motion.div 
                 className="splash-view-portfolio-btn-wrapper"
                 initial={{ opacity: 0, y: -10 }}
@@ -256,13 +298,44 @@ export function SplashScreen() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <MagneticButton
-                  className="button button-primary ghost-hover"
-                  onClick={handleEnter}
+                  className="button button-secondary"
+                  onClick={() => handleEnterTarget("/#top")}
                   icon={ArrowIcon}
+                  strength={0.1}
                 >
-                  View Portfolio
+                  Skip intro
                 </MagneticButton>
               </motion.div>
+
+              {selectedMedia ? (
+                <motion.div
+                  className="splash-project-preview glass"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                >
+                  <p className="mono">{selectedMedia.kind ?? "Project"}</p>
+                  <h2>{selectedMedia.title}</h2>
+                  <span>{selectedMedia.artist}</span>
+                  <div className="splash-preview-actions">
+                    <button
+                      className="button button-primary"
+                      type="button"
+                      onClick={() => handleEnterTarget(selectedMedia.sectionTarget ?? "/#projects")}
+                    >
+                      View in portfolio
+                      {ArrowIcon}
+                    </button>
+                    <button
+                      className="button button-tertiary"
+                      type="button"
+                      onClick={() => setSelectedMedia(null)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </motion.div>
+              ) : null}
 
               {/* Instruction hint at bottom right */}
               <motion.div 
@@ -272,7 +345,7 @@ export function SplashScreen() {
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
                 <span className={nudgeClass}>
-                  scroll down/up, or click View Portfolio button
+                  Drag to explore, tap a project, or enter portfolio
                 </span>
               </motion.div>
             </div>

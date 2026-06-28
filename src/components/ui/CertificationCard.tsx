@@ -41,6 +41,7 @@ export function CertificationCard({ certification }: CertificationCardProps) {
             label: certification.issuer,
           },
         ]}
+        fit="certificate"
         open={viewerOpen}
         title={certification.name}
         onClose={() => setViewerOpen(false)}

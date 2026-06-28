@@ -25,6 +25,11 @@ import { generateChunkPlanesCached, getChunkUpdateThrottleMs, shouldThrottleUpda
 
 const PLANE_GEOMETRY = new THREE.PlaneGeometry(1, 1);
 
+type NavigatorWithHints = Navigator & {
+  connection?: { saveData?: boolean };
+  deviceMemory?: number;
+};
+
 const KEYBOARD_MAP = [
   { name: "forward", keys: ["w", "W", "ArrowUp"] },
   { name: "backward", keys: ["s", "S", "ArrowDown"] },
@@ -69,6 +74,7 @@ function MediaPlane({
   chunkCy,
   chunkCz,
   cameraGridRef,
+  onMediaSelect,
 }: {
   position: THREE.Vector3;
   scale: THREE.Vector3;
@@ -77,6 +83,7 @@ function MediaPlane({
   chunkCy: number;
   chunkCz: number;
   cameraGridRef: React.RefObject<CameraGridState>;
+  onMediaSelect?: (media: MediaItem) => void;
 }) {
   const meshRef = React.useRef<THREE.Mesh>(null);
   const materialRef = React.useRef<THREE.MeshBasicMaterial>(null);
@@ -184,7 +191,17 @@ function MediaPlane({
   }
 
   return (
-    <mesh ref={meshRef} position={position} scale={displayScale} visible={false} geometry={PLANE_GEOMETRY}>
+    <mesh
+      ref={meshRef}
+      position={position}
+      scale={displayScale}
+      visible={false}
+      geometry={PLANE_GEOMETRY}
+      onClick={(event) => {
+        event.stopPropagation();
+        onMediaSelect?.(media);
+      }}
+    >
       <meshBasicMaterial ref={materialRef} transparent opacity={0} side={THREE.DoubleSide} />
     </mesh>
   );
@@ -196,12 +213,14 @@ function Chunk({
   cz,
   media,
   cameraGridRef,
+  onMediaSelect,
 }: {
   cx: number;
   cy: number;
   cz: number;
   media: MediaItem[];
   cameraGridRef: React.RefObject<CameraGridState>;
+  onMediaSelect?: (media: MediaItem) => void;
 }) {
   const [planes, setPlanes] = React.useState<PlaneData[] | null>(null);
 
@@ -248,6 +267,7 @@ function Chunk({
             chunkCy={cy}
             chunkCz={cz}
             cameraGridRef={cameraGridRef}
+            onMediaSelect={onMediaSelect}
           />
         );
       })}
@@ -287,7 +307,15 @@ const createInitialState = (camZ: number): ControllerState => ({
   pendingChunk: null,
 });
 
-function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onTextureProgress?: (progress: number) => void }) {
+function SceneController({
+  media,
+  onTextureProgress,
+  onMediaSelect,
+}: {
+  media: MediaItem[];
+  onTextureProgress?: (progress: number) => void;
+  onMediaSelect?: (media: MediaItem) => void;
+}) {
   const { camera, gl } = useThree();
   const isTouchDevice = useIsTouchDevice();
   const [, getKeys] = useKeyboardControls<keyof KeyboardKeys>();
@@ -504,7 +532,15 @@ function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onT
   return (
     <>
       {chunks.map((chunk) => (
-        <Chunk key={chunk.key} cx={chunk.cx} cy={chunk.cy} cz={chunk.cz} media={media} cameraGridRef={cameraGridRef} />
+        <Chunk
+          key={chunk.key}
+          cx={chunk.cx}
+          cy={chunk.cy}
+          cz={chunk.cz}
+          media={media}
+          cameraGridRef={cameraGridRef}
+          onMediaSelect={onMediaSelect}
+        />
       ))}
     </>
   );
@@ -513,6 +549,7 @@ function SceneController({ media, onTextureProgress }: { media: MediaItem[]; onT
 export function InfiniteCanvasScene({
   media,
   onTextureProgress,
+  onMediaSelect,
   showFps = false,
   showControls = false,
   cameraFov = 60,
@@ -524,7 +561,13 @@ export function InfiniteCanvasScene({
   fogColor = "#ffffff",
 }: InfiniteCanvasProps) {
   const isTouchDevice = useIsTouchDevice();
-  const dpr = Math.min(window.devicePixelRatio || 1, isTouchDevice ? 1.5 : 2.0);
+  const nav = navigator as NavigatorWithHints;
+  const prefersReducedData = nav.connection?.saveData ?? false;
+  const memory = nav.deviceMemory ?? 4;
+  const lowPower = prefersReducedData || memory <= 4;
+  const dpr = Math.min(window.devicePixelRatio || 1, isTouchDevice || lowPower ? 1.15 : 1.75);
+  const effectiveFogFar = lowPower ? Math.min(fogFar, 240) : fogFar;
+  const effectiveFogNear = lowPower ? Math.min(fogNear, 90) : fogNear;
 
   if (!media.length) {
     return null;
@@ -537,12 +580,12 @@ export function InfiniteCanvasScene({
           camera={{ position: [0, 0, INITIAL_CAMERA_Z], fov: cameraFov, near: cameraNear, far: cameraFar }}
           dpr={dpr}
           flat
-          gl={{ antialias: true, powerPreference: "high-performance" }}
+          gl={{ antialias: !lowPower, powerPreference: lowPower ? "default" : "high-performance" }}
           className={styles.canvas}
         >
           <color attach="background" args={[backgroundColor]} />
-          <fog attach="fog" args={[fogColor, fogNear, fogFar]} />
-          <SceneController media={media} onTextureProgress={onTextureProgress} />
+          <fog attach="fog" args={[fogColor, effectiveFogNear, effectiveFogFar]} />
+          <SceneController media={media} onTextureProgress={onTextureProgress} onMediaSelect={onMediaSelect} />
           {showFps && <Stats className={styles.stats} />}
         </Canvas>
 

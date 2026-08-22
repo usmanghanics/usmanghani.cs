@@ -8,6 +8,13 @@ export type TimelineItem = {
 
 export const experience: TimelineItem[] = [
   {
+    period: "2026",
+    title: "Intern — FG Tech",
+    organization: "Fatima Group",
+    description:
+      "Led the complete frontend overhaul of FG AI Studio (AgentSphere), an enterprise AI platform for agentic workflows, agent orchestration, and automation at scale.",
+  },
+  {
     period: "2025",
     title: "Software & Application Developer Intern",
     organization: "BizCare Software Solutions",

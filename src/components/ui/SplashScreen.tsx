@@ -29,7 +29,7 @@ type Phase = "loading" | "active" | "exiting" | "done";
 const sectionForTitle = (title?: string) => {
   if (!title) return "/#projects";
   const appTitles = ["Makki AutoCare", "BizCare", "Biz Parta", "SnapCut", "Clippy", "Scanix"];
-  const featuredTitles = ["Leafiyo", "DOS2-AI"];
+  const featuredTitles: string[] = [];
   if (appTitles.includes(title)) return "/#apps";
   if (featuredTitles.includes(title)) return "/#work";
   return "/projects";
@@ -38,7 +38,7 @@ const sectionForTitle = (title?: string) => {
 const kindForTitle = (title?: string): MediaItem["kind"] => {
   if (!title) return "project";
   if (["Makki AutoCare", "BizCare", "Biz Parta", "SnapCut", "Clippy", "Scanix"].includes(title)) return "app";
-  if (["Leafiyo", "DOS2-AI"].includes(title)) return "featured";
+  if (([] as string[]).includes(title)) return "featured";
   return "project";
 };
 

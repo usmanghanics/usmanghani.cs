@@ -17,7 +17,7 @@ export const experience: TimelineItem[] = [
   {
     period: "2025 - Present",
     title: "Software & Application Developer",
-    organization: "Veloq / client production work",
+    organization: "Veloq",
     description:
       "Building production mobile apps, AI-powered systems, workflow automations, and full-stack product experiences for real clients.",
     current: true,

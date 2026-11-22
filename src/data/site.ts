@@ -3,7 +3,7 @@
  * Change facts here, not in the pages.
  */
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://usmanghani.vercel.app').replace(/\/$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://usmanghanics.vercel.app').replace(/\/$/, '');
 
 export const me = {
   name: 'Usman Ghani',

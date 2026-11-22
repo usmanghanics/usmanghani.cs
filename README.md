@@ -2,7 +2,7 @@
 
 The personal site of Usman Ghani, software engineer building mobile apps, AI agents and web platforms.
 
-**Live:** https://usmanghani.vercel.app
+**Live:** https://usmanghanics.vercel.app
 
 ## Pages
 

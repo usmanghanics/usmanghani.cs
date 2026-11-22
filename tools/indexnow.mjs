@@ -2,7 +2,7 @@
 // the site's pages changed. Run after a deploy: node tools/indexnow.mjs
 import { readdirSync } from 'node:fs';
 
-const site = process.env.SITE ?? 'https://usmanghani.vercel.app';
+const site = process.env.SITE ?? 'https://usmanghanics.vercel.app';
 const key = readdirSync(new URL('../public/', import.meta.url)).find((f) => /^[0-9a-f]{32}\.txt$/.test(f))?.replace('.txt', '');
 if (!key) throw new Error('No IndexNow key file in public/');
 const xml = await (await fetch(`${site}/sitemap.xml`)).text();

@@ -3,7 +3,7 @@
 // The site moved from Netlify to Vercel. When Netlify builds this repo
 // (it sets NETLIFY=true), every old address forwards to the same page on
 // the new site, so links and search rankings carry over.
-const NEW_SITE = 'https://usmanghani.vercel.app';
+const NEW_SITE = 'https://usmanghanics.vercel.app';
 const onNetlify = process.env.NETLIFY === 'true';
 
 const nextConfig = {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { Icon } from './Icon';
 import { ThemeToggle } from './ThemeToggle';
 import { me } from '@/data/site';
@@ -36,12 +36,20 @@ export function Nav() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // On the home page the link is already "here", so bring the reader back to the top.
+  const toTop = (e: MouseEvent) => {
+    if (path !== '/') return;
+    e.preventDefault();
+    window.history.replaceState(null, '', '/');
+    window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+
   const current = (href: string) => (!href.includes('#') && (path === href || path.startsWith(`${href}/`)) ? 'page' : undefined);
 
   return (
     <header className="nav" data-scrolled={scrolled || open}>
       <nav className="nav-inner" aria-label="Main">
-        <Link href="/" className="brand" aria-label="Usman Ghani, home">
+        <Link href="/" className="brand" aria-label="Usman Ghani, home" onClick={toTop}>
           <img src={me.avatar} alt="" width={36} height={36} />
           <span>Usman Ghani</span>
         </Link>

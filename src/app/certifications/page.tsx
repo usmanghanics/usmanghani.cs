@@ -1,49 +1,62 @@
-import { Footer } from "@/components/layout/Footer";
-import { Nav } from "@/components/layout/Nav";
-import { CertificationCard } from "@/components/ui/CertificationCard";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { certifications, type Certification } from "@/data/certifications";
+import type { Metadata } from 'next';
+import { Contact } from '@/components/Contact';
+import { certifications } from '@/data/certifications';
+import { ogImage } from '@/data/site';
+import { JsonLd, crumbs, person } from '@/lib/seo';
 
-const categories: Certification["category"][] = [
-  "AI",
-  "Mobile",
-  "Web",
-  "Automation",
-  "Data",
-  "Business",
-  "Security",
-];
+const desc = 'Certificates earned by Usman Ghani in mobile development, AI, web development, security, data and automation.';
 
-export default function CertificationsPage() {
+export const metadata: Metadata = {
+  title: 'Certificates',
+  description: desc,
+  alternates: { canonical: '/certifications' },
+  openGraph: { url: '/certifications', title: 'Certificates | Usman Ghani', description: desc, images: [ogImage] },
+};
+
+export default function Certificates() {
+  const order = ['Work', 'Mobile', 'AI', 'Web', 'Security', 'Automation', 'Data', 'Business'];
+  const list = [...certifications].sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
   return (
     <>
-      <Nav />
-      <main className="subpage page-shell" id="top">
-        <div className="subpage-hero">
-          <SectionLabel>All certifications</SectionLabel>
-          <h1>Certification gallery.</h1>
-          <p>
-            Credentials grouped by technical area. Open a card to view the
-            full certificate without leaving the page.
+      <JsonLd
+        data={[
+          person,
+          crumbs([
+            { name: 'Home', path: '/' },
+            { name: 'Certificates', path: '/certifications' },
+          ]),
+        ]}
+      />
+      <header className="page-head">
+        <div className="wrap">
+          <h1 className="h1">Certificates</h1>
+          <p className="lead">
+            {certifications.length} certificates in mobile development, AI, the web, security and more. Tap one to see it full size.
           </p>
         </div>
-        {categories.map((category) => {
-          const categoryCerts = certifications.filter((cert) => cert.category === category);
-          if (categoryCerts.length === 0) return null;
-
-          return (
-            <section className="subpage-group" key={category}>
-              <h2 className="app-group-title mono">{category}</h2>
-              <div className="compact-grid certifications-grid all-grid">
-                {categoryCerts.map((cert) => (
-                  <CertificationCard certification={cert} key={cert.id} />
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </main>
-      <Footer />
+      </header>
+      <section className="section" style={{ paddingTop: 0 }} aria-label="All certificates">
+        <div className="wrap">
+          <ul className="certs">
+            {list.map((c) => (
+              <li key={c.id}>
+                <a className="card cert" href={c.image} target="_blank" rel="noopener" data-reveal>
+                  <div className="cert-img">
+                    <img src={c.image} alt={`${c.name} certificate from ${c.issuer}`} loading="lazy" width={800} height={600} />
+                  </div>
+                  <div className="cert-text">
+                    <h3>{c.name}</h3>
+                    <p>
+                      {c.issuer} · {c.date}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <Contact />
     </>
   );
 }

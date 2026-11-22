@@ -3,15 +3,24 @@ export type Certification = {
   name: string;
   issuer: string;
   date: string;
-  category: "AI" | "Web" | "Business" | "Automation" | "Data" | "Security" | "Mobile";
+  category: "Work" | "AI" | "Web" | "Business" | "Automation" | "Data" | "Security" | "Mobile";
   image: string;
   featured?: boolean;
 };
 
-const certPath = "/assets/certifications/";
+const certPath = "/img/certificates/";
 const certImage = (file: string) => `${certPath}${file.replace(/\.png$/, ".webp")}`;
 
 export const certifications: Certification[] = [
+  {
+    id: "fg-tech-internship",
+    name: "Internship Certificate, FG AI Studio",
+    issuer: "FG Tech, Fatima Group",
+    date: "2026",
+    category: "Work",
+    image: "/img/certificates/fg-tech-internship.webp",
+    featured: true,
+  },
   {
     id: "ibm-ai-fundamentals",
     name: "Artificial Intelligence Fundamentals",

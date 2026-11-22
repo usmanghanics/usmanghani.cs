@@ -1,184 +1,54 @@
-# Usman Ghani Portfolio
+# Usman Ghani: Portfolio
 
-A premium, high-performance portfolio website showcasing published mobile apps, AI systems, automation solutions, and production-grade software engineering work.
+The personal site of Usman Ghani, software engineer building mobile apps, AI agents and web platforms.
 
-**Live Site:** [https://usmanghanics.netlify.app]  
-**Stack:** Next.js 14 | TypeScript | Tailwind CSS
+**Live:** https://usmanghani.vercel.app
 
----
+## Pages
 
-## Table of Contents
+| Path | What it shows |
+|---|---|
+| `/` | Hero, selected work, apps I publish, websites, experience, about, contact |
+| `/work` | Every case study, my apps, websites, university and earlier projects |
+| `/work/[slug]` | Case studies: `snapcut`, `fg-ai-studio`, `bizcare-apps`, `veloq` |
+| `/about` | Bio, experience, skills, education, awards, featured certificates |
+| `/certifications` | All certificates |
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Development](#development)
-- [Project Structure](#project-structure)
-- [Deployment](#deployment)
-- [License](#license)
+## Search and sharing
 
----
+- Static pages with a title, description and canonical address each
+- Structured data (JSON-LD): Person, WebSite, ProfilePage, AboutPage, CollectionPage, CreativeWork, BreadcrumbList
+- `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, `llms.txt` for AI assistants
+- Open Graph and Twitter card image at `public/og.png` (1200 × 630)
+- The old Netlify address forwards every page here with a permanent redirect (see `next.config.mjs`)
 
-## Overview
+## Stack
 
-This portfolio is a modern, full-stack application built with **Next.js** that highlights:
+Next.js 16 (App Router, every page prerendered), React 19, TypeScript, plain CSS with design tokens in `src/app/globals.css`, Geist font, Phosphor icons. No animation or 3D libraries: motion is CSS only and respects reduced motion.
 
-- **Published Mobile Apps** - iOS and Android applications with millions of downloads
-- **AI & Machine Learning** - Production AI systems and automation solutions
-- **Software Engineering** - Full-stack development, backend systems, and DevOps work
-- **Case Studies** - In-depth project documentation and technical insights
+## Editing content
 
----
+All words and numbers live in `src/data`:
 
-## Features
+- `site.ts`: name, links, headline numbers, jobs, education, awards, skills
+- `work.ts`: case studies, apps, websites and smaller projects
+- `certifications.ts`: certificates
 
-- **Next.js 14** - Latest React framework with App Router
-- **Modern UI/UX** - Responsive design with smooth animations
-- **SEO Optimized** - Metadata, Open Graph, and structured data
-- **Mobile First** - Fully responsive across all devices
-- **High Performance** - Optimized images, lazy loading, and caching
-- **Dark Mode Support** - Theme toggle for user preference
-- **Accessible** - WCAG compliant with proper semantic HTML
-- **Analytics Ready** - Integration points for tracking and monitoring
+Images live in `public/img` as WebP. App screens go in `public/img/apps`, sized about 540 to 640 px wide.
 
----
-
-## Tech Stack
-
-| Technology | Purpose |
-|------------|---------|
-| **Next.js 14** | React framework with SSR/SSG |
-| **TypeScript** | Type-safe development (63.6% of codebase) |
-| **Tailwind CSS** | Utility-first styling (36.3% of codebase) |
-| **React** | UI component library |
-| **JavaScript** | Client-side interactions (0.1%) |
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn package manager
-
-### Installation
+## Commands
 
 ```bash
-# Clone the repository
-git clone https://github.com/Code-with-UsmanG/Portfolio-Site.git
-cd Portfolio-Site
-
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint     # type check
 ```
 
----
+Icons: add a Phosphor name to `tools/icons.py`, then run `python3 -I tools/icons.py`.
 
-## Development
+## Deploying
 
-### Available Scripts
+The GitHub repo is connected to Vercel, so every push to `main` deploys to production. Set `NEXT_PUBLIC_SITE_URL` in Vercel when a custom domain is added, then redeploy.
 
-```bash
-# Development server with hot reload
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Run linting
-npm run lint
-
-# Run tests (if configured)
-npm test
-```
-
-### Project Structure
-
-```
-Portfolio-Site/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   └── projects/          # Projects pages
-├── components/            # Reusable React components
-│   ├── Header.tsx
-│   ├── Footer.tsx
-│   └── ProjectCard.tsx
-├── styles/               # Global styles
-│   └── globals.css
-├── public/               # Static assets
-│   ├── images/
-│   └── icons/
-├── utils/               # Utility functions
-├── types/              # TypeScript type definitions
-├── package.json
-├── tsconfig.json
-├── tailwind.config.js
-├── next.config.js
-└── README.md
-```
-
----
-
-## Deployment
-
-### Recommended Platforms
-
-- **Vercel** (Official Next.js hosting)
-  ```bash
-  npm install -g vercel
-  vercel
-  ```
-
-- **Netlify**
-  ```bash
-  # Build
-  npm run build
-  # Deploy via Netlify CLI or git integration
-  ```
-
-- **AWS Amplify, DigitalOcean, or self-hosted**
-
-### Environment Variables
-
-Create a `.env.local` file for local development:
-
-```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_GA_ID=your_analytics_id
-```
-
----
-
-## License
-
-This project is personal work. All rights reserved © 2026 Usman Ghani.
-
----
-
-## 📧 Contact
-
-For inquiries about my work or collaboration opportunities:
-
-- **Email:** [usmanghanii7729@gmail.com]
-- **LinkedIn:** [https://www.linkedin.com/in/usmanghanics/]
-- **GitHub:** [https://github.com/Code-with-UsmanG]
-- **X:** [https://x.com/USMAANGF]
-
----
-
-## Acknowledgments
-
-Built with ❤️ using modern web technologies and best practices in software engineering.
-
----
-
-**Last Updated:** June 2026
+© Usman Ghani

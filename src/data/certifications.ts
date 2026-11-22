@@ -1,206 +1,43 @@
+/**
+ * Certificates, most important first. The first six show on the home page.
+ * `logo` is a Simple Icons name from src/lib/brands.ts, or empty for a text badge.
+ */
+
 export type Certification = {
   id: string;
   name: string;
   issuer: string;
+  logo: string;
   date: string;
-  category: "Work" | "AI" | "Web" | "Business" | "Automation" | "Data" | "Security" | "Mobile";
   image: string;
-  featured?: boolean;
+  group: 'Core' | 'AI and data' | 'Web' | 'Business and automation';
 };
 
-const certPath = "/img/certificates/";
-const certImage = (file: string) => `${certPath}${file.replace(/\.png$/, ".webp")}`;
+const img = (file: string) => `/img/certificates/${file}`;
 
 export const certifications: Certification[] = [
-  {
-    id: "fg-tech-internship",
-    name: "Internship Certificate, FG AI Studio",
-    issuer: "FG Tech, Fatima Group",
-    date: "2026",
-    category: "Work",
-    image: "/img/certificates/fg-tech-internship.webp",
-    featured: true,
-  },
-  {
-    id: "ibm-ai-fundamentals",
-    name: "Artificial Intelligence Fundamentals",
-    issuer: "IBM",
-    date: "August 2024",
-    category: "AI",
-    image: certImage("ArtificialIntelligenceFundamentals-IBM.png"),
-    featured: true,
-  },
-  {
-    id: "ibm-ai",
-    name: "Artificial Intelligence",
-    issuer: "IBM",
-    date: "August 2024",
-    category: "AI",
-    image: certImage("ArtifificialIntelligence-IBM.png"),
-  },
-  {
-    id: "ibm-project-management",
-    name: "Project Management Fundamentals",
-    issuer: "IBM",
-    date: "August 2024",
-    category: "Business",
-    image: certImage("ProjectManagementFundamentals-IBM.png"),
-    featured: true,
-  },
-  {
-    id: "fcc-responsive",
-    name: "Responsive Web Design",
-    issuer: "freeCodeCamp",
-    date: "July 2024",
-    category: "Web",
-    image: certImage("Responsivewebdesign.png"),
-    featured: true,
-  },
-  {
-    id: "fcc-js",
-    name: "JavaScript Algorithms and Data Structures",
-    issuer: "freeCodeCamp",
-    date: "July 2024",
-    category: "Web",
-    image: certImage("Javascriptalgorithmsanddatastructures.png"),
-  },
-  {
-    id: "google-soft-skills",
-    name: "Google Soft Skills Program",
-    issuer: "Google PAFLA",
-    date: "November 2024",
-    category: "Business",
-    image: certImage("google-soft-skills-program_Google(PAFLA).png"),
-  },
-  {
-    id: "google-ai-ads",
-    name: "AI-powered Ads Certification",
-    issuer: "Google Analytics Academy",
-    date: "August 2024",
-    category: "AI",
-    image: certImage("AIpoweredADcertification-GoogleAnalyticsAcademy.png"),
-  },
-  {
-    id: "google-analytics",
-    name: "Google Analytics for Beginners",
-    issuer: "Google Analytics Academy",
-    date: "August 2024",
-    category: "Data",
-    image: certImage("GoogleAnalyticsforBeginners-GoogleAnalyticsAcademy.png"),
-  },
-  {
-    id: "google-play-listing",
-    name: "Google Play Store Listing Certificate",
-    issuer: "Google Play Academy",
-    date: "July 2024",
-    category: "Mobile",
-    image: certImage("GooglePlayStoreListingCertificate-GooglePlayAcademy.png"),
-    featured: true,
-  },
-  {
-    id: "linkedin-generative-ai",
-    name: "Generative AI",
-    issuer: "LinkedIn Learning",
-    date: "August 2025",
-    category: "AI",
-    image: certImage("GenerativeAILinkedinLearning.png"),
-  },
-  {
-    id: "clickup-novice",
-    name: "ClickUp Certification",
-    issuer: "ClickUp",
-    date: "August 2025",
-    category: "Business",
-    image: certImage("ClickUPCertification-ClickUp.png"),
-  },
-  {
-    id: "hp-cybersecurity",
-    name: "Introduction to Cybersecurity Awareness",
-    issuer: "HP LIFE",
-    date: "September 2025",
-    category: "Security",
-    image: certImage("introductiontocybersecurity-hp.png"),
-  },
-  {
-    id: "accenture-data",
-    name: "Data Analytics and Visualization Job Simulation",
-    issuer: "Accenture / Forage",
-    date: "August 2024",
-    category: "Data",
-    image: certImage("dataanalytics-Accenture(Forage).png"),
-  },
-  {
-    id: "goldman-excel",
-    name: "Excel Skills for Business Job Simulation",
-    issuer: "Goldman Sachs / Forage",
-    date: "August 2024",
-    category: "Data",
-    image: certImage("excel_skills-GoldmanSachs(Forage).png"),
-  },
-  {
-    id: "freelancing",
-    name: "Freelancing Professional Certification",
-    issuer: "Institute of Management, Technology and Finance",
-    date: "August 2025",
-    category: "Business",
-    image: certImage("FreelancingProfessionalCertification-InstituteOfManagement_technology_and_finance.png"),
-  },
-  {
-    id: "prompt-engineering",
-    name: "Prompt Engineering Professional Certification",
-    issuer: "Institute of Management, Technology and Finance",
-    date: "August 2025",
-    category: "AI",
-    image: certImage("PromtEngineeringPourtugese-InstituteOfManagement_technology_and_finance.png"),
-  },
-  {
-    id: "airslate-analytics",
-    name: "airSlate Workflow Analytics",
-    issuer: "airSlate",
-    date: "August 2025",
-    category: "Automation",
-    image: certImage("AirslateworkflowAnalytics-airSlate.png"),
-  },
-  {
-    id: "airslate-use-cases",
-    name: "Automation in Action: Industry Use Cases",
-    issuer: "airSlate",
-    date: "August 2025",
-    category: "Automation",
-    image: certImage("AutomationinactionIndustryusecases-airslate.png"),
-  },
-  {
-    id: "airslate-bpa",
-    name: "Business Process Automation",
-    issuer: "airSlate",
-    date: "August 2025",
-    category: "Automation",
-    image: certImage("BusinessProcessAutomation-airSlate.png"),
-    featured: true,
-  },
-  {
-    id: "uci-blockchain",
-    name: "The Blockchain",
-    issuer: "University of California, Irvine",
-    date: "July 2025",
-    category: "Business",
-    image: certImage("The_Blockchain.png"),
-  },
-  {
-    id: "microsoft-cybersecurity",
-    name: "Cybersecurity Planning, Management and Compliance",
-    issuer: "Microsoft",
-    date: "August 2025",
-    category: "Security",
-    image: certImage("Cybersecurity_Planning_Management_and_Compliance.png"),
-  },
-  {
-    id: "meta-android",
-    name: "Introduction to Android Mobile Application Development",
-    issuer: "Meta",
-    date: "July 2025",
-    category: "Mobile",
-    image: certImage("Introduction_to_Android_Mobile_Application_Development.png"),
-    featured: true,
-  },
+  { id: 'meta-android', name: 'Introduction to Android Mobile Application Development', issuer: 'Meta', logo: 'meta', date: 'Jul 2025', image: img('Introduction_to_Android_Mobile_Application_Development.webp'), group: 'Core' },
+  { id: 'microsoft-cybersecurity', name: 'Cybersecurity Planning, Management and Compliance', issuer: 'Microsoft', logo: 'microsoft', date: 'Aug 2025', image: img('Cybersecurity_Planning_Management_and_Compliance.webp'), group: 'Core' },
+  { id: 'ibm-ml', name: 'Machine Learning with Python', issuer: 'IBM', logo: 'ibm', date: 'Jun 2025', image: img('ibm-machine-learning.webp'), group: 'Core' },
+  { id: 'uci-blockchain', name: 'The Blockchain', issuer: 'University of California, Irvine', logo: '', date: 'Jun 2025', image: img('The_Blockchain.webp'), group: 'Core' },
+  { id: 'ibm-ai-fundamentals', name: 'Artificial Intelligence Fundamentals', issuer: 'IBM', logo: 'ibm', date: 'Aug 2024', image: img('ArtificialIntelligenceFundamentals-IBM.webp'), group: 'Core' },
+  { id: 'google-play-listing', name: 'Google Play Store Listing Certificate', issuer: 'Google Play Academy', logo: 'googleplay', date: 'Jul 2024', image: img('GooglePlayStoreListingCertificate-GooglePlayAcademy.webp'), group: 'Core' },
+  { id: 'fcc-js', name: 'JavaScript Algorithms and Data Structures', issuer: 'freeCodeCamp', logo: 'freecodecamp', date: 'Jul 2024', image: img('Javascriptalgorithmsanddatastructures.webp'), group: 'Web' },
+  { id: 'fcc-responsive', name: 'Responsive Web Design', issuer: 'freeCodeCamp', logo: 'freecodecamp', date: 'Jul 2024', image: img('Responsivewebdesign.webp'), group: 'Web' },
+  { id: 'ibm-ai', name: 'Artificial Intelligence', issuer: 'IBM', logo: 'ibm', date: 'Aug 2024', image: img('ArtifificialIntelligence-IBM.webp'), group: 'AI and data' },
+  { id: 'linkedin-generative-ai', name: 'What Is Generative AI?', issuer: 'LinkedIn Learning', logo: 'linkedin', date: 'Aug 2025', image: img('GenerativeAILinkedinLearning.webp'), group: 'AI and data' },
+  { id: 'google-analytics', name: 'Google Analytics for Beginners', issuer: 'Google Analytics Academy', logo: 'google', date: 'Aug 2024', image: img('GoogleAnalyticsforBeginners-GoogleAnalyticsAcademy.webp'), group: 'AI and data' },
+  { id: 'google-ai-ads', name: 'AI-Powered Ads', issuer: 'Google Analytics Academy', logo: 'google', date: 'Aug 2024', image: img('AIpoweredADcertification-GoogleAnalyticsAcademy.webp'), group: 'AI and data' },
+  { id: 'accenture-data', name: 'Data Analytics and Visualization Job Simulation', issuer: 'Accenture, Forage', logo: '', date: 'Aug 2024', image: img('dataanalytics-Accenture(Forage).webp'), group: 'AI and data' },
+  { id: 'goldman-excel', name: 'Excel Skills for Business Job Simulation', issuer: 'Goldman Sachs, Forage', logo: '', date: 'Aug 2024', image: img('excel_skills-GoldmanSachs(Forage).webp'), group: 'AI and data' },
+  { id: 'hp-cybersecurity', name: 'Introduction to Cybersecurity Awareness', issuer: 'HP LIFE', logo: '', date: 'Sep 2025', image: img('introductiontocybersecurity-hp.webp'), group: 'Core' },
+  { id: 'airslate-bpa', name: 'Business Process Automation', issuer: 'airSlate', logo: '', date: 'Aug 2025', image: img('BusinessProcessAutomation-airSlate.webp'), group: 'Business and automation' },
+  { id: 'airslate-use-cases', name: 'Automation in Action: Industry Use Cases', issuer: 'airSlate', logo: '', date: 'Aug 2025', image: img('AutomationinactionIndustryusecases-airslate.webp'), group: 'Business and automation' },
+  { id: 'airslate-analytics', name: 'Workflow Analytics', issuer: 'airSlate', logo: '', date: 'Aug 2025', image: img('AirslateworkflowAnalytics-airSlate.webp'), group: 'Business and automation' },
+  { id: 'ibm-project-management', name: 'Project Management Fundamentals', issuer: 'IBM', logo: 'ibm', date: 'Aug 2024', image: img('ProjectManagementFundamentals-IBM.webp'), group: 'Business and automation' },
+  { id: 'google-soft-skills', name: 'Soft Skills Program', issuer: 'Google, PAFLA', logo: 'google', date: 'Nov 2024', image: img('google-soft-skills-program_Google(PAFLA).webp'), group: 'Business and automation' },
+  { id: 'clickup-novice', name: 'ClickUp Certification', issuer: 'ClickUp', logo: '', date: 'Aug 2025', image: img('ClickUPCertification-ClickUp.webp'), group: 'Business and automation' },
+  { id: 'freelancing', name: 'Freelancing Professional Certification', issuer: 'Institute of Management, Technology and Finance', logo: '', date: 'Aug 2025', image: img('FreelancingProfessionalCertification-InstituteOfManagement_technology_and_finance.webp'), group: 'Business and automation' },
 ];
+
+export const groups: Certification['group'][] = ['Core', 'Web', 'AI and data', 'Business and automation'];

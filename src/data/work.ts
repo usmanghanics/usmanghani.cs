@@ -1,327 +1,277 @@
 /**
- * Selected work. Each entry with `page: true` also gets its own case study
- * at /work/<slug>. Client names stay private: say who the work was with
- * (Veloq, BizCare, Fatima Group or BlueX) and describe the product, not the client.
+ * Shipped work: apps on the stores and live web platforms.
+ * Apps get a case study at /work/<slug>. Order = strongest first.
  */
 
-export type Shot = { src: string; alt: string; ratio: number };
-export type Link = { label: string; href: string; kind?: 'play' | 'appstore' | 'web' | 'github' };
+import type { IconName } from '@/lib/icons';
 
-export type StoreApp = {
-  name: string;
-  icon: string;
-  text: string;
-  play?: string;
-  appStore?: string;
-  web?: string;
-  rating?: string;
-};
+export type Stat = { value: string; label: string };
+export type Feature = { icon: IconName; title: string; text: string };
 
-export type MoreItem = { name: string; text: string; stack: string[]; href?: string };
-
-export type Visual =
-  | { type: 'phones'; tint: string; shots: Shot[] }
-  | { type: 'diagram'; tint: string }
-  | { type: 'browser'; tint: string; src: string; alt: string; url: string };
-
-export type Work = {
+export type AppWork = {
   slug: string;
   name: string;
-  org: string;
-  period: string;
-  role: string;
-  title: string;
+  icon: string;
+  client: string;
+  builtAt: string;
+  tagline: string;
   summary: string;
-  facts: { value: string; label: string }[];
-  built: string[];
-  stack: string[];
-  links: Link[];
-  visual: Visual;
-  apps?: StoreApp[];
-  more?: MoreItem[];
+  media: string;
+  tint: string;
+  stats: Stat[];
+  play?: string;
+  appStore?: string;
+  website?: string;
+  platforms: string;
+  role: string;
+  period: string;
+  features: Feature[];
+  did: string[];
+  tools: string[];
+  gallery: { src: string; alt: string; kind: 'mockup' | 'screen' | 'page' }[];
   seo: { title: string; description: string };
 };
 
 const play = (id: string) => `https://play.google.com/store/apps/details?id=${id}`;
 
-export const bluexApps: StoreApp[] = [
-  {
-    name: 'SnapCut',
-    icon: '/img/apps/snapcut-icon.webp',
-    text: 'Video and audio editor with captions made on the phone.',
-    play: play('com.bluex.soundy'),
-    web: 'https://bluexsoftware.vercel.app/snapcut/',
-    rating: '4.4',
-  },
-  {
-    name: 'Clippy',
-    icon: '/img/apps/clippy-icon.webp',
-    text: 'Clipboard history with a floating button and AI translation.',
-    play: play('com.bluex.clippy'),
-    web: 'https://bluexsoftware.vercel.app/clippy/',
-  },
-  {
-    name: 'Scanix',
-    icon: '/img/apps/scanix-icon.webp',
-    text: 'Document scanner with text recognition and PDF tools.',
-    play: play('com.bluex.scanix'),
-    web: 'https://bluexsoftware.vercel.app/scanix/',
-  },
-];
-
-export const work: Work[] = [
+export const apps: AppWork[] = [
   {
     slug: 'snapcut',
     name: 'SnapCut',
-    org: 'BlueX Software Solutions',
-    period: 'Live on Google Play',
-    role: 'Founder, designer and developer',
-    title: 'A full video editor for Android, built and run on my own.',
+    icon: '/img/apps/snapcut-icon.webp',
+    client: 'My own app',
+    builtAt: 'BlueX Software Solutions',
+    tagline: 'A video editor that does everything on the phone.',
     summary:
-      'SnapCut edits video and audio on the phone: a timeline, captions made on the device, split screen, picture in picture, beat sync and exports sized for Reels, TikTok and Shorts. I design it, build it, publish it and answer every review.',
-    facts: [
+      'Multi-track video and audio editing with captions made on the device, split screen, picture in picture and beat sync. No ads, no sign-in, and it works offline.',
+    media: '/img/work/snapcut.webp',
+    tint: '#29aae2',
+    stats: [
       { value: '5K+', label: 'Downloads' },
-      { value: '4.4', label: 'Rating from 127 reviews' },
-      { value: '805', label: 'Automated tests' },
-      { value: '0', label: 'Ads or trackers' },
+      { value: '4.4★', label: 'Google Play rating' },
     ],
-    built: [
-      'A multi-track timeline that cuts, splits, joins and reorders clips, with undo that never empties a project.',
-      'Captions from an on-device speech model, timed word by word, so the video never leaves the phone.',
-      'Smooth playback across cuts, 17 transition styles and an export pipeline built on FFmpeg.',
-      'Face-follow blur, green screen, picture in picture, split screen, beat sync, voiceover and text to speech.',
-      'An Ideas board where people suggest and vote on features, backed by Firebase.',
-      'The store listing, screenshots, privacy policy and the product website.',
+    play: play('com.bluex.soundy'),
+    website: 'https://bluexsoftware.vercel.app/snapcut/',
+    platforms: 'Android',
+    role: 'Founder, designer and only developer',
+    period: '2025 – Present',
+    features: [
+      { icon: 'film-strip', title: 'Multi-track timeline', text: 'Cut, split, join and reorder clips, with undo that never loses a project.' },
+      { icon: 'subtitles', title: 'Captions on the device', text: 'A speech model on the phone writes word-timed captions. The video never leaves it.' },
+      { icon: 'music-notes', title: 'Cut to the beat', text: 'Finds the beats in a song and lands every cut on one.' },
+      { icon: 'split-horizontal', title: 'Split screen and picture in picture', text: 'Play clips side by side, stacked, or one inside the other.' },
+      { icon: 'wifi-slash', title: 'Works offline', text: 'No account and no upload. Editing and export run on the phone.' },
+      { icon: 'download-simple', title: 'Export for every app', text: 'Sized for Reels, TikTok, Shorts and WhatsApp in one tap.' },
     ],
-    stack: ['Flutter', 'Dart', 'FFmpeg', 'On-device speech', 'Firebase', 'Google Play'],
-    links: [
-      { label: 'Google Play', href: play('com.bluex.soundy'), kind: 'play' },
-      { label: 'Website', href: 'https://bluexsoftware.vercel.app/snapcut/', kind: 'web' },
+    did: [
+      'Designed the app, its icon, its store listing and its website.',
+      'Built the editor, the playback engine and the export pipeline on FFmpeg.',
+      'Run releases, read every review and ship the features people ask for through the in-app Ideas board.',
     ],
-    visual: {
-      type: 'phones',
-      tint: 'var(--tint-blue)',
-      shots: [
-        { src: '/img/apps/snapcut-captions.webp', alt: 'SnapCut adding captions to a clip', ratio: 0.5 },
-        { src: '/img/apps/snapcut-editor.webp', alt: 'SnapCut timeline editor', ratio: 0.5 },
-        { src: '/img/apps/snapcut-split_screen.webp', alt: 'SnapCut split screen layouts', ratio: 0.5 },
-      ],
-    },
-    apps: bluexApps,
+    tools: ['Flutter', 'Dart', 'FFmpeg', 'On-device speech model', 'Firebase', 'Google Play'],
+    gallery: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => ({ src: `/img/work/snapcut-g${i}.webp`, alt: `SnapCut Google Play image ${i}`, kind: 'mockup' as const })),
     seo: {
-      title: 'SnapCut: Android Video Editor',
-      description:
-        'How Usman Ghani designs, builds and runs SnapCut, an Android video editor with on-device captions, 5K+ downloads and a 4.4 rating on Google Play.',
+      title: 'SnapCut: Android Video Editor With On-Device Captions',
+      description: 'SnapCut is an Android video editor by Usman Ghani with on-device captions, beat sync and split screen. 5K+ downloads and a 4.4 rating on Google Play.',
     },
   },
   {
-    slug: 'fg-ai-studio',
-    name: 'FG AI Studio',
-    org: 'Fatima Group',
+    slug: 'makki-autocare',
+    name: 'Makki AutoCare',
+    icon: '/img/apps/makki-autocare-icon.webp',
+    client: 'For Makki Oil Store',
+    builtAt: 'BizCare Software Solutions',
+    tagline: 'Every customer’s next oil change, in their pocket.',
+    summary:
+      'Makki Oil Store’s customers see when each car is due for an oil change by date and kilometres, keep the full service history, and get a reminder before it is due.',
+    media: '/img/work/makki-autocare.webp',
+    tint: '#161616',
+    stats: [
+      { value: '1K+', label: 'Downloads' },
+      { value: '2', label: 'Stores, Android and iOS' },
+    ],
+    play: play('com.bizcare.makki_autocare'),
+    appStore: 'https://apps.apple.com/pk/app/makki-autocare/id6752372809',
+    platforms: 'Android and iOS',
+    role: 'Lead developer, at BizCare',
+    period: '2025 – Present',
+    features: [
+      { icon: 'car', title: 'Every car at a glance', text: 'All the cars on a phone number, with the one that needs attention first.' },
+      { icon: 'gauge', title: 'Due by date and kilometres', text: 'Works out the next oil change from daily driving, not just the calendar.' },
+      { icon: 'bell', title: 'Reminders that arrive', text: 'Push alerts before a change is due and a receipt after every visit.' },
+      { icon: 'receipt', title: 'Full service history', text: 'Oil, filters and readings from every visit, branch by branch.' },
+      { icon: 'map-pin', title: 'Help on the road', text: 'Call a branch, find the nearest one, or reach rescue and police in one tap.' },
+      { icon: 'shield-check', title: 'Sign in with a code', text: 'A one-time code by email, backed by a new, secured API for the app.' },
+    ],
+    did: [
+      'Rebuilt the app from scratch in 2026 with a new design, light and dark.',
+      'Built a new, secured API for the app inside the company’s .NET gateway, leaving the old one running for existing users.',
+      'Shipped it to Google Play and the App Store, including the screenshots and privacy policy.',
+    ],
+    tools: ['Flutter', 'Dart', 'Riverpod', '.NET gateway', 'SQL Server', 'Firebase Cloud Messaging'],
+    gallery: [1, 2, 3, 4, 5, 6].map((i) => ({ src: `/img/work/makki-autocare-g${i}.webp`, alt: `Makki AutoCare store image ${i}`, kind: 'mockup' as const })),
+    seo: {
+      title: 'Makki AutoCare: Oil Change Reminders App',
+      description: 'Makki AutoCare, built by Usman Ghani at BizCare for Makki Oil Store: oil change reminders, service history and roadside help. 1K+ downloads on Android and iOS.',
+    },
+  },
+  {
+    slug: 'madadgar-kisan',
+    name: 'Madadgar Kisan',
+    icon: '/img/apps/madadgar-kisan-icon.webp',
+    client: 'For a farm supplies company in Hasilpur',
+    builtAt: 'BizCare Software Solutions',
+    tagline: 'Fertiliser and lab tests, ordered from the farm.',
+    summary:
+      'Farmers order fertiliser and seed and book soil and water tests from nearby branches, in English or Urdu, with delivery priced by road distance.',
+    media: '/img/work/madadgar-kisan.webp',
+    tint: '#5f921b',
+    stats: [
+      { value: 'EN + اردو', label: 'English and Urdu' },
+      { value: '2', label: 'Stores, Android and iOS' },
+    ],
+    play: play('com.bizcare.madadgar_kisan'),
+    appStore: 'https://apps.apple.com/pk/app/madadgar-kisan/id6825722989',
+    platforms: 'Android and iOS',
+    role: 'Sole developer, app, API and admin website',
     period: '2026',
-    role: 'Frontend lead, internship at FG Tech',
-    title: 'The new frontend of an enterprise AI agent platform, in six weeks.',
-    summary:
-      'FG AI Studio is Fatima Group’s platform for building AI agents and agent workflows. During my internship at FG Tech I led the overhaul of its whole frontend: agent chat, the workflow builder and the admin console.',
-    facts: [
-      { value: '178', label: 'Commits' },
-      { value: '34.5K', label: 'Lines of code' },
-      { value: '6', label: 'Weeks' },
+    features: [
+      { icon: 'storefront', title: 'Shop by branch stock', text: 'Fertiliser, seed and organics with live stock at each branch.' },
+      { icon: 'flask', title: 'Soil and water tests', text: 'Book a lab test, send a sample and get the report in the app.' },
+      { icon: 'truck', title: 'Delivery by road distance', text: 'Delivery is priced from the real road distance and the weight of the order.' },
+      { icon: 'translate', title: 'English and Urdu', text: 'Full right-to-left Urdu screens, not just translated labels.' },
+      { icon: 'bell', title: 'Order tracking', text: 'Push updates from confirmed to packed, dispatched and delivered.' },
+      { icon: 'browser', title: 'Admin website', text: 'Staff manage products, stock, tests, orders and payments from the web.' },
     ],
-    built: [
-      'Agent chat with replies that stream in live over server-sent events, step indicators and saved conversations.',
-      'A visual workflow builder: add nodes, connect them, insert steps inline and watch each step run.',
-      'Forms described by the server and drawn by the frontend, so new agent settings ship without a frontend release.',
-      'One design system and responsive layouts across every screen of the console.',
-      'Runs fully on the company network, with no CDNs or outside fonts.',
+    did: [
+      'Built the whole product: the Flutter app, the .NET API and the admin website.',
+      'Set it up on the company’s Windows server with its own database and push notifications.',
+      'Took it through Google Play and App Store review.',
     ],
-    stack: ['React', 'TypeScript', 'Vite', 'React Flow', 'Server-sent events', 'Server-driven UI'],
-    links: [],
-    visual: { type: 'diagram', tint: 'var(--tint-green)' },
+    tools: ['Flutter', 'Dart', '.NET', 'SQL Server', 'React', 'Google Maps', 'Firebase Cloud Messaging'],
+    gallery: [1, 2, 3, 4, 5, 6].map((i) => ({ src: `/img/work/madadgar-kisan-g${i}.webp`, alt: `Madadgar Kisan screen ${i}`, kind: 'screen' as const })),
     seo: {
-      title: 'FG AI Studio: Enterprise AI Agent Platform',
-      description:
-        'Usman Ghani led the frontend overhaul of FG AI Studio at Fatima Group: streaming agent chat, a visual workflow builder and server-driven forms.',
+      title: 'Madadgar Kisan: Farm Supplies App in English and Urdu',
+      description: 'Madadgar Kisan, built by Usman Ghani at BizCare: farmers order fertiliser and book soil tests in English or Urdu. Live on Android and iOS.',
     },
   },
   {
-    slug: 'bizcare-apps',
-    name: 'Business apps at BizCare',
-    org: 'BizCare Software Solutions',
+    slug: 'bizcare',
+    name: 'BizCare and Biz Parta',
+    icon: '/img/apps/bizcare-icon.webp',
+    client: 'For BizCare’s ERP clients',
+    builtAt: 'BizCare Software Solutions',
+    tagline: 'A company’s ERP, in the owner’s pocket.',
+    summary:
+      'Business owners check sales, ledgers, stock and financial reports from their BizCare ERP and post transactions on the go. Biz Parta gives flour mills their daily production cost reports.',
+    media: '/img/work/bizcare.webp',
+    tint: '#017e84',
+    stats: [
+      { value: '2', label: 'Apps, live on both stores' },
+      { value: '32%', label: 'More efficient client workflows' },
+    ],
+    play: play('com.bizcare.bizcare'),
+    appStore: 'https://apps.apple.com/pk/app/bizcare/id6752336703',
+    platforms: 'Android and iOS',
+    role: 'Sole lead developer',
     period: '2025 – Present',
-    role: 'Mobile developer',
-    title: 'Apps that businesses run on every day.',
-    summary:
-      'BizCare makes ERP software for businesses in Pakistan. I build and publish its mobile apps for Android and iOS: an ERP companion for owners, a car care chain’s customer app, production reports for flour mills and a farm supplies shop in English and Urdu.',
-    facts: [
-      { value: '4', label: 'Apps on both stores' },
-      { value: '2', label: 'Platforms, one codebase' },
-      { value: '2', label: 'Languages, English and Urdu' },
+    features: [
+      { icon: 'chart-bar', title: 'Live financial overview', text: 'Cash, bank, receivables, payables and stock from the ERP, as of the last posting.' },
+      { icon: 'file-text', title: 'Ledgers and reports', text: 'Account ledgers, sales, purchase and financial reports by date range.' },
+      { icon: 'receipt', title: 'Post transactions', text: 'Record sales and cash transactions without opening a computer.' },
+      { icon: 'chart-line', title: 'Production analysis', text: 'Biz Parta works out a mill’s output, rates and costs per product.' },
+      { icon: 'download-simple', title: 'Share as PDF', text: 'Any report goes out as a PDF in a tap.' },
+      { icon: 'lightning', title: 'Connection check', text: 'Shows the live connection to the ERP, so owners know the figures are current.' },
     ],
-    built: [
-      'Flutter apps for Android and iOS, from the first screen to the store listing.',
-      'Connected to the company’s .NET gateway and ERP, with sign-in by phone number and one-time codes.',
-      'Right-to-left Urdu screens next to English in the farm supplies app.',
-      'Reports that owners can export and share as PDF.',
-      'Store screenshots, privacy policies and releases on Google Play and the App Store.',
+    did: [
+      'Built both apps and connected them to the company ERP through its gateway API.',
+      'Owned architecture, testing and releases on Google Play and the App Store.',
     ],
-    stack: ['Flutter', 'Dart', '.NET gateway', 'REST APIs', 'Firebase', 'Google Play', 'App Store'],
-    links: [],
-    visual: {
-      type: 'phones',
-      tint: 'var(--tint-warm)',
-      shots: [
-        { src: '/img/apps/bizcare-dashboard.webp', alt: 'BizCare ERP dashboard', ratio: 0.46 },
-        { src: '/img/apps/makki-autocare-home.webp', alt: 'Makki AutoCare home with an oil change reminder', ratio: 0.4614 },
-        { src: '/img/apps/madadgar-kisan-home.webp', alt: 'Madadgar Kisan farm supplies shop', ratio: 0.4614 },
-      ],
-    },
-    apps: [
-      {
-        name: 'BizCare',
-        icon: '/img/apps/bizcare-icon.webp',
-        text: 'The company ERP in your pocket: sales, ledgers, stock and reports.',
-        play: play('com.bizcare.bizcare'),
-        appStore: 'https://apps.apple.com/pk/app/bizcare/id6752336703',
-      },
-      {
-        name: 'Makki AutoCare',
-        icon: '/img/apps/makki-autocare-icon.webp',
-        text: 'Oil change reminders by date and kilometres, service history and help on the road.',
-        play: play('com.bizcare.makki_autocare'),
-        appStore: 'https://apps.apple.com/pk/app/makki-autocare/id6752372809',
-      },
-      {
-        name: 'Madadgar Kisan',
-        icon: '/img/apps/madadgar-kisan-icon.webp',
-        text: 'Order fertiliser, seed and lab tests from nearby branches, in English or Urdu.',
-        play: play('com.bizcare.madadgar_kisan'),
-        appStore: 'https://apps.apple.com/pk/app/madadgar-kisan/id6825722989',
-      },
-      {
-        name: 'Biz Parta',
-        icon: '/img/apps/bizparta-icon.webp',
-        text: 'Production cost reports for flour mills, shared as PDF.',
-        play: play('com.bizcare.bizparta'),
-        appStore: 'https://apps.apple.com/us/app/biz-parta/id6752411960',
-      },
-    ],
+    tools: ['Flutter', 'Dart', '.NET gateway', 'SQL Server', 'PDF export'],
+    gallery: [1, 2, 3, 4, 5, 6].map((i) => ({ src: `/img/work/bizcare-g${i}.webp`, alt: i < 4 ? `BizCare screen ${i}` : `Biz Parta screen ${i - 3}`, kind: 'screen' as const })),
     seo: {
-      title: 'Business Apps for Android and iOS at BizCare',
-      description:
-        'Flutter apps Usman Ghani builds and publishes at BizCare Software Solutions: BizCare ERP, Makki AutoCare, Madadgar Kisan and Biz Parta.',
+      title: 'BizCare and Biz Parta: ERP Apps for Android and iOS',
+      description: 'BizCare and Biz Parta, built by Usman Ghani: ERP reports, ledgers and production costs on the phone, live on Google Play and the App Store.',
     },
   },
+];
+
+export type WebWork = {
+  slug?: string;
+  name: string;
+  org: string;
+  orgLogo: string;
+  text: string;
+  role: string;
+  tools: string[];
+  href: string;
+  host: string;
+  image: string;
+};
+
+export const bizcarePk = {
+  name: 'bizcare.pk',
+  org: 'BizCare Software Solutions',
+  title: 'The new website of an ERP company.',
+  text: 'I designed and built the new bizcare.pk from scratch: the company’s ERP modules, industries, client apps and support, with fast static pages, light on the phone and set up for search.',
+  points: ['Designed and built end to end', 'ERP modules, industries and client apps', 'Fast static pages, set up for search'],
+  tools: ['Astro', 'TypeScript', 'Plesk hosting'],
+  href: 'https://bizcare.pk/',
+  image: '/img/web/bizcare-pk.webp',
+  phone: '/img/web/bizcare-pk-phone.webp',
+  pages: [
+    { src: '/img/web/bizcare-pk-erp.webp', alt: 'bizcare.pk ERP page' },
+    { src: '/img/web/bizcare-pk-apps-makki-autocare.webp', alt: 'bizcare.pk Makki AutoCare app page' },
+    { src: '/img/web/bizcare-pk-clients.webp', alt: 'bizcare.pk clients page' },
+  ],
+};
+
+export const web: WebWork[] = [
   {
-    slug: 'veloq',
-    name: 'AI products at Veloq',
+    name: 'Talent Pool',
     org: 'Veloq',
-    period: '2025 – Present',
-    role: 'Software & Application Developer',
-    title: 'AI agents and SaaS platforms, built end to end.',
-    summary:
-      'At Veloq I build AI products for clients abroad, from the database to the interface: a book-writing platform, a sales engine, document checkers and research assistants. Client names stay private, so the work is described by what it does.',
-    facts: [
-      { value: '5+', label: 'Client products' },
-      { value: 'End to end', label: 'Database, API, AI and interface' },
-    ],
-    built: [
-      'Leafyio, an AI platform that writes and illustrates ebooks, picture books and comics, then lets people sell them.',
-      'Multi-tenant SaaS with row-level security, so each workspace only ever sees its own data.',
-      'Agents that read documents with OCR and check them against rules, keeping a person in the loop.',
-      'Retrieval-augmented answers that cite the source documents they came from.',
-    ],
-    stack: ['Next.js', 'FastAPI', 'Supabase', 'PostgreSQL', 'Celery', 'Claude', 'Gemini', 'Stripe'],
-    links: [],
-    visual: {
-      type: 'browser',
-      tint: 'var(--tint-rose)',
-      src: '/img/work/leafyio-1.webp',
-      alt: 'Leafyio home page: generate AI ebooks that sell',
-      url: 'leafyio.io',
-    },
-    more: [
-      {
-        name: 'Leafyio',
-        href: 'https://www.leafyio.io/',
-        text: 'Writes, illustrates and assembles ebooks, picture books and comics as print-ready PDFs, with credits and checkout.',
-        stack: ['Next.js', 'Supabase', 'Claude', 'Gemini images', 'Stripe'],
-      },
-      {
-        name: 'AI outbound sales engine',
-        text: 'Finds leads, enriches them and runs email campaigns per workspace. Multi-tenant from the first commit.',
-        stack: ['Next.js', 'FastAPI', 'Celery', 'Supabase'],
-      },
-      {
-        name: 'Recruitment document agent',
-        text: 'Reads applicants’ documents with OCR and checks them against each role’s requirements for enterprise hiring teams.',
-        stack: ['Python', 'OCR', 'Next.js', 'Supabase'],
-      },
-      {
-        name: 'Legal research assistant',
-        text: 'Answers questions from a firm’s own legal documents, with the passages it used.',
-        stack: ['Python', 'RAG', 'Vector search'],
-      },
-      {
-        name: 'Talent network',
-        text: 'A platform where developers join a vetted pool and companies hire from it.',
-        stack: ['React', 'Node.js'],
-      },
-    ],
-    seo: {
-      title: 'AI Agents and SaaS Platforms at Veloq',
-      description:
-        'AI products Usman Ghani builds at Veloq: Leafyio, an AI sales engine, OCR document agents and retrieval-augmented research assistants.',
-    },
+    orgLogo: '/img/logos/veloq-icon.png',
+    text: 'A marketplace where companies hire vetted engineers: 3D candidate search, contracts, e-signatures, milestones and invoicing.',
+    role: 'Front end and backend integration',
+    tools: ['React', 'Redux', 'Three.js', 'Node.js'],
+    href: 'https://harbor.veloq.tech/',
+    host: 'harbor.veloq.tech',
+    image: '/img/web/talent-pool.webp',
+  },
+  {
+    name: 'COI Tracker',
+    org: 'Veloq',
+    orgLogo: '/img/logos/veloq-icon.png',
+    text: 'Vendor compliance for property managers: reads insurance certificates, tracks expiry and chases renewals.',
+    role: 'Front end',
+    tools: ['Next.js', 'Supabase'],
+    href: 'https://coi-tracker-three.vercel.app/',
+    host: 'coi-tracker-three.vercel.app',
+    image: '/img/web/coi-tracker.webp',
+  },
+  {
+    name: 'Leafyio',
+    org: 'Veloq',
+    orgLogo: '/img/logos/veloq-icon.png',
+    text: 'An AI platform that writes, illustrates and assembles ebooks, picture books and comics, ready to sell.',
+    role: 'Product engineering',
+    tools: ['Next.js', 'Supabase', 'Claude', 'Stripe'],
+    href: 'https://www.leafyio.io/',
+    host: 'leafyio.io',
+    image: '/img/web/leafyio.webp',
   },
 ];
 
-export const sites: { name: string; text: string; href: string; image: string; stack: string }[] = [
-  {
-    name: 'bizcare.pk',
-    text: 'The new website of BizCare Software Solutions, an ERP company in Lahore.',
-    href: 'https://bizcare.pk/',
-    image: '/img/sites/bizcare.webp',
-    stack: 'Astro',
-  },
-  {
-    name: 'BlueX Software Solutions',
-    text: 'Home of my apps, with product pages, privacy policies and support.',
-    href: 'https://bluexsoftware.vercel.app/',
-    image: '/img/sites/bluex.webp',
-    stack: 'Astro',
-  },
+export const moreApps = [
+  { name: 'Biz Parta', text: 'Production cost reports for flour mills', href: play('com.bizcare.bizparta') },
+  { name: 'Clippy', text: 'Clipboard history for Android', href: play('com.bluex.clippy') },
+  { name: 'Scanix', text: 'Document scanner for Android', href: play('com.bluex.scanix') },
 ];
 
-export const labs: { name: string; text: string; stack: string; status?: string; href?: string }[] = [
-  {
-    name: 'Sanctum',
-    text: 'Final year project: a platform that detects and stops malicious AI agents.',
-    stack: 'AI security',
-    status: 'In progress',
-  },
-  {
-    name: 'VulnRadar',
-    text: 'A web vulnerability scanner that re-implements the core checks of Nuclei and Nikto.',
-    stack: 'React, FastAPI',
-  },
-  {
-    name: 'TraceIt',
-    text: 'A lost and found app for campuses, with matching, claims and admin checks.',
-    stack: 'Kotlin, Jetpack Compose, Firebase, Supabase',
-  },
-  {
-    name: 'Treasure Hunt',
-    text: 'A grid game that uses BFS and DFS to find paths, for a data structures course.',
-    stack: 'C++',
-    href: 'https://github.com/Code-with-UsmanG/DSA-Project-Treasure-Hunting-Game',
-  },
-  {
-    name: 'Chess',
-    text: 'A full chess game for the terminal, 7,000 lines, in my first semester.',
-    stack: 'C++',
-    href: 'https://github.com/Code-with-UsmanG/Chess-Game',
-  },
+export const labs = [
+  { name: 'Sanctum', text: 'Final year project: a defensive platform that detects and stops malicious AI agents.', tools: 'AI security', status: 'In progress' },
+  { name: 'VulnRadar', text: 'A web vulnerability scanner that re-implements the core checks of Nuclei and Nikto.', tools: 'React, FastAPI' },
+  { name: 'TraceIt', text: 'A lost and found app for campuses, with matching, claims and admin checks.', tools: 'Kotlin, Jetpack Compose' },
 ];
 
-export const findWork = (slug: string) => work.find((w) => w.slug === slug);
+export const findApp = (slug: string) => apps.find((a) => a.slug === slug);

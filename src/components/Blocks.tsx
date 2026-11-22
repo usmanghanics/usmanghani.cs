@@ -157,7 +157,7 @@ export function Experience() {
   return (
     <ol className="xp">
       {jobs.map((j) => {
-        const fill = j.logo.includes('/apps/');
+        const fill = j.logo.includes('/apps/') || j.logo.includes('bluex-tile');
         const inv = j.logo.includes('ieee') || j.logo.includes('fg-mark');
         return (
           <li key={j.org} className="job" data-reveal>
@@ -185,7 +185,7 @@ export function Experience() {
                 </div>
               )}
               {j.certificate && (
-                <a className="cert-link" href={j.certificate.image} target="_blank" rel="noopener">
+                <a className="cert-link" href={j.certificate.image} target="_blank" rel="noopener" data-zoom={`${j.org} ${j.certificate.label.toLowerCase()}`}>
                   <img src={j.certificate.image} alt={`${j.org} ${j.certificate.label}`} width={74} height={54} loading="lazy" />
                   <span>
                     <b>{j.certificate.label}</b>
@@ -213,7 +213,12 @@ export function Achievements() {
         <li key={a.event} className="ach" data-reveal style={d(i)}>
           <div className={`ach-top${a.photo ? ' has-photo' : ''}`} style={{ ['--tint' as string]: a.tint }}>
             {a.photo ? (
-              <img className="ach-photo" src={a.photo} alt={`${a.event}, ${a.title}`} loading="lazy" />
+              <a className="ach-zoom" href={a.photo} target="_blank" rel="noopener" data-zoom={`${a.event}, ${a.title}`} aria-label={`View photo: ${a.event}`}>
+                <img className="ach-photo" src={a.photo} alt={`${a.event}, ${a.title}`} loading="lazy" />
+                <span className="zoom-hint" aria-hidden="true">
+                  <Icon name="arrows-out" size={18} />
+                </span>
+              </a>
             ) : (
               <img className="ach-big-logo" src={a.logo} alt={`${a.org} logo`} loading="lazy" />
             )}
@@ -243,7 +248,7 @@ export function PlayAccount() {
     <div className="play-account" data-reveal>
       <div className="play-id">
         <span className="play-logo">
-          <Brand name="googleplay" size={26} color="#fff" />
+          <Brand name="googleplay" size={24} color="#fff" />
         </span>
         <div>
           <h3>My Google Play developer account</h3>
@@ -252,22 +257,23 @@ export function PlayAccount() {
           </p>
         </div>
       </div>
+      <a className="btn btn-ink btn-sm play-cta" href={playAccount.href} target="_blank" rel="noopener">
+        View on Google Play <Icon name="arrow-up-right" size={18} className="out" />
+      </a>
       <ul className="play-apps">
         {playAccount.apps.map((p) => (
           <li key={p.name}>
             <a href={p.href} target="_blank" rel="noopener">
-              <img src={p.icon} alt="" width={44} height={44} loading="lazy" />
+              <img src={p.icon} alt="" width={48} height={48} loading="lazy" />
               <span>
                 <b>{p.name}</b>
                 <small>{p.text}</small>
               </span>
+              <Icon name="arrow-up-right" size={16} className="play-go" />
             </a>
           </li>
         ))}
       </ul>
-      <a className="btn btn-ink btn-sm" href={playAccount.href} target="_blank" rel="noopener">
-        View on Google Play <Icon name="arrow-up-right" size={18} className="out" />
-      </a>
     </div>
   );
 }
@@ -302,7 +308,7 @@ export function Certificates({ limit }: { limit?: number }) {
     <ul className="certs">
       {list.map((c, i) => (
         <li key={c.id} style={{ display: 'grid' }}>
-          <a className="cert" href={c.image} target="_blank" rel="noopener" data-reveal style={d(i % 3)}>
+          <a className="cert" href={c.image} target="_blank" rel="noopener" data-zoom={`${c.name}, ${c.issuer}`} data-reveal style={d(i % 3)}>
             <div className="cert-img">
               <img src={c.image} alt={`${c.name} certificate from ${c.issuer}`} width={800} height={600} loading="lazy" />
             </div>

@@ -164,9 +164,9 @@ export default function Home() {
           <div className="head" data-reveal>
             <div>
               <h2 className="title" id="ach-title">
-                Proven <span className="accent">under pressure</span>.
+                Awards and <span className="accent">rankings</span>.
               </h2>
-              <p className="lead">National programming contests and Pakistan’s national capture-the-flag platform.</p>
+              <p className="lead">National programming contests and Pakistan’s national capture-the-flag platform. Tap a photo to see it in full.</p>
             </div>
           </div>
           <Achievements />

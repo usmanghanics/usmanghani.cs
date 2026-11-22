@@ -12,11 +12,12 @@ sys.path.insert(0, str(HERE / 'phosphor'))
 from glyphs import Font, path  # noqa: E402
 
 ICONS = sorted(set('''
-arrow-up-right arrow-right arrow-left caret-right caret-down check envelope-simple github-logo linkedin-logo x-logo
-google-play-logo app-store-logo star sun moon list x map-pin graduation-cap trophy certificate briefcase
-device-mobile robot globe code browser flow-arrow chat-circle-text lightning file-text download-simple
-copy check-circle sparkle stack database cloud users shield-check film-strip subtitles clipboard-text scan
-car storefront chart-bar plant read-cv-logo house
+arrow-up-right arrow-right arrow-left caret-right caret-down check check-circle envelope-simple github-logo linkedin-logo x-logo
+google-play-logo app-store-logo apple-logo star sun moon list x map-pin graduation-cap trophy certificate briefcase medal seal-check
+device-mobile robot globe code browser chat-circle-text lightning file-text download-simple copy sparkle stack database cloud users
+shield-check film-strip subtitles clipboard-text scan car storefront chart-bar chart-line plant read-cv-logo house bell truck flask
+translate receipt buildings calendar-blank timer scissors waveform split-horizontal picture-in-picture music-notes wifi-slash
+gauge flag link cube cursor-click devices
 '''.split()))
 
 

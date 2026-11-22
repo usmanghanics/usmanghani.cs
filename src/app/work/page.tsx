@@ -6,7 +6,7 @@ import { JsonLd, crumbs, person } from '@/lib/seo';
 
 const title = 'Work: Apps and Web Platforms I’ve Shipped';
 const desc =
-  'Apps and platforms built by Usman Ghani: SnapCut, Makki AutoCare, Madadgar Kisan and BizCare on Google Play and the App Store, plus bizcare.pk, Talent Pool, COI Tracker and Leafyio.';
+  'Apps and platforms built by Usman Ghani: SnapCut, Makki AutoCare, Madadgar Kisan and BizCare on Google Play and the App Store, plus bizcare.pk, Leafyio, AutoScale Agents and Talent Pool.';
 
 export const metadata: Metadata = {
   title,

@@ -66,14 +66,14 @@ export const jobs: Job[] = [
     place: 'Melbourne, Australia · Remote',
     intro: 'An engineer-led AI software house building agent systems, retrieval platforms and workflow automation for clients in recruitment, property and logistics.',
     points: [
-      'Talent Pool: built the front end and backend integration of a talent marketplace, from 3D candidate search to contract drafting, BoldSign e-signatures, milestones and invoicing.',
-      'COI Tracker: built the front end of a vendor compliance platform that reads insurance certificates, tracks expiry dates and chases renewals.',
       'Leafyio: an AI platform that writes, illustrates and sells ebooks, picture books and comics.',
+      'AutoScale Agents: built an AI outbound engine end to end, from prospect sourcing and AI-written emails with human approval to sending, reply sorting and booking.',
+      'Talent Pool: built the front end and backend integration of a talent marketplace, from 3D candidate search to contract drafting, BoldSign e-signatures, milestones and invoicing.',
     ],
     links: [
-      { label: 'Talent Pool', href: 'https://harbor.veloq.tech/' },
-      { label: 'COI Tracker', href: 'https://coi-tracker-three.vercel.app/' },
       { label: 'Leafyio', href: 'https://www.leafyio.io/' },
+      { label: 'AutoScale Agents', href: 'https://auto-scale-agents-web.vercel.app/' },
+      { label: 'Talent Pool', href: 'https://harbor.veloq.tech/' },
     ],
   },
   {
@@ -109,9 +109,9 @@ export const jobs: Job[] = [
   },
   {
     org: 'BlueX Software Solutions',
-    logo: '/img/apps/snapcut-icon.webp',
+    logo: '/img/logos/bluex-tile.svg',
     role: 'Founder',
-    type: 'My Google Play publisher',
+    type: 'Google Play developer',
     period: '2025 – Present',
     place: 'Pakistan',
     points: [

@@ -228,28 +228,6 @@ export const bizcarePk = {
 
 export const web: WebWork[] = [
   {
-    name: 'Talent Pool',
-    org: 'Veloq',
-    orgLogo: '/img/logos/veloq-icon.png',
-    text: 'A marketplace where companies hire vetted engineers: 3D candidate search, contracts, e-signatures, milestones and invoicing.',
-    role: 'Front end and backend integration',
-    tools: ['React', 'Redux', 'Three.js', 'Node.js'],
-    href: 'https://harbor.veloq.tech/',
-    host: 'harbor.veloq.tech',
-    image: '/img/web/talent-pool.webp',
-  },
-  {
-    name: 'COI Tracker',
-    org: 'Veloq',
-    orgLogo: '/img/logos/veloq-icon.png',
-    text: 'Vendor compliance for property managers: reads insurance certificates, tracks expiry and chases renewals.',
-    role: 'Front end',
-    tools: ['Next.js', 'Supabase'],
-    href: 'https://coi-tracker-three.vercel.app/',
-    host: 'coi-tracker-three.vercel.app',
-    image: '/img/web/coi-tracker.webp',
-  },
-  {
     name: 'Leafyio',
     org: 'Veloq',
     orgLogo: '/img/logos/veloq-icon.png',
@@ -259,6 +237,28 @@ export const web: WebWork[] = [
     href: 'https://www.leafyio.io/',
     host: 'leafyio.io',
     image: '/img/web/leafyio.webp',
+  },
+  {
+    name: 'AutoScale Agents',
+    org: 'Veloq',
+    orgLogo: '/img/logos/veloq-icon.png',
+    text: 'An AI outbound engine: finds prospects that fit, writes every email from real company detail and routes the replies that matter to a booking.',
+    role: 'Full stack',
+    tools: ['Next.js', 'FastAPI', 'Supabase', 'Claude'],
+    href: 'https://auto-scale-agents-web.vercel.app/',
+    host: 'auto-scale-agents-web.vercel.app',
+    image: '/img/web/autoscale.webp',
+  },
+  {
+    name: 'Talent Pool',
+    org: 'Veloq',
+    orgLogo: '/img/logos/veloq-icon.png',
+    text: 'A marketplace where companies hire vetted engineers: 3D candidate search, contracts, e-signatures, milestones and invoicing.',
+    role: 'Front end and backend integration',
+    tools: ['React', 'Redux', 'Three.js', 'Node.js'],
+    href: 'https://harbor.veloq.tech/',
+    host: 'harbor.veloq.tech',
+    image: '/img/web/talent-pool.webp',
   },
 ];
 

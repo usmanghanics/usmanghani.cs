@@ -45,6 +45,8 @@ npm run build    # production build
 npm run lint     # type check
 ```
 
+After a deploy that adds or changes pages, tell Bing and other IndexNow engines: `node tools/indexnow.mjs`
+
 Icons: add a Phosphor name to `tools/icons.py`, then run `python3 -I tools/icons.py`.
 
 ## Deploying

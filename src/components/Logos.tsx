@@ -17,8 +17,8 @@ export function BizcareLogo({ height = 28 }: { height?: number }) {
   return (
     <svg width={w} height={height} viewBox={`0 0 ${L.width} ${L.height}`} fill="currentColor" role="img" aria-label="BizCare">
       <path d={L.mark} />
-      <circle cx={L.dot.cx} cy={L.dot.cy} r={L.dot.r} />
-      <path d={L.word} transform={`translate(${L.wordX} ${L.wordY})`} />
+      <circle cx={L.dot.cx} cy={L.dot.cy} r={L.dot.r} fill="#017e84" />
+      <path d={L.word} fillRule="evenodd" transform={`translate(${L.wordX} ${L.wordY})`} />
     </svg>
   );
 }

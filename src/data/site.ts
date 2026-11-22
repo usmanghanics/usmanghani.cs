@@ -28,7 +28,7 @@ export const description =
   'Usman Ghani is a software engineer in Lahore who builds and ships mobile apps and AI platforms. SnapCut, Makki AutoCare and Madadgar Kisan are live on Google Play and the App Store.';
 
 export const stats = [
-  { value: '7', label: 'Apps live on Google Play and the App Store' },
+  { value: '15+', label: 'Projects shipped, across mobile apps and web platforms' },
   { value: '6K+', label: 'Downloads across SnapCut and Makki AutoCare' },
   { value: '#1', label: 'On CTF Square, Pakistan’s national CTF platform' },
   { value: '1st', label: 'CodeX 3.0, against 188 programmers' },
@@ -36,7 +36,7 @@ export const stats = [
 
 /** Logos shown under the hero. `invert` flips black logos in the dark theme. */
 export const orgs = [
-  { name: 'Veloq', logo: '/img/logos/veloq.png', h: 30, invert: true },
+  { name: 'Veloq', logo: '/img/logos/veloq-mark.png', h: 34, invert: true, label: 'Veloq' },
   { name: 'BizCare Software Solutions', logo: 'bizcare', h: 30, invert: true },
   { name: 'Fatima Group', logo: '/img/logos/fg-mark.png', h: 30, invert: true, label: 'Fatima Group' },
   { name: 'Namal University', logo: '/img/logos/namal.png', h: 48, label: 'Namal University' },
@@ -59,7 +59,7 @@ export type Job = {
 export const jobs: Job[] = [
   {
     org: 'Veloq',
-    logo: '/img/logos/veloq-icon.png',
+    logo: '/img/logos/veloq-mark.png',
     role: 'Software & Application Engineer',
     type: 'Freelance',
     period: 'Apr 2026 – Present',
@@ -96,17 +96,16 @@ export const jobs: Job[] = [
     org: 'BizCare Software Solutions',
     logo: '/img/apps/bizcare-icon.webp',
     role: 'Software & Application Developer',
-    type: 'Started as an intern',
-    period: 'Jul 2025 – Present',
+    type: 'Internship',
+    period: 'Jul 2025 – Sep 2025',
     place: 'Lahore · Hybrid',
     intro: 'An ERP company in Lahore whose software runs flour mills, traders and service businesses across Pakistan.',
     points: [
-      'Sole lead developer of the company’s mobile apps, live on Google Play and the App Store: BizCare, Makki AutoCare, Madadgar Kisan and Biz Parta.',
-      'Owned each app end to end, from architecture and testing to releases through Play Console and App Store Connect.',
-      'Built ERP-connected features for sales, payments, finance, stock and production reports that made client workflows 32% more efficient.',
-      'Designed and built the new bizcare.pk, and features for the company’s Angular web ERP.',
+      'Sole lead developer on three commercial apps published on Google Play and the App Store: Makki AutoCare, BizCare and Biz Parta.',
+      'Makki AutoCare passed 1,000 downloads, giving Makki Oil Store’s customers their service history and maintenance reminders.',
+      'Owned the full lifecycle of each app: architecture, implementation, testing, releases and store publishing.',
+      'Built ERP-connected features for sales, payments, finance, stock and production reports that made client workflows 32% more efficient, plus Angular features for the company’s web ERP.',
     ],
-    links: [{ label: 'bizcare.pk', href: 'https://bizcare.pk/' }],
   },
   {
     org: 'BlueX Software Solutions',
@@ -140,6 +139,7 @@ export type Achievement = {
   date: string;
   text: string;
   logo: string;
+  photo?: string;
   tint: string;
 };
 
@@ -152,6 +152,7 @@ export const achievements: Achievement[] = [
     date: 'Dec 2025',
     text: 'National inter-university competition with 188 participants from 11 universities, solved without AI tools.',
     logo: '/img/logos/namal.png',
+    photo: '/img/me/codex-trophy.webp',
     tint: 'var(--tint-green)',
   },
   {
@@ -159,9 +160,10 @@ export const achievements: Achievement[] = [
     title: 'Top of the leaderboard',
     event: 'CTF Square',
     org: 'National CERT, Pakistan',
-    date: '2026',
-    text: 'First on the individual leaderboard of Pakistan’s national capture-the-flag platform: 8,930 points, 62 challenges.',
+    date: 'Nov 2026',
+    text: 'First on the individual leaderboard of Pakistan’s national capture-the-flag platform: 16,480 points from 82 challenges solved.',
     logo: '/img/logos/pkcert.png',
+    photo: '/img/me/ctf-leaderboard.webp',
     tint: 'var(--tint-sage)',
   },
   {
@@ -172,6 +174,7 @@ export const achievements: Achievement[] = [
     date: '2026',
     text: 'Against teams from 25+ universities, with my teammate Muhammad Gulfam Afzal.',
     logo: '/img/logos/bahria.png',
+    photo: '/img/me/aurex-team.webp',
     tint: 'var(--tint-blue)',
   },
   {
@@ -203,7 +206,7 @@ export const education = [
     place: 'Hasilpur',
     degree: 'F.Sc Pre-Engineering, Grade A+',
     period: 'May 2021 – Jul 2023',
-    logo: '',
+    logo: '/img/logos/daanish.png',
     points: ['Matriculation: 1,098 out of 1,100, second position (BISE Lahore).'],
   },
 ];

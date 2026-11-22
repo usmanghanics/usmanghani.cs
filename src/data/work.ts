@@ -39,7 +39,7 @@ export const apps: AppWork[] = [
     slug: 'snapcut',
     name: 'SnapCut',
     icon: '/img/apps/snapcut-icon.webp',
-    client: 'My own app',
+    client: 'Published as BlueX Software Solutions',
     builtAt: 'BlueX Software Solutions',
     tagline: 'A video editor that does everything on the phone.',
     summary:
@@ -79,7 +79,7 @@ export const apps: AppWork[] = [
     slug: 'makki-autocare',
     name: 'Makki AutoCare',
     icon: '/img/apps/makki-autocare-icon.webp',
-    client: 'For Makki Oil Store',
+    client: 'For Makki Oil Store, built at BizCare',
     builtAt: 'BizCare Software Solutions',
     tagline: 'Every customer’s next oil change, in their pocket.',
     summary:
@@ -119,7 +119,7 @@ export const apps: AppWork[] = [
     slug: 'madadgar-kisan',
     name: 'Madadgar Kisan',
     icon: '/img/apps/madadgar-kisan-icon.webp',
-    client: 'For a farm supplies company in Hasilpur',
+    client: 'For a farm supplies company, built at BizCare',
     builtAt: 'BizCare Software Solutions',
     tagline: 'Fertiliser and lab tests, ordered from the farm.',
     summary:
@@ -159,7 +159,7 @@ export const apps: AppWork[] = [
     slug: 'bizcare',
     name: 'BizCare and Biz Parta',
     icon: '/img/apps/bizcare-icon.webp',
-    client: 'For BizCare’s ERP clients',
+    client: 'For BizCare’s ERP clients, built at BizCare',
     builtAt: 'BizCare Software Solutions',
     tagline: 'A company’s ERP, in the owner’s pocket.',
     summary:
@@ -262,11 +262,16 @@ export const web: WebWork[] = [
   },
 ];
 
-export const moreApps = [
-  { name: 'Biz Parta', text: 'Production cost reports for flour mills', href: play('com.bizcare.bizparta') },
-  { name: 'Clippy', text: 'Clipboard history for Android', href: play('com.bluex.clippy') },
-  { name: 'Scanix', text: 'Document scanner for Android', href: play('com.bluex.scanix') },
-];
+/** My Google Play developer account and every app on it. */
+export const playAccount = {
+  name: 'BlueX Software Solutions',
+  href: 'https://play.google.com/store/apps/developer?id=BlueX+Software+Solutions',
+  apps: [
+    { name: 'SnapCut', text: 'Video and audio editor', icon: '/img/apps/snapcut-icon.webp', href: play('com.bluex.soundy') },
+    { name: 'Clippy', text: 'Clipboard history', icon: '/img/apps/clippy-icon.webp', href: play('com.bluex.clippy') },
+    { name: 'Scanix', text: 'Document scanner', icon: '/img/apps/scanix-icon.webp', href: play('com.bluex.scanix') },
+  ],
+};
 
 export const labs = [
   { name: 'Sanctum', text: 'Final year project: a defensive platform that detects and stops malicious AI agents.', tools: 'AI security', status: 'In progress' },

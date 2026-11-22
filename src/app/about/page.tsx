@@ -1,25 +1,21 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Contact } from '@/components/Contact';
+import { Achievements, Contact, Education, Experience, Stack } from '@/components/Blocks';
 import { Icon } from '@/components/Icon';
-import { EduAwards, Jobs, MoreLink, Skills } from '@/components/Sections';
-import { certifications } from '@/data/certifications';
+import { Brand } from '@/components/Logos';
 import { SITE_URL, me, ogImage } from '@/data/site';
 import { JsonLd, crumbs, person } from '@/lib/seo';
 
-const title = 'About Usman Ghani';
 const desc =
-  'Usman Ghani is a software engineer and computer science student at Namal University. He builds mobile apps, AI agents and web platforms at Veloq and BizCare, and runs BlueX Software Solutions.';
+  'About Usman Ghani: software engineer in Lahore, computer science at Namal University, Software & Application Engineer at Veloq, apps live on Google Play and the App Store, winner of CodeX 3.0.';
 
 export const metadata: Metadata = {
-  title: { absolute: 'About Usman Ghani: Software Engineer and Founder of BlueX' },
+  title: { absolute: 'About Usman Ghani: Software Engineer in Lahore' },
   description: desc,
   alternates: { canonical: '/about' },
-  openGraph: { type: 'profile', url: '/about', title: `${title}`, description: desc, images: [ogImage] },
+  openGraph: { type: 'profile', url: '/about', title: 'About Usman Ghani', description: desc, images: [ogImage] },
 };
 
 export default function About() {
-  const featured = certifications.filter((c) => c.featured).slice(0, 6);
   return (
     <>
       <JsonLd
@@ -29,119 +25,98 @@ export default function About() {
             { name: 'Home', path: '/' },
             { name: 'About', path: '/about' },
           ]),
-          {
-            '@type': 'AboutPage',
-            url: `${SITE_URL}/about`,
-            name: title,
-            description: desc,
-            mainEntity: { '@id': person['@id'] },
-          },
+          { '@type': 'AboutPage', url: `${SITE_URL}/about`, name: 'About Usman Ghani', description: desc, mainEntity: { '@id': person['@id'] } },
         ]}
       />
-      <header className="page-head">
-        <div className="wrap about" style={{ alignItems: 'center' }}>
+      <header className="case-head">
+        <div className="wrap about-head">
           <div className="portrait">
-            <img src={me.photo} alt="Usman Ghani" width={720} height={795} fetchPriority="high" />
+            <img src={me.photo} alt="Usman Ghani" width={960} height={960} fetchPriority="high" />
           </div>
           <div>
-            <h1 className="h1" style={{ marginTop: 0 }}>
-              Hi, I’m Usman Ghani.
+            <h1 className="display">
+              Hi, I’m <span className="accent">Usman Ghani</span>.
             </h1>
             <div className="prose" style={{ marginTop: 28 }}>
               <p>
-                I’m a software engineer from Pakistan and a computer science student at <strong>Namal University</strong>, Mianwali,
-                graduating in 2027. I build mobile apps, AI agents and web platforms, and I like to own them from the first sketch
-                to the store page.
+                I build and ship products. My first app came out of a challenge in an algorithms course: build something that runs on a
+                phone. Today <strong>SnapCut</strong>, the video editor I publish as BlueX Software Solutions, has more than 5,000
+                downloads, and the apps I built at <strong>BizCare</strong> run car care, farm supply and ERP businesses on Android and
+                iOS.
               </p>
               <p>
-                At <strong>BizCare Software Solutions</strong> I build and publish the mobile apps that businesses use with the
-                company ERP. At <strong>Veloq</strong> I build AI products for clients abroad: agents, document checkers, research
-                assistants and SaaS platforms. In 2026 I led the frontend overhaul of FG AI Studio during my internship at{' '}
-                <strong>Fatima Group</strong>.
+                At <strong>Veloq</strong> I build web platforms and AI products for clients in recruitment, property and logistics. In
+                summer 2026 I redesigned <strong>FG AI Studio</strong>, Fatima Group’s platform for AI agents, during their Empower to
+                Lead internship.
               </p>
               <p>
-                <strong>BlueX Software Solutions</strong> is my own Google Play developer name. Its main app, SnapCut, is a video
-                editor with more than 5,000 downloads and a 4.4 rating.
+                I study computer science at <strong>Namal University</strong>, compete in programming contests, and sit at the top of
+                CTF Square, Pakistan’s national capture-the-flag platform.
               </p>
             </div>
-            <div className="btn-row" style={{ marginTop: 32 }}>
-              <a className="btn btn-primary" href={`mailto:${me.email}`}>
+            <div className="row" style={{ marginTop: 32 }}>
+              <a className="btn btn-ink" href={`mailto:${me.email}`}>
                 <Icon name="envelope-simple" size={20} /> Email Me
               </a>
-              <a className="btn btn-outline" href={me.links.linkedin} target="_blank" rel="noopener me">
-                <Icon name="linkedin-logo" size={20} /> LinkedIn
+              <a className="btn btn-line" href={me.links.linkedin} target="_blank" rel="noopener me">
+                <Brand name="linkedin" size={18} /> LinkedIn
               </a>
             </div>
           </div>
         </div>
       </header>
 
-      <section className="section" aria-labelledby="exp-title">
-        <div className="wrap split">
-          <div className="split-aside" data-reveal>
-            <h2 className="h2" id="exp-title">
+      <section className="section soft" aria-labelledby="ach-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <h2 className="title" id="ach-title">
+              Achievements
+            </h2>
+          </div>
+          <Achievements />
+          <div className="photos" style={{ marginTop: 20 }}>
+            <figure data-reveal>
+              <img src="/img/me/aurex-team.webp" alt="Usman Ghani with the AUREX 2026 winners at Bahria University, Islamabad" width={1195} height={896} loading="lazy" />
+              <figcaption>AUREX 2026 at Bahria University, Islamabad</figcaption>
+            </figure>
+            <figure data-reveal>
+              <img src="/img/me/aurex-certificate.webp" alt="AUREX 2026 certificate: Speed Programming, 2nd Runner Up" width={1280} height={885} loading="lazy" />
+              <figcaption>2nd Runner-Up certificate, Speed Programming</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="xp-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <h2 className="title" id="xp-title">
               Experience
             </h2>
-            <MoreLink href="/work">See the work</MoreLink>
           </div>
-          <Jobs />
+          <Experience />
         </div>
       </section>
 
-      <section className="section section-soft" aria-labelledby="skills-title">
+      <section className="section soft" aria-labelledby="edu-title">
         <div className="wrap">
-          <div className="section-head" data-reveal>
-            <div>
-              <h2 className="h2" id="skills-title">
-                What I work with
-              </h2>
-              <p>The tools I use every week, grouped by the kind of work.</p>
-            </div>
-          </div>
-          <Skills />
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="edu-title">
-        <div className="wrap about">
-          <figure className="award-photo" data-reveal>
-            <img src="/img/me/award.webp" alt="Usman Ghani with other winners at a university programming contest" width={1000} height={750} loading="lazy" />
-          </figure>
-          <div data-reveal>
-            <h2 className="h2" id="edu-title">
-              Education and awards
+          <div className="head" data-reveal>
+            <h2 className="title" id="edu-title">
+              Education
             </h2>
-            <EduAwards />
           </div>
+          <Education />
         </div>
       </section>
 
-      <section className="section" aria-labelledby="certs-title">
+      <section className="section" aria-labelledby="stack-title">
         <div className="wrap">
-          <div className="section-head" data-reveal>
-            <div>
-              <h2 className="h2" id="certs-title">
-                Certificates
-              </h2>
-              <p>A few highlights. The full list is on its own page.</p>
-            </div>
-            <MoreLink href="/certifications">All certificates</MoreLink>
+          <div className="head" data-reveal>
+            <h2 className="title" id="stack-title">
+              Tools
+            </h2>
           </div>
-          <ul className="certs">
-            {featured.map((c) => (
-              <li key={c.id} className="card cert" data-reveal>
-                <div className="cert-img">
-                  <img src={c.image} alt={`${c.name} certificate from ${c.issuer}`} loading="lazy" width={800} height={600} />
-                </div>
-                <div className="cert-text">
-                  <h3>{c.name}</h3>
-                  <p>
-                    {c.issuer} · {c.date}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <Stack />
         </div>
       </section>
 

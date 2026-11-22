@@ -14,7 +14,13 @@ export const person = {
   description,
   email: `mailto:${me.email}`,
   nationality: { '@type': 'Country', name: 'Pakistan' },
-  homeLocation: { '@type': 'Country', name: 'Pakistan' },
+  homeLocation: { '@type': 'Place', name: 'Lahore, Pakistan' },
+  award: [
+    'Winner, Competitive Programming, CodeX 3.0 (Namal University, 2025)',
+    '#1 on the CTF Square individual leaderboard, National CERT Pakistan',
+    '2nd Runner-Up, Speed Programming, AUREX 2026 (Bahria University)',
+    '3rd, On Spot Programming, Visio Spark (COMSATS University, 2025)',
+  ],
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Namal University', url: 'https://namal.edu.pk/' },
   worksFor: [
     { '@type': 'Organization', name: 'Veloq', url: 'https://veloq.tech/' },
@@ -30,6 +36,7 @@ export const person = {
     'Retrieval-augmented generation',
     'FastAPI',
     'Supabase',
+    'Cybersecurity',
     'Search engine optimization',
   ],
   sameAs: [me.links.linkedin, me.links.github, me.links.githubOld, me.links.x, me.links.play],
@@ -48,7 +55,7 @@ export const website = {
 export const bluexOrg = {
   '@type': 'Organization',
   name: 'BlueX Software Solutions',
-  url: me.links.bluex,
+  url: 'https://bluexsoftware.vercel.app/',
   founder: { '@id': personId },
   sameAs: [me.links.play],
 };

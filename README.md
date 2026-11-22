@@ -8,11 +8,11 @@ The personal site of Usman Ghani, software engineer building mobile apps, AI age
 
 | Path | What it shows |
 |---|---|
-| `/` | Hero, selected work, apps I publish, websites, experience, about, contact |
-| `/work` | Every case study, my apps, websites, university and earlier projects |
-| `/work/[slug]` | Case studies: `snapcut`, `fg-ai-studio`, `bizcare-apps`, `veloq` |
-| `/about` | Bio, experience, skills, education, awards, featured certificates |
-| `/certifications` | All certificates |
+| `/` | Hero with proof, shipped apps, web platforms, experience, achievements, education, certificates, tools, contact |
+| `/work` | All apps, web platforms and university projects |
+| `/work/[slug]` | App case studies: `snapcut`, `makki-autocare`, `madadgar-kisan`, `bizcare` |
+| `/about` | Bio, achievements with photos, experience, education, tools |
+| `/certifications` | All certificates, most important first |
 
 ## Search and sharing
 
@@ -24,7 +24,7 @@ The personal site of Usman Ghani, software engineer building mobile apps, AI age
 
 ## Stack
 
-Next.js 16 (App Router, every page prerendered), React 19, TypeScript, plain CSS with design tokens in `src/app/globals.css`, Geist font, Phosphor icons. No animation or 3D libraries: motion is CSS only and respects reduced motion.
+Next.js 16 (App Router, every page prerendered), React 19, TypeScript, plain CSS with design tokens in `src/app/globals.css`, Geist font, Phosphor icons, brand logos from Simple Icons (`tools/brands.py`). No animation or 3D libraries: motion is CSS only and respects reduced motion.
 
 ## Editing content
 
@@ -34,7 +34,7 @@ All words and numbers live in `src/data`:
 - `work.ts`: case studies, apps, websites and smaller projects
 - `certifications.ts`: certificates
 
-Images live in `public/img` as WebP. App screens go in `public/img/apps`, sized about 540 to 640 px wide.
+Images live in `public/img` as WebP. The app showcase images in `public/img/work` are built from real app screens by `tools/mockups.py`.
 
 ## Commands
 

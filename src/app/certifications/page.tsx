@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Contact } from '@/components/Contact';
-import { certifications } from '@/data/certifications';
+import { Contact } from '@/components/Blocks';
+import { Brand } from '@/components/Logos';
+import { certifications, groups } from '@/data/certifications';
 import { ogImage } from '@/data/site';
 import { JsonLd, crumbs, person } from '@/lib/seo';
 
-const desc = 'Certificates earned by Usman Ghani in mobile development, AI, web development, security, data and automation.';
+const desc = 'Certificates earned by Usman Ghani from Meta, Microsoft, IBM, UC Irvine, Google and others, in mobile development, AI, the web and security.';
 
 export const metadata: Metadata = {
   title: 'Certificates',
@@ -14,48 +15,52 @@ export const metadata: Metadata = {
 };
 
 export default function Certificates() {
-  const order = ['Work', 'Mobile', 'AI', 'Web', 'Security', 'Automation', 'Data', 'Business'];
-  const list = [...certifications].sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
   return (
     <>
-      <JsonLd
-        data={[
-          person,
-          crumbs([
-            { name: 'Home', path: '/' },
-            { name: 'Certificates', path: '/certifications' },
-          ]),
-        ]}
-      />
-      <header className="page-head">
+      <JsonLd data={[person, crumbs([{ name: 'Home', path: '/' }, { name: 'Certificates', path: '/certifications' }])]} />
+      <header className="case-head">
         <div className="wrap">
-          <h1 className="h1">Certificates</h1>
+          <h1 className="display">
+            <span className="accent">Certificates</span>
+          </h1>
           <p className="lead">
-            {certifications.length} certificates in mobile development, AI, the web, security and more. Tap one to see it full size.
+            {certifications.length} certificates, most important first. My internship certificate from Fatima Group is with my experience.
           </p>
         </div>
       </header>
-      <section className="section" style={{ paddingTop: 0 }} aria-label="All certificates">
-        <div className="wrap">
-          <ul className="certs">
-            {list.map((c) => (
-              <li key={c.id}>
-                <a className="card cert" href={c.image} target="_blank" rel="noopener" data-reveal>
-                  <div className="cert-img">
-                    <img src={c.image} alt={`${c.name} certificate from ${c.issuer}`} loading="lazy" width={800} height={600} />
-                  </div>
-                  <div className="cert-text">
-                    <h3>{c.name}</h3>
-                    <p>
-                      {c.issuer} · {c.date}
-                    </p>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {groups.map((g, gi) => {
+        const list = certifications.filter((c) => c.group === g);
+        return (
+          <section key={g} className={`section${gi % 2 ? ' soft' : ''}`} style={gi === 0 ? { paddingTop: 0 } : undefined} aria-labelledby={`g-${gi}`}>
+            <div className="wrap">
+              <div className="head" data-reveal>
+                <h2 className="title-sm" id={`g-${gi}`}>
+                  {g === 'Core' ? 'Mobile, AI and security' : g}
+                </h2>
+              </div>
+              <ul className="certs">
+                {list.map((c) => (
+                  <li key={c.id} style={{ display: 'grid' }}>
+                    <a className="cert" href={c.image} target="_blank" rel="noopener" data-reveal>
+                      <div className="cert-img">
+                        <img src={c.image} alt={`${c.name} certificate from ${c.issuer}`} width={800} height={600} loading="lazy" />
+                      </div>
+                      <div className="cert-body">
+                        <span className="cert-issuer">
+                          {c.logo && <Brand name={c.logo} size={18} />}
+                          {c.issuer}
+                        </span>
+                        <h3>{c.name}</h3>
+                        <small>Issued {c.date}</small>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        );
+      })}
       <Contact />
     </>
   );

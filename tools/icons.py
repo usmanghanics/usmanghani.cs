@@ -17,7 +17,7 @@ google-play-logo app-store-logo apple-logo star sun moon list x map-pin graduati
 device-mobile robot globe code browser chat-circle-text lightning file-text download-simple copy sparkle stack database cloud users
 shield-check film-strip subtitles clipboard-text scan car storefront chart-bar chart-line plant read-cv-logo house bell truck flask
 translate receipt buildings calendar-blank timer scissors waveform split-horizontal picture-in-picture music-notes wifi-slash
-gauge flag link cube cursor-click devices
+gauge flag link cube cursor-click devices arrows-out
 '''.split()))
 
 

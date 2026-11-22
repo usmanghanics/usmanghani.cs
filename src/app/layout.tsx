@@ -4,6 +4,7 @@ import './globals.css';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Reveal } from '@/components/Reveal';
+import { Zoom } from '@/components/Zoom';
 import { SITE_URL, description, me, ogImage } from '@/data/site';
 
 const sans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <Reveal />
+        <Zoom />
       </body>
     </html>
   );

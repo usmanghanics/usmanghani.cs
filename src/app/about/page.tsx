@@ -76,15 +76,21 @@ export default function About() {
           <Achievements />
           <div className="photos" style={{ marginTop: 20 }}>
             <figure data-reveal>
-              <img src="/img/me/codex-trophy.webp" alt="1st Position trophy, Competitive Programming, CodeX 3.0, Namal University" width={895} height={1200} loading="lazy" />
+              <a className="photo-zoom" href="/img/me/codex-trophy.webp" target="_blank" rel="noopener" data-zoom="1st Position trophy, Competitive Programming, CodeX 3.0, Namal University">
+                <img src="/img/me/codex-trophy.webp" alt="1st Position trophy, Competitive Programming, CodeX 3.0, Namal University" width={895} height={1200} loading="lazy" />
+              </a>
               <figcaption>CodeX 3.0 trophy, 5 December 2025</figcaption>
             </figure>
             <figure data-reveal>
-              <img src="/img/me/ctf-leaderboard.webp" alt="CTF Square individual leaderboard with Usman Ghani at number one" width={1000} height={750} loading="lazy" />
+              <a className="photo-zoom" href="/img/me/ctf-leaderboard.webp" target="_blank" rel="noopener" data-zoom="CTF Square individual leaderboard with Usman Ghani at number one">
+                <img src="/img/me/ctf-leaderboard.webp" alt="CTF Square individual leaderboard with Usman Ghani at number one" width={1000} height={750} loading="lazy" />
+              </a>
               <figcaption>CTF Square leaderboard, National CERT</figcaption>
             </figure>
             <figure data-reveal>
-              <img src="/img/me/aurex-team.webp" alt="Usman Ghani with the AUREX 2026 winners at Bahria University, Islamabad" width={1195} height={896} loading="lazy" />
+              <a className="photo-zoom" href="/img/me/aurex-team.webp" target="_blank" rel="noopener" data-zoom="Usman Ghani with the AUREX 2026 winners at Bahria University, Islamabad">
+                <img src="/img/me/aurex-team.webp" alt="Usman Ghani with the AUREX 2026 winners at Bahria University, Islamabad" width={1195} height={896} loading="lazy" />
+              </a>
               <figcaption>AUREX 2026, Bahria University</figcaption>
             </figure>
           </div>

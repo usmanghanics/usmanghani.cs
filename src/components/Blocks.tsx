@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { achievements, education, jobs, me, orgs, stack } from '@/data/site';
-import { apps, bizcarePk, web, type AppWork } from '@/data/work';
+import { apps, bizcarePk, playAccount, web, type AppWork } from '@/data/work';
 import { certifications } from '@/data/certifications';
 import { AppStoreBadge, BizcareLogo, Brand, PlayBadge } from './Logos';
 import { CopyEmail } from './CopyEmail';
@@ -211,9 +211,18 @@ export function Achievements() {
     <ul className="achs">
       {achievements.map((a, i) => (
         <li key={a.event} className="ach" data-reveal style={d(i)}>
-          <div className="ach-top" style={{ ['--tint' as string]: a.tint }}>
+          <div className={`ach-top${a.photo ? ' has-photo' : ''}`} style={{ ['--tint' as string]: a.tint }}>
+            {a.photo ? (
+              <img className="ach-photo" src={a.photo} alt={`${a.event}, ${a.title}`} loading="lazy" />
+            ) : (
+              <img className="ach-big-logo" src={a.logo} alt={`${a.org} logo`} loading="lazy" />
+            )}
             <span className="ach-rank">{a.rank}</span>
-            <img src={a.logo} alt={`${a.org} logo`} loading="lazy" />
+            {a.photo && (
+              <span className="ach-logo">
+                <img src={a.logo} alt={`${a.org} logo`} loading="lazy" />
+              </span>
+            )}
           </div>
           <div className="ach-body">
             <span className="event">{a.event}</span>
@@ -226,6 +235,40 @@ export function Achievements() {
         </li>
       ))}
     </ul>
+  );
+}
+
+export function PlayAccount() {
+  return (
+    <div className="play-account" data-reveal>
+      <div className="play-id">
+        <span className="play-logo">
+          <Brand name="googleplay" size={26} color="#fff" />
+        </span>
+        <div>
+          <h3>My Google Play developer account</h3>
+          <p>
+            Published as <b>{playAccount.name}</b>. I design, build, release and support every app on it.
+          </p>
+        </div>
+      </div>
+      <ul className="play-apps">
+        {playAccount.apps.map((p) => (
+          <li key={p.name}>
+            <a href={p.href} target="_blank" rel="noopener">
+              <img src={p.icon} alt="" width={44} height={44} loading="lazy" />
+              <span>
+                <b>{p.name}</b>
+                <small>{p.text}</small>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a className="btn btn-ink btn-sm" href={playAccount.href} target="_blank" rel="noopener">
+        View on Google Play <Icon name="arrow-up-right" size={18} className="out" />
+      </a>
+    </div>
   );
 }
 

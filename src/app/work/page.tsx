@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Apps, Contact, WebWork } from '@/components/Blocks';
+import { Apps, Contact, PlayAccount, WebWork } from '@/components/Blocks';
 import { SITE_URL, ogImage } from '@/data/site';
-import { apps, labs, moreApps } from '@/data/work';
+import { apps, labs } from '@/data/work';
 import { JsonLd, crumbs, person } from '@/lib/seo';
 
 const title = 'Work: Apps and Web Platforms I’ve Shipped';
@@ -54,14 +54,7 @@ export default function WorkPage() {
             </h2>
           </div>
           <Apps />
-          <p className="also">
-            Also on Google Play:
-            {moreApps.map((m) => (
-              <a key={m.name} href={m.href} target="_blank" rel="noopener">
-                {m.name}
-              </a>
-            ))}
-          </p>
+          <PlayAccount />
         </div>
       </section>
 

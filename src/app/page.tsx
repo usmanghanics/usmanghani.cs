@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Achievements, Apps, Certificates, Contact, Education, Experience, Orgs, Stack, WebWork } from '@/components/Blocks';
+import { Achievements, Apps, Certificates, Contact, Education, Experience, Orgs, PlayAccount, Stack, WebWork } from '@/components/Blocks';
 import { Icon } from '@/components/Icon';
 import { Brand } from '@/components/Logos';
 import { SITE_URL, me, stats } from '@/data/site';
-import { moreApps } from '@/data/work';
 import { JsonLd, person, website } from '@/lib/seo';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
@@ -62,38 +61,34 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="portrait-wrap">
+            <figure className="portrait-card">
               <div className="portrait">
                 <img src={me.photo} alt="Usman Ghani" width={960} height={960} fetchPriority="high" />
               </div>
-              <div className="proof proof-1">
-                <span className="pi">
-                  <img src="/img/apps/snapcut-icon.webp" alt="" />
+              <figcaption className="portrait-facts">
+                <span>
+                  <img src="/img/apps/snapcut-icon.webp" alt="" width={36} height={36} />
+                  <span>
+                    <b>5K+</b>
+                    <small>SnapCut downloads</small>
+                  </span>
                 </span>
                 <span>
-                  <b>SnapCut · 5K+ downloads</b>
-                  <small>Rated 4.4 on Google Play</small>
-                </span>
-              </div>
-              <div className="proof proof-2">
-                <span className="pi pad">
-                  <img src="/img/logos/namal.png" alt="" />
+                  <img className="pad" src="/img/logos/namal.png" alt="" width={36} height={36} />
+                  <span>
+                    <b>1st</b>
+                    <small>CodeX 3.0</small>
+                  </span>
                 </span>
                 <span>
-                  <b>Winner, CodeX 3.0</b>
-                  <small>188 programmers, 11 universities</small>
+                  <img className="pad" src="/img/logos/pkcert.png" alt="" width={36} height={36} />
+                  <span>
+                    <b>#1</b>
+                    <small>CTF Square</small>
+                  </span>
                 </span>
-              </div>
-              <div className="proof proof-3">
-                <span className="pi pad">
-                  <img src="/img/logos/pkcert.png" alt="" />
-                </span>
-                <span>
-                  <b>#1 on CTF Square</b>
-                  <small>National CERT, Pakistan</small>
-                </span>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           </div>
 
           <dl className="stats">
@@ -122,8 +117,8 @@ export default function Home() {
                 Apps people actually <span className="accent">download</span>.
               </h2>
               <p className="lead">
-                Four apps I built and shipped to the stores, for my own company and for businesses across Pakistan. Each one is live
-                and in daily use.
+                Built and shipped to Google Play and the App Store, as an independent developer and for businesses across Pakistan.
+                Every one is live and in daily use.
               </p>
             </div>
             <Link className="link" href="/work">
@@ -132,14 +127,7 @@ export default function Home() {
             </Link>
           </div>
           <Apps />
-          <p className="also">
-            Also on Google Play:
-            {moreApps.map((m) => (
-              <a key={m.name} href={m.href} target="_blank" rel="noopener">
-                {m.name}
-              </a>
-            ))}
-          </p>
+          <PlayAccount />
         </div>
       </section>
 
@@ -203,7 +191,7 @@ export default function Home() {
               <h2 className="title" id="cert-title">
                 Certified by <span className="accent">Meta, Microsoft and IBM</span>.
               </h2>
-              <p className="lead">The certificates that matter most for my work. Tap one to see it.</p>
+              <p className="lead">From Meta, Microsoft, IBM and UC Irvine. Tap any certificate to see it.</p>
             </div>
             <Link className="link" href="/certifications">
               <span>All certificates</span>

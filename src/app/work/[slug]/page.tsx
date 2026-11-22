@@ -67,9 +67,7 @@ export default async function CaseStudy({ params }: Props) {
             <img src={a.icon} alt="" width={68} height={68} />
             <div>
               <b>{a.name}</b>
-              <span>
-                {a.client} · built at {a.builtAt}
-              </span>
+              <span>{a.client}</span>
             </div>
           </div>
           <h1 className="display">{a.tagline}</h1>

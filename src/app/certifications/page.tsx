@@ -24,7 +24,7 @@ export default function Certificates() {
             <span className="accent">Certificates</span>
           </h1>
           <p className="lead">
-            {certifications.length} certificates, most important first. My internship certificate from Fatima Group is with my experience.
+            {certifications.length} certificates in mobile development, AI, security, the web and automation. My internship certificate from Fatima Group is listed with my experience.
           </p>
         </div>
       </header>

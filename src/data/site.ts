@@ -37,7 +37,7 @@ export const stats = [
 /** Logos shown under the hero. `invert` flips black logos in the dark theme. */
 export const orgs = [
   { name: 'Veloq', logo: '/img/logos/veloq-mark.png', h: 34, invert: true, label: 'Veloq' },
-  { name: 'BizCare Software Solutions', logo: 'bizcare', h: 30, invert: true },
+  { name: 'BizCare Software Solutions', logo: 'bizcare', h: 30 },
   { name: 'Fatima Group', logo: '/img/logos/fg-mark.png', h: 30, invert: true, label: 'Fatima Group' },
   { name: 'Namal University', logo: '/img/logos/namal.png', h: 48, label: 'Namal University' },
   { name: 'IEEE', logo: 'ieee', h: 76 },

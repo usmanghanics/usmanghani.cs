@@ -17,9 +17,7 @@ export function Orgs() {
           {o.logo === 'ieee' ? (
             <Brand name="ieee" size={o.h} />
           ) : o.logo === 'bizcare' ? (
-            <span className="inv" style={{ display: 'inline-flex' }}>
-              <BizcareLogo height={o.h} />
-            </span>
+            <BizcareLogo height={o.h} />
           ) : (
             <img className={o.invert ? 'inv' : undefined} src={o.logo} alt={o.name} style={{ height: o.h }} />
           )}

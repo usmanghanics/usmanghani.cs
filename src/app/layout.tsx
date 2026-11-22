@@ -59,6 +59,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   formatDetection: { telephone: false, email: false, address: false },
+  verification: { other: { 'msvalidate.01': '0112D07B91D9AAAB35130DB07B4764CD' } },
   category: 'technology',
 };
 

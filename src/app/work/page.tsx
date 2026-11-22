@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
-import { Case } from '@/components/Case';
-import { AppCards } from '@/components/AppCards';
-import { Contact } from '@/components/Contact';
-import { Labs, Sites } from '@/components/Sections';
-import { bluexApps, work } from '@/data/work';
-import { JsonLd, crumbs, person } from '@/lib/seo';
+import { Apps, Contact, WebWork } from '@/components/Blocks';
 import { SITE_URL, ogImage } from '@/data/site';
+import { apps, labs, moreApps } from '@/data/work';
+import { JsonLd, crumbs, person } from '@/lib/seo';
 
-const title = 'Work: Apps, AI Products and Websites';
+const title = 'Work: Apps and Web Platforms I’ve Shipped';
 const desc =
-  'Projects by Usman Ghani: SnapCut on Google Play, FG AI Studio at Fatima Group, business apps at BizCare, AI products at Veloq, websites and university projects.';
+  'Apps and platforms built by Usman Ghani: SnapCut, Makki AutoCare, Madadgar Kisan and BizCare on Google Play and the App Store, plus bizcare.pk, Talent Pool, COI Tracker and Leafyio.';
 
 export const metadata: Metadata = {
   title,
@@ -34,64 +31,73 @@ export default function WorkPage() {
             name: title,
             description: desc,
             author: { '@id': person['@id'] },
-            hasPart: work.map((w) => ({ '@type': 'CreativeWork', name: w.name, url: `${SITE_URL}/work/${w.slug}` })),
+            hasPart: apps.map((a) => ({ '@type': 'MobileApplication', name: a.name, url: `${SITE_URL}/work/${a.slug}` })),
           },
         ]}
       />
-      <header className="page-head">
+      <header className="case-head">
         <div className="wrap">
-          <h1 className="h1">Work I’m proud of.</h1>
+          <h1 className="display">
+            Shipped, live and <span className="accent">in use</span>.
+          </h1>
           <p className="lead">
-            Apps on Google Play and the App Store, an enterprise AI platform, AI products for clients and fast websites. Client
-            names stay private; the work speaks for itself.
+            Every project here is out in the world: apps on Google Play and the App Store, and web platforms with real customers.
           </p>
         </div>
       </header>
 
-      <section className="section" style={{ paddingTop: 0 }} aria-label="Case studies">
-        <div className="wrap cases">
-          {work.map((w, i) => (
-            <Case key={w.slug} item={w} flip={i % 2 === 1} headingLevel={2} />
-          ))}
-        </div>
-      </section>
-
-      <section className="section section-soft" aria-labelledby="apps-title">
+      <section className="section soft" aria-labelledby="apps-title">
         <div className="wrap">
-          <div className="section-head" data-reveal>
-            <div>
-              <h2 className="h2" id="apps-title">
-                My apps
-              </h2>
-              <p>Published on Google Play under my developer name, BlueX Software Solutions.</p>
-            </div>
-          </div>
-          <AppCards apps={bluexApps} />
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="sites-title">
-        <div className="wrap">
-          <div className="section-head" data-reveal>
-            <h2 className="h2" id="sites-title">
-              Websites
+          <div className="head" data-reveal>
+            <h2 className="title" id="apps-title">
+              Mobile apps
             </h2>
           </div>
-          <Sites />
+          <Apps />
+          <p className="also">
+            Also on Google Play:
+            {moreApps.map((m) => (
+              <a key={m.name} href={m.href} target="_blank" rel="noopener">
+                {m.name}
+              </a>
+            ))}
+          </p>
+        </div>
+      </section>
+
+      <section className="section band" aria-labelledby="web-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <h2 className="title" id="web-title">
+              Web platforms
+            </h2>
+          </div>
+          <WebWork />
         </div>
       </section>
 
       <section className="section" aria-labelledby="labs-title">
         <div className="wrap">
-          <div className="section-head" data-reveal>
+          <div className="head" data-reveal>
             <div>
-              <h2 className="h2" id="labs-title">
-                University and earlier projects
+              <h2 className="title" id="labs-title">
+                University projects
               </h2>
-              <p>From my final year project back to the chess game I wrote in my first semester.</p>
+              <p className="lead">Security and mobile projects from my degree at Namal University.</p>
             </div>
           </div>
-          <Labs />
+          <ul className="labs">
+            {labs.map((l) => (
+              <li key={l.name} className="lab" data-reveal>
+                <h3>
+                  {l.name}
+                  {l.status && <span className="tag">{l.status}</span>}
+                </h3>
+                <p>{l.text}</p>
+                <span>{l.tools}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

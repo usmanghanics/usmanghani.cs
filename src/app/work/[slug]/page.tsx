@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Contact } from '@/components/Contact';
+import { Contact } from '@/components/Blocks';
 import { Icon } from '@/components/Icon';
-import { StoreLinks } from '@/components/Store';
-import { Visual } from '@/components/Visual';
-import { findWork, work } from '@/data/work';
+import { AppStoreBadge, PlayBadge } from '@/components/Logos';
 import { SITE_URL, ogImage } from '@/data/site';
+import { apps, findApp } from '@/data/work';
 import { JsonLd, crumbs, person } from '@/lib/seo';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -14,33 +13,24 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return work.map((w) => ({ slug: w.slug }));
+  return apps.map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const w = findWork(slug);
-  if (!w) return {};
+  const a = findApp((await params).slug);
+  if (!a) return {};
   return {
-    title: w.seo.title,
-    description: w.seo.description,
-    alternates: { canonical: `/work/${w.slug}` },
-    openGraph: {
-      type: 'article',
-      url: `/work/${w.slug}`,
-      title: `${w.seo.title} | Usman Ghani`,
-      description: w.seo.description,
-      images: [ogImage],
-    },
+    title: a.seo.title,
+    description: a.seo.description,
+    alternates: { canonical: `/work/${a.slug}` },
+    openGraph: { type: 'article', url: `/work/${a.slug}`, title: `${a.seo.title} | Usman Ghani`, description: a.seo.description, images: [{ url: a.media, width: 1600, height: 1000, alt: `${a.name} app screens` }, ogImage] },
   };
 }
 
-export default async function CasePage({ params }: Props) {
-  const { slug } = await params;
-  const w = findWork(slug);
-  if (!w) notFound();
-  const i = work.indexOf(w);
-  const next = work[(i + 1) % work.length];
+export default async function CaseStudy({ params }: Props) {
+  const a = findApp((await params).slug);
+  if (!a) notFound();
+  const next = apps[(apps.indexOf(a) + 1) % apps.length];
 
   return (
     <>
@@ -50,153 +40,139 @@ export default async function CasePage({ params }: Props) {
           crumbs([
             { name: 'Home', path: '/' },
             { name: 'Work', path: '/work' },
-            { name: w.name, path: `/work/${w.slug}` },
+            { name: a.name, path: `/work/${a.slug}` },
           ]),
           {
-            '@type': 'CreativeWork',
-            '@id': `${SITE_URL}/work/${w.slug}#work`,
-            name: w.name,
-            headline: w.title,
-            description: w.seo.description,
-            url: `${SITE_URL}/work/${w.slug}`,
+            '@type': 'MobileApplication',
+            name: a.name,
+            description: a.summary,
+            operatingSystem: a.appStore ? 'Android, iOS' : 'Android',
+            applicationCategory: a.slug === 'snapcut' ? 'MultimediaApplication' : 'BusinessApplication',
+            image: `${SITE_URL}${a.media}`,
+            url: a.play ?? a.appStore,
+            sameAs: [a.play, a.appStore].filter(Boolean),
             author: { '@id': person['@id'] },
-            creator: { '@id': person['@id'] },
-            keywords: w.stack.join(', '),
-            ...(w.apps
-              ? {
-                  hasPart: w.apps.map((a) => ({
-                    '@type': 'MobileApplication',
-                    name: a.name,
-                    operatingSystem: a.appStore ? 'Android, iOS' : 'Android',
-                    applicationCategory: 'BusinessApplication',
-                    url: a.play ?? a.appStore,
-                  })),
-                }
-              : {}),
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           },
         ]}
       />
-      <header className="page-head">
+      <header className="case-head">
         <div className="wrap">
           <nav className="crumbs" aria-label="Breadcrumb">
             <Link href="/work">Work</Link>
             <Icon name="caret-right" size={14} />
-            <span aria-current="page">{w.name}</span>
+            <span aria-current="page">{a.name}</span>
           </nav>
-          <h1 className="h1">{w.title}</h1>
-          <p className="lead">{w.summary}</p>
-          <div className="head-row">
-            <p className="meta">
-              <b>{w.org}</b>
-              <span>{w.role}</span>
-              <span>{w.period}</span>
-            </p>
-            {w.links.length > 0 && (
-              <div className="btn-row">
-                {w.links.map((l) => (
-                  <a
-                    key={l.href}
-                    className={l.kind === 'play' ? 'btn btn-primary btn-sm' : 'btn btn-outline btn-sm'}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <Icon name={l.kind === 'play' ? 'google-play-logo' : 'globe'} size={18} /> {l.label}
-                  </a>
-                ))}
-              </div>
+          <div className="case-id">
+            <img src={a.icon} alt="" width={68} height={68} />
+            <div>
+              <b>{a.name}</b>
+              <span>
+                {a.client} · built at {a.builtAt}
+              </span>
+            </div>
+          </div>
+          <h1 className="display">{a.tagline}</h1>
+          <p className="lead">{a.summary}</p>
+          <div className="row" style={{ marginTop: 32 }}>
+            {a.play && <PlayBadge href={a.play} name={a.name} />}
+            {a.appStore && <AppStoreBadge href={a.appStore} name={a.name} />}
+            {a.website && (
+              <a className="btn btn-line btn-sm" href={a.website} target="_blank" rel="noopener">
+                Website <Icon name="arrow-up-right" size={16} className="out" />
+              </a>
             )}
           </div>
+          <dl className="case-meta">
+            {[
+              ['My role', a.role],
+              ['Platforms', a.platforms],
+              ['When', a.period],
+              ...a.stats.slice(0, 1).map((s) => [s.label, s.value]),
+            ].map(([k, v]) => (
+              <div key={k}>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </header>
 
       <div className="wrap" data-reveal>
-        <Visual visual={w.visual} big eager />
+        <div className="case-hero" style={{ ['--tint' as string]: a.tint }}>
+          <img src={a.media} alt={`${a.name} app screens`} width={1600} height={1000} fetchPriority="high" />
+        </div>
       </div>
 
-      <div className="wrap">
-        <section className="cols" aria-labelledby="facts-title">
-          <h2 id="facts-title">In numbers</h2>
-          <dl className="facts" style={{ ['--cols' as string]: w.facts.length, borderTop: 0, paddingTop: 0 }}>
-            {w.facts.map((f) => (
-              <div key={f.label}>
-                <dt className="num" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-                  {f.value}
-                </dt>
-                <dd>{f.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="cols" aria-labelledby="built-title">
-          <h2 id="built-title">What I built</h2>
-          <ul className="built">
-            {w.built.map((b) => (
-              <li key={b} data-reveal>
-                <Icon name="check-circle" size={20} />
-                <span>{b}</span>
+      <section className="section" aria-labelledby="feat-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <h2 className="title" id="feat-title">
+              What it does
+            </h2>
+          </div>
+          <ul className="features">
+            {a.features.map((f, i) => (
+              <li key={f.title} className="feat" data-reveal style={{ ['--delay' as string]: `${(i % 3) * 0.07}s` }}>
+                <i>
+                  <Icon name={f.icon} size={22} />
+                </i>
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
               </li>
             ))}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        {w.apps && (
-          <section className="cols" aria-labelledby="apps-title">
-            <h2 id="apps-title">{w.slug === 'snapcut' ? 'My other apps' : 'The apps'}</h2>
-            <ul className="app-rows">
-              {w.apps
-                .filter((a) => !(w.slug === 'snapcut' && a.name === 'SnapCut'))
-                .map((a) => (
-                  <li key={a.name} className="card app-row" data-reveal>
-                    <img src={a.icon} alt="" width={56} height={56} loading="lazy" />
-                    <div>
-                      <h3>{a.name}</h3>
-                      <p>{a.text}</p>
-                    </div>
-                    <StoreLinks play={a.play} appStore={a.appStore} web={a.web} name={a.name} />
-                  </li>
-                ))}
-            </ul>
-          </section>
-        )}
+      <section className="section soft" aria-labelledby="gal-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="gal-title">
+                {a.gallery[0].kind === 'mockup' ? 'On the store' : 'Inside the app'}
+              </h2>
+              <p className="lead">{a.gallery[0].kind === 'mockup' ? 'The images people see on the store listing.' : 'Real screens from the live app.'}</p>
+            </div>
+          </div>
+          <div className="gallery" tabIndex={0} aria-label={`${a.name} images`}>
+            {a.gallery.map((g) => (
+              <img key={g.src} src={g.src} alt={g.alt} width={540} height={g.kind === 'mockup' ? 960 : 1170} loading="lazy" />
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {w.more && (
-          <section className="cols" aria-labelledby="more-title">
-            <h2 id="more-title">Products</h2>
-            <ul className="more-list">
-              {w.more.map((m) => (
-                <li key={m.name} className="card more-item" data-reveal>
-                  <h3>
-                    {m.href ? (
-                      <a className="link" href={m.href} target="_blank" rel="noopener">
-                        <span>{m.name}</span>
-                        <Icon name="arrow-up-right" size={16} />
-                      </a>
-                    ) : (
-                      m.name
-                    )}
-                  </h3>
-                  <p>{m.text}</p>
-                  <small>{m.stack.join(' · ')}</small>
+      <section className="section" aria-labelledby="did-title">
+        <div className="wrap split2">
+          <div data-reveal>
+            <h2 className="title-sm" id="did-title">
+              What I did
+            </h2>
+          </div>
+          <div data-reveal>
+            <ul className="did">
+              {a.did.map((x) => (
+                <li key={x}>
+                  <Icon name="check-circle" size={20} />
+                  {x}
                 </li>
               ))}
             </ul>
-          </section>
-        )}
+            <ul className="tools-line" style={{ marginTop: 32 }} aria-label="Tools">
+              {a.tools.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        <section className="cols" aria-labelledby="stack-title">
-          <h2 id="stack-title">Tools</h2>
-          <ul className="inline-list">
-            {w.stack.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-        </section>
-
-        <Link className="next-case" href={`/work/${next.slug}`} data-reveal>
+      <div className="wrap" style={{ paddingBottom: 'var(--section)' }}>
+        <Link className="next" href={`/work/${next.slug}`} data-reveal>
           <span>
-            <small>Next case study</small>
+            <small>Next project</small>
             <b>{next.name}</b>
           </span>
           <span className="arrow">

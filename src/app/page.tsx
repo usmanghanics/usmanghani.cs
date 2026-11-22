@@ -1,24 +1,13 @@
 import type { Metadata } from 'next';
-import { Case } from '@/components/Case';
-import { AppCards } from '@/components/AppCards';
-import { Contact } from '@/components/Contact';
+import Link from 'next/link';
+import { Achievements, Apps, Certificates, Contact, Education, Experience, Orgs, Stack, WebWork } from '@/components/Blocks';
 import { Icon } from '@/components/Icon';
-import { Phone } from '@/components/Phone';
-import { EduAwards, Jobs, Labs, MoreLink, Sites } from '@/components/Sections';
-import { me, places, stats } from '@/data/site';
-import { bluexApps, work } from '@/data/work';
-import { JsonLd, bluexOrg, person, website } from '@/lib/seo';
-import { SITE_URL } from '@/data/site';
+import { Brand } from '@/components/Logos';
+import { SITE_URL, me, stats } from '@/data/site';
+import { moreApps } from '@/data/work';
+import { JsonLd, person, website } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/' },
-};
-
-const heroShots = [
-  { src: '/img/apps/makki-autocare-home.webp', alt: 'Makki AutoCare, a car care app built at BizCare', ratio: 0.4614 },
-  { src: '/img/apps/snapcut-editor.webp', alt: 'SnapCut, the video editor I publish on Google Play', ratio: 0.5 },
-  { src: '/img/apps/clippy-home.webp', alt: 'Clippy, my clipboard app for Android', ratio: 0.45 },
-];
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 export default function Home() {
   return (
@@ -27,7 +16,6 @@ export default function Home() {
         data={[
           person,
           website,
-          bluexOrg,
           {
             '@type': 'ProfilePage',
             '@id': `${SITE_URL}/#profile`,
@@ -35,7 +23,6 @@ export default function Home() {
             name: 'Usman Ghani',
             isPartOf: { '@id': website['@id'] },
             mainEntity: { '@id': person['@id'] },
-            dateModified: new Date().toISOString().slice(0, 10),
           },
         ]}
       />
@@ -44,34 +31,71 @@ export default function Home() {
         <div className="wrap">
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="hello">
-                <img src={me.avatar} alt="" width={36} height={36} />
+              <p className="now">
+                <img src="/img/logos/veloq-icon.png" alt="" width={28} height={28} />
                 <span>
-                  <b>Usman Ghani</b> · Software Engineer<span className="where"> in {me.location}</span>
+                  {me.role} at <b>Veloq</b>
                 </span>
               </p>
-              <h1 className="h1" id="hero-title">
-                I build mobile apps and AI products that people use.
+              <h1 className="display" id="hero-title">
+                I build and <span className="accent">ship</span> apps people use every day.
               </h1>
               <p className="lead">
-                I publish my own Android apps as BlueX Software Solutions, build business apps at BizCare and AI agents and SaaS
-                platforms at Veloq. SnapCut, my video editor, has been downloaded more than 5,000 times.
+                My apps are live on Google Play and the App Store with thousands of downloads, and I build AI platforms and web
+                products for companies. Based in Lahore, studying computer science at Namal University.
               </p>
-              <div className="btn-row">
-                <a className="btn btn-primary" href="#work">
-                  See My Work <Icon name="arrow-right" size={18} className="go" />
+              <div className="row">
+                <a className="btn btn-ink" href="#apps">
+                  See What I’ve Shipped <Icon name="arrow-right" size={18} className="go" />
                 </a>
-                <a className="btn btn-outline" href="#contact">
+                <a className="btn btn-line" href="#contact">
                   <Icon name="envelope-simple" size={20} /> Email Me
                 </a>
+                <span className="hero-socials">
+                  <a className="icon-btn" href={me.links.linkedin} target="_blank" rel="noopener me" aria-label="LinkedIn">
+                    <Brand name="linkedin" size={20} />
+                  </a>
+                  <a className="icon-btn" href={me.links.github} target="_blank" rel="noopener me" aria-label="GitHub">
+                    <Brand name="github" size={20} />
+                  </a>
+                </span>
               </div>
             </div>
-            <div className="hero-stage" aria-label="Apps I have built">
-              <Phone shot={heroShots[0]} className="p1" eager />
-              <Phone shot={heroShots[1]} className="p2" eager />
-              <Phone shot={heroShots[2]} className="p3" eager />
+
+            <div className="portrait-wrap">
+              <div className="portrait">
+                <img src={me.photo} alt="Usman Ghani" width={960} height={960} fetchPriority="high" />
+              </div>
+              <div className="proof proof-1">
+                <span className="pi">
+                  <img src="/img/apps/snapcut-icon.webp" alt="" />
+                </span>
+                <span>
+                  <b>SnapCut · 5K+ downloads</b>
+                  <small>Rated 4.4 on Google Play</small>
+                </span>
+              </div>
+              <div className="proof proof-2">
+                <span className="pi pad">
+                  <img src="/img/logos/namal.png" alt="" />
+                </span>
+                <span>
+                  <b>Winner, CodeX 3.0</b>
+                  <small>188 programmers, 11 universities</small>
+                </span>
+              </div>
+              <div className="proof proof-3">
+                <span className="pi pad">
+                  <img src="/img/logos/pkcert.png" alt="" />
+                </span>
+                <span>
+                  <b>#1 on CTF Square</b>
+                  <small>National CERT, Pakistan</small>
+                </span>
+              </div>
             </div>
           </div>
+
           <dl className="stats">
             {stats.map((s) => (
               <div key={s.label} className="stat">
@@ -86,113 +110,120 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Where I work">
+      <div className="wrap">
+        <Orgs />
+      </div>
+
+      <section className="section soft" id="apps" aria-labelledby="apps-title">
         <div className="wrap">
-          <ul className="places">
-            <li className="places-label">Where I build</li>
-            {places.map((p) => (
-              <li key={p.name}>
-                {p.name} <small>{p.note}</small>
-              </li>
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="apps-title">
+                Apps people actually <span className="accent">download</span>.
+              </h2>
+              <p className="lead">
+                Four apps I built and shipped to the stores, for my own company and for businesses across Pakistan. Each one is live
+                and in daily use.
+              </p>
+            </div>
+            <Link className="link" href="/work">
+              <span>All work</span>
+              <Icon name="arrow-right" size={18} />
+            </Link>
+          </div>
+          <Apps />
+          <p className="also">
+            Also on Google Play:
+            {moreApps.map((m) => (
+              <a key={m.name} href={m.href} target="_blank" rel="noopener">
+                {m.name}
+              </a>
             ))}
-          </ul>
+          </p>
         </div>
       </section>
 
-      <section className="section" id="work" aria-labelledby="work-title">
+      <section className="section band" id="web" aria-labelledby="web-title">
         <div className="wrap">
-          <div className="section-head" data-reveal>
+          <div className="head" data-reveal>
             <div>
-              <h2 className="h2" id="work-title">
-                Selected work
+              <h2 className="title" id="web-title">
+                Platforms businesses <span className="accent">run on</span>.
               </h2>
-              <p>Apps on the stores, an enterprise AI platform and products for clients. My strongest work first.</p>
-            </div>
-            <MoreLink href="/work">All work</MoreLink>
-          </div>
-          <div className="cases">
-            {work.map((w, i) => (
-              <Case key={w.slug} item={w} flip={i % 2 === 1} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-soft" id="apps" aria-labelledby="apps-title">
-        <div className="wrap">
-          <div className="section-head" data-reveal>
-            <div>
-              <h2 className="h2" id="apps-title">
-                Apps I publish
-              </h2>
-              <p>
-                BlueX Software Solutions is my Google Play developer name. I design, build, publish and support every one of these
-                apps myself.
-              </p>
-            </div>
-            <a className="link" href={me.links.bluex} target="_blank" rel="noopener">
-              <span>Visit BlueX</span>
-              <Icon name="arrow-up-right" size={18} />
-            </a>
-          </div>
-          <AppCards apps={bluexApps} />
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="more-title">
-        <div className="wrap">
-          <div className="section-head" data-reveal>
-            <div>
-              <h2 className="h2" id="more-title">
-                Websites and more
-              </h2>
-              <p>Fast, search-friendly websites, and the projects I build at university.</p>
+              <p className="lead">Websites and web products I’ve built, all live: for BizCare, and for Veloq’s clients.</p>
             </div>
           </div>
-          <Sites />
-          <div style={{ marginTop: 'clamp(48px, 6vw, 80px)' }}>
-            <Labs limit={3} />
-          </div>
+          <WebWork />
         </div>
       </section>
 
-      <section className="section" id="experience" aria-labelledby="exp-title">
-        <div className="wrap split">
-          <div className="split-aside" data-reveal>
-            <h2 className="h2" id="exp-title">
-              Experience
+      <section className="section" id="experience" aria-labelledby="xp-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="xp-title">
+                Where I’ve <span className="accent">worked</span>.
+              </h2>
+              <p className="lead">An AI software house, an ERP company, one of Pakistan’s largest business groups, and my own apps.</p>
+            </div>
+          </div>
+          <Experience />
+        </div>
+      </section>
+
+      <section className="section soft" id="achievements" aria-labelledby="ach-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="ach-title">
+                Proven <span className="accent">under pressure</span>.
+              </h2>
+              <p className="lead">National programming contests and Pakistan’s national capture-the-flag platform.</p>
+            </div>
+          </div>
+          <Achievements />
+        </div>
+      </section>
+
+      <section className="section" id="education" aria-labelledby="edu-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <h2 className="title" id="edu-title">
+              Education
             </h2>
-            <p>Two companies, one internship and my own apps, alongside a computer science degree.</p>
-            <MoreLink href="/about">More about me</MoreLink>
           </div>
-          <Jobs />
+          <Education />
         </div>
       </section>
 
-      <section className="section section-soft" id="about" aria-labelledby="about-title">
-        <div className="wrap about">
-          <div className="portrait" data-reveal>
-            <img src={me.photo} alt="Usman Ghani" width={720} height={795} loading="lazy" />
-          </div>
-          <div data-reveal>
-            <h2 className="h2" id="about-title" style={{ marginBottom: 28 }}>
-              I like owning the whole product.
-            </h2>
-            <div className="prose">
-              <p>
-                I’m Usman, a computer science student at <strong>Namal University</strong> and a working software engineer. I started
-                by publishing my own Android apps, and I still run them: SnapCut, Clippy and Scanix are mine, from the code to the
-                store page to the support inbox.
-              </p>
-              <p>
-                Today I build mobile apps that businesses run on at <strong>BizCare</strong>, and AI agents and SaaS platforms at{' '}
-                <strong>Veloq</strong>. In 2026 I led the frontend rebuild of FG AI Studio during my internship at{' '}
-                <strong>Fatima Group</strong>.
-              </p>
-              <p>I care most about the parts people feel: speed, clear screens and apps that never lose your work.</p>
+      <section className="section soft" id="certificates" aria-labelledby="cert-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="cert-title">
+                Certified by <span className="accent">Meta, Microsoft and IBM</span>.
+              </h2>
+              <p className="lead">The certificates that matter most for my work. Tap one to see it.</p>
             </div>
-            <EduAwards />
+            <Link className="link" href="/certifications">
+              <span>All certificates</span>
+              <Icon name="arrow-right" size={18} />
+            </Link>
           </div>
+          <Certificates limit={6} />
+        </div>
+      </section>
+
+      <section className="section" id="stack" aria-labelledby="stack-title">
+        <div className="wrap">
+          <div className="head" data-reveal>
+            <div>
+              <h2 className="title" id="stack-title">
+                The tools I <span className="accent">ship with</span>.
+              </h2>
+            </div>
+          </div>
+          <Stack />
         </div>
       </section>
 

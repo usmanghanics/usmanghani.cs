@@ -22,10 +22,7 @@ export const person = {
     '3rd, On Spot Programming, Visio Spark (COMSATS University, 2025)',
   ],
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Namal University', url: 'https://namal.edu.pk/' },
-  worksFor: [
-    { '@type': 'Organization', name: 'Veloq', url: 'https://veloq.tech/' },
-    { '@type': 'Organization', name: 'BizCare Software Solutions', url: 'https://bizcare.pk/' },
-  ],
+  worksFor: { '@type': 'Organization', name: 'Veloq', url: 'https://veloq.tech/' },
   knowsAbout: [
     'Android development',
     'iOS development',
@@ -37,7 +34,8 @@ export const person = {
     'FastAPI',
     'Supabase',
     'Cybersecurity',
-    'Search engine optimization',
+    'Kotlin',
+    'Competitive programming',
   ],
   sameAs: [me.links.linkedin, me.links.github, me.links.githubOld, me.links.x, me.links.play],
 };
